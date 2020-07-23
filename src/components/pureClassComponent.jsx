@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
 export default class PureClassComponent extends PureComponent {
   constructor(props) {
@@ -12,17 +12,19 @@ export default class PureClassComponent extends PureComponent {
   }
 
   increment() {
-    this.setState({...this.state, counter: this.state.counter + 1})
+    this.setState((prev) => ({ ...prev, counter: prev.counter + 1 }));
   }
 
   render() {
+    const { counter } = this.state;
     return (
       <>
         <p>
-          Hello world from class extended from PureComponent{" "}
-          {this.state.counter}
+          Hello world from class extended from PureComponent
+          {' '}
+          {counter}
         </p>
-        <button onClick={this.increment}>Increment</button>
+        <button type="button" onClick={this.increment}>Increment</button>
       </>
     );
   }

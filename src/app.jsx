@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   FunctionalComponent,
   CreateElementComponent,
   ClassComponent,
   PureClassComponent,
-} from "./components";
+} from './components';
 
 class App extends Component {
   render() {
