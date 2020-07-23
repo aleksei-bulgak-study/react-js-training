@@ -2,7 +2,6 @@
   "name": "movieui.reactjs",
   "version": "1.0.0",
   "description": "Epam ReactJs training",
-  "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open --hot",
     "build:prod": "env ENV=prod webpack",
