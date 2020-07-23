@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   FunctionalComponent,
   CreateElementComponent,
@@ -6,17 +6,11 @@ import {
   PureClassComponent,
 } from './components';
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <FunctionalComponent />
-        <CreateElementComponent />
-        <ClassComponent />
-        <PureClassComponent />
-      </>
-    );
-  }
-}
-
-export default App;
+export default () => (
+  <>
+    <FunctionalComponent />
+    <CreateElementComponent />
+    <ClassComponent />
+    <PureClassComponent />
+  </>
+);

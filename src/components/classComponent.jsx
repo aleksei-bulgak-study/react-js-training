@@ -1,9 +1,34 @@
 import React, { Component } from 'react';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class ClassComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      counter: 0,
+    };
+
+    this.increment = this.increment.bind(this);
+  }
+
+  increment() {
+    this.setState((prev) => ({ ...prev, counter: prev.counter + 1 }));
+  }
+
   render() {
-    return <p>Hello world from class extended from Component</p>;
+    const { counter } = this.state;
+    return (
+      <>
+        <p>
+          Hello world from class extended from Component
+          {' '}
+          {counter}
+        </p>
+        <button type="button" onClick={this.increment}>
+          Increment
+        </button>
+      </>
+    );
   }
 }
 

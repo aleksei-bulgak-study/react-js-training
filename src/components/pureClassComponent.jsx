@@ -24,7 +24,9 @@ export default class PureClassComponent extends PureComponent {
           {' '}
           {counter}
         </p>
-        <button type="button" onClick={this.increment}>Increment</button>
+        <button type="button" onClick={this.increment}>
+          Increment
+        </button>
       </>
     );
   }
