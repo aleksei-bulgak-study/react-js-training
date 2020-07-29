@@ -1,0 +1,34 @@
+.film-results {
+  --red: #f65261;
+  --grey: #555555;
+  --grey-transparent: #55555570;
+  --grey-darker: #232323;
+  --grey-darker-transparent: #232323d7;
+  --white: #ffffff;
+
+  color: var(--white);
+}
+
+.film-results__title {
+  height: 5rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.film-results__count::after {
+  content: '';
+  display: inline-block;
+  width: 0.5rem;
+}
+
+.film-results__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 1rem 0;
+}

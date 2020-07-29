@@ -9,8 +9,6 @@ module.exports = merge(common, {
     minimize: true,
     splitChunks: {
       chunks: 'all',
-      minSize: 3000,
-      maxSize: 30000,
     },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },

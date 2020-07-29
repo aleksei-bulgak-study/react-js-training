@@ -1,0 +1,27 @@
+/* header section */
+header {
+  height: 37vh;
+  background-image: url(/images/favorite-sci-fi-posters.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  background-color: #00000096;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+header > * {
+  position: relative;
+  z-index: 2;
+}

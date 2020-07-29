@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import ClassComponent from './ClassComponent';
-import CreateElementComponent from './CreateElement';
-import FunctionalComponent from './Functional';
-import PureClassComponent from './PureClassComponent';
-=======
 import Footer from './footer/footer.component';
 import Header from './header/header.component';
->>>>>>> dc34ca7... [ERMP]: add initial structure
+import Footer from './footer';
+import Header from './header';
+import Main from './main';
 
-export { Footer, Header };
+export { Footer, Header, Main };

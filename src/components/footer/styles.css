@@ -1,3 +1,11 @@
+html {
+  --red: #f65261;
+  --grey: #555555;
+  --grey-transparent: #55555570;
+  --grey-darker: #232323;
+  --white: #ffffff;
+}
+
 footer {
   background-color: #424242;
   color: var(--red);

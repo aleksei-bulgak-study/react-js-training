@@ -1,0 +1,9 @@
+.film-results--empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: white;
+  height: calc(55vh - 4rem);
+  font-weight: 100;
+}

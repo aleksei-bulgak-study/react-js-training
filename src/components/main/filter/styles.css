@@ -1,0 +1,116 @@
+.filter__list {
+  --red: #f65261;
+  --grey: #555555;
+  --grey-transparent: #55555570;
+  --grey-darker: #232323;
+  --white: #ffffff;
+
+  color: var(--white);
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  margin: 0 0;
+  padding: 0 0;
+  box-sizing: border-box;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.filter__list * {
+  letter-spacing: 0.1rem;
+}
+
+.filter__list::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(180deg, rgba(122,121,121,1) 0%, rgba(85,85,85,1) 20%, rgba(0,0,0,1) 100%);
+  border-radius: 5px;
+}
+
+.filter__item {
+  display: inline-block;
+  width: 49%;
+  margin: 0 0;
+  padding: 0 0;
+  box-sizing: border-box;
+}
+
+/* filter by genre */
+.filter__item:not(:last-child) {
+  margin-right: 2%;
+}
+
+.filter__item:first-child ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.genre-filter__item{
+  text-transform: uppercase;
+}
+
+.genre-filter__item:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.genre-filter__item,
+.genre-filter__item a {
+  list-style-type: none;
+  text-decoration: none;
+  color: var(--white);
+  position: relative;
+}
+
+.genre-filter__item a:hover::after {
+  position: absolute;
+  content: '';
+  border-bottom: 3px solid var(--red);
+  left: 0;
+  right: 0;
+  bottom: -1rem;
+  z-index: 2;
+  border-radius: 1px;
+}
+
+
+/* filter by date */
+.filter__by-date {
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.filter__by-date__title {
+  color: var(--grey);
+  font-weight: 100;
+}
+
+.filter__by-date__select {
+  background-color: var(--grey-darker);
+  color: var(--white);
+  font-size: 1.2rem;
+  outline: none;
+  margin-left: 2rem;
+}
+
+.filter__by-date__select:hover {
+  cursor: pointer;
+}
+
+.filter__by-date__select::after {
+  content: '';
+  border-top: 5px solid var(--red);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  z-index: 2;
+}

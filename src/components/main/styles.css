@@ -1,0 +1,8 @@
+/* main section */
+main
+{
+    min-height: 55vh;
+    margin: 0.3rem auto;
+    background-color: var(--grey-darker);
+    overflow: hidden;
+}
