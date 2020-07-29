@@ -5,6 +5,7 @@ import {
   ClassComponent,
   PureClassComponent,
 } from './components';
+import './styles.css';
 
 export default () => (
   <>

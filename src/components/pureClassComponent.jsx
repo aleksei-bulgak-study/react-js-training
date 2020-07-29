@@ -18,7 +18,7 @@ export default class PureClassComponent extends PureComponent {
   render() {
     const { counter } = this.state;
     return (
-      <>
+      <div className="component">
         <p>
           Hello world from class extended from PureComponent
           {' '}
@@ -27,7 +27,7 @@ export default class PureClassComponent extends PureComponent {
         <button type="button" onClick={this.increment}>
           Increment
         </button>
-      </>
+      </div>
     );
   }
 }

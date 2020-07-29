@@ -18,7 +18,7 @@ class ClassComponent extends Component {
   render() {
     const { counter } = this.state;
     return (
-      <>
+      <div className="component">
         <p>
           Hello world from class extended from Component
           {' '}
@@ -27,7 +27,7 @@ class ClassComponent extends Component {
         <button type="button" onClick={this.increment}>
           Increment
         </button>
-      </>
+      </div>
     );
   }
 }
