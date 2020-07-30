@@ -13,8 +13,13 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  margin-right: 5rem;
   margin-bottom: 2rem;
   position: relative;
+}
+
+.film-results__item:nth-child(4n) {
+  margin-right: 0;
 }
 
 .film__logo {

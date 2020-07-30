@@ -18,7 +18,7 @@ SearchResultsCount.propTypes = {
 
 const FilmResultsList = ({ results }) => (
   <section className="film-results">
-    <SearchResultsCount count={results.lenght} />
+    <SearchResultsCount count={results.length} />
     <div className="film-results__list">
       {results.map((filmDetails) => (
         <Film key={filmDetails.id} details={filmDetails} />
