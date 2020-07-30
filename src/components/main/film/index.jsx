@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FilmSettings from '../film-settings';
 import './styles.css';
 
 const Film = ({ details }) => (
@@ -14,9 +15,7 @@ const Film = ({ details }) => (
       <p className="film__genre">{details.genre}</p>
       <p className="film__release-year">{details.releaseYear}</p>
     </div>
-    <div className="film__edit">
-      <div className="film__edit__dot" />
-    </div>
+    <FilmSettings />
   </div>
 );
 
