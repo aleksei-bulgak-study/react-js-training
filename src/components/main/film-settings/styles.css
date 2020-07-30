@@ -100,8 +100,8 @@
   border-top: 2px solid var(--white);
   transform: rotate(45deg);
   width: 1rem;
-  left: 40%;
-  top: 60%;
+  left: 30%;
+  top: 80%;
 }
 
 .film__menu__close::after {
@@ -110,6 +110,6 @@
   border-top: 2px solid var(--white);
   transform: rotate(-45deg);
   width: 1rem;
-  left: 40%;
-  top: 60%;
+  left: 30%;
+  top: 80%;
 }
