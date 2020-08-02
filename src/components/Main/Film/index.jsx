@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FilmSettings from '../film-settings';
+import FilmSettings from '../FilmSettings';
 import './styles.css';
 
 const Film = ({ details }) => (
   <div className="film-results__item film">
-    <img
-      className="film__logo"
-      src={details.url}
-      alt="Pulp fiction"
-    />
+    <img className="film__logo" src={details.url} alt="Pulp fiction" />
     <div className="film__description">
-      <button className="film__title" type="button">{details.title}</button>
+      <button className="film__title" type="button">
+        {details.title}
+      </button>
       <p className="film__genre">{details.genre}</p>
       <p className="film__release-year">{details.releaseYear}</p>
     </div>

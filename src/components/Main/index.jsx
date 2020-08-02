@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wrapper from '../wrapper';
-import Filter from './filter';
-import SearchResults from './search-results';
+import Wrapper from '../Wrapper';
+import Filter from './Filter';
+import SearchResults from './SearchResults';
 import './styles.css';
 
 const Main = ({ searchResults }) => (

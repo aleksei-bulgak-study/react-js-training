@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FilmResults from '../film-results';
-import NotFound from '../not-found';
+import FilmResults from '../FilmResults';
+import NotFound from '../NotFound';
 import './styles.css';
 
 const SearchResults = ({ searchResults }) => (

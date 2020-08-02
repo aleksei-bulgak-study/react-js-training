@@ -6,19 +6,19 @@ export default () => (
     <div className="filter__item filter__by-genre">
       <ul className="genre-filter">
         <li className="genre-filter__item">
-          <a href="#">All</a>
+          <a href="#date-filter">All</a>
         </li>
         <li className="genre-filter__item">
-          <a href="#">Documentary</a>
+          <a href="#date-filter">Documentary</a>
         </li>
         <li className="genre-filter__item">
-          <a href="#">Comedy</a>
+          <a href="#date-filter">Comedy</a>
         </li>
         <li className="genre-filter__item">
-          <a href="#">Horror</a>
+          <a href="#date-filter">Horror</a>
         </li>
         <li className="genre-filter__item">
-          <a href="#">Crime</a>
+          <a href="#date-filter">Crime</a>
         </li>
       </ul>
     </div>

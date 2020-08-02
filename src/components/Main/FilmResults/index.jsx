@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Film from '../film';
+import Film from '../Film';
 import './styles.css';
 
 const SearchResultsCount = ({ count }) => (

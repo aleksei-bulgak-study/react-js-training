@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
 const MenuClosed = ({ action }) => (
-  <div
-    role="button"
+  <button
+    type="button"
     className="film__menu film__menu--closed"
     onClick={() => action(true)}
   >
     <div className="film__menu__dot" />
-  </div>
+  </button>
 );
+
+MenuClosed.propTypes = {
+  action: PropTypes.func.isRequired,
+};
 
 const MenuOpened = ({ action, editFilm, deleteFilm }) => (
   <div className="film__menu film__menu--opened">
-    <button
-      className="film__menu__action"
-      type="button"
-      onClick={editFilm}
-    >
+    <button className="film__menu__action" type="button" onClick={editFilm}>
       Edit
     </button>
     <button className="film__menu__action" type="button" onClick={deleteFilm}>
@@ -33,6 +34,12 @@ const MenuOpened = ({ action, editFilm, deleteFilm }) => (
   </div>
 );
 
+MenuOpened.propTypes = {
+  action: PropTypes.func.isRequired,
+  editFilm: PropTypes.func.isRequired,
+  deleteFilm: PropTypes.func.isRequired,
+};
+
 const FilmMenu = ({ editAction, deleteAction }) => {
   const [isOpened, setIsOpened] = useState(false);
   return (
@@ -47,6 +54,11 @@ const FilmMenu = ({ editAction, deleteAction }) => {
       )}
     </>
   );
+};
+
+FilmMenu.propTypes = {
+  editAction: PropTypes.func.isRequired,
+  deleteAction: PropTypes.func.isRequired,
 };
 
 export default FilmMenu;

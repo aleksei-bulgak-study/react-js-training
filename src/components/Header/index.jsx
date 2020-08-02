@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wrapper from '../wrapper';
-import PreviewMovie from '../preview';
-import SearchBar from '../searchBar';
-import BrandHeader from './brand';
+import Wrapper from '../Wrapper';
+import PreviewMovie from '../Preview';
+import SearchBar from '../SearchBar';
+import BrandHeader from './Brand';
 import './styles.css';
 
 const Header = ({ preview }) => (
