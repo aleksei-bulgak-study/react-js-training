@@ -1,5 +1,5 @@
 function getEnv() {
-  const env = process.env.ENV;
+  const env = process.env.NODE_ENV;
   return env ? env.toLowerCase() : 'prod';
 }
 
