@@ -1,7 +1,7 @@
-import ClassComponent from './classComponent';
-import CreateElementComponent from './createElement';
-import FunctionalComponent from './functional';
-import PureClassComponent from './pureClassComponent';
+import ClassComponent from './ClassComponent';
+import CreateElementComponent from './CreateElement';
+import FunctionalComponent from './Functional';
+import PureClassComponent from './PureClassComponent';
 
 export {
   FunctionalComponent,
