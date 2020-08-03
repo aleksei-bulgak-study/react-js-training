@@ -64,6 +64,7 @@
   width: 10rem;
   height: 7rem;
   padding: 1.5rem 0 1rem;
+  cursor: default;
 }
 
 .film__menu__action {
