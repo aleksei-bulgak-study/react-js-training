@@ -4,8 +4,8 @@
   "description": "Epam ReactJs training",
   "scripts": {
     "start": "webpack-dev-server --open --hot",
-    "build:prod": "env NODE_ENV=prod webpack",
-    "build:dev": "env NODE_ENV=dev webpack",
+    "build:prod": "cross-env NODE_ENV=prod webpack",
+    "build:dev": "cross-env NODE_ENV=dev webpack",
     "lint": "eslint ./src --ext .js,.jsx",
     "test": "jest --no-cache --coverage --config jest.config.json"
   },
@@ -32,6 +32,7 @@
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
     "eslint": "^7.5.0",
     "eslint-config-airbnb": "^18.2.0",
