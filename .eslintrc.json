@@ -16,6 +16,7 @@
   "plugins": ["react", "jest"],
   "rules": {
     "import/no-dynamic-require": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "linebreak-style": ["error", "unix"]
   }
 }
