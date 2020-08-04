@@ -1,10 +1,6 @@
 /* header section */
 .search-preview {
   height: 37vh;
-  background-image: url(/images/favorite-sci-fi-posters.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   position: relative;
   overflow: hidden;
 }
@@ -17,7 +13,11 @@
   left: 0;
   right: 0;
   content: '';
-  backdrop-filter: blur(8px);
+  background-image: url(/images/favorite-sci-fi-posters.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
   z-index: 1;
 }
 
