@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header, Footer, Main } from '../components';
+import { Header, Footer, Main, TopSection } from '../components';
 
 const Home = ({ preview, results }) => (
   <>
     <Header preview={preview} />
+    <TopSection preview={preview} />
     <Main searchResults={results} />
     <Footer />
   </>

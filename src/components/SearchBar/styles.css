@@ -1,7 +1,9 @@
 .search-bar {
   margin: 0 5%;
-  height: 80%;
+  height: 100%;
   padding: 2% 0;
+  display: flex;
+  align-items: center;
 }
 
 .search-bar__controls {
@@ -14,6 +16,7 @@
 
 .search-bar__title {
   display: block;
+  width: 100%;
   color: var(--white);
   text-transform: uppercase;
   font-weight: lighter;

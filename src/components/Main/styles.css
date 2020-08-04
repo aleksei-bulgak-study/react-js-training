@@ -1,8 +1,7 @@
 /* main section */
 main
 {
-    min-height: 55vh;
-    margin: 0.3rem auto;
+    min-height: 56vh;
     background-color: var(--grey-darker);
     overflow: hidden;
 }

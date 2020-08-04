@@ -5,13 +5,3 @@
   width: 88%;
   overflow: hidden;
 }
-
-.error {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--white);
-  font-size: 3rem;
-}

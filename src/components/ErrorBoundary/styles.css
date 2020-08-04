@@ -1,9 +1,9 @@
-.film-results--empty {
+.error {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--white);
   font-size: 3rem;
-  color: white;
-  height: calc(56vh - 4rem);
-  font-weight: 100;
 }

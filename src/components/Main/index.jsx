@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from '../Wrapper';
+import ErrorBoundary from '../ErrorBoundary';
 import Filter from './Filter';
 import SearchResults from './SearchResults';
 import './styles.css';
 
 const Main = ({ searchResults }) => (
   <main>
-    <Wrapper>
-      <Filter />
-      <SearchResults searchResults={searchResults} />
-    </Wrapper>
+    <ErrorBoundary>
+      <Wrapper>
+        <Filter />
+        <SearchResults searchResults={searchResults} />
+      </Wrapper>
+    </ErrorBoundary>
   </main>
 );
 
