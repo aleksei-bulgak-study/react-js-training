@@ -11,7 +11,8 @@ footer {
   color: var(--red);
   height: 7vh;
   font-size: 1.5rem;
-  position: relative;
+  position: sticky;
+  bottom: 0;
 }
 
 .app-title {
