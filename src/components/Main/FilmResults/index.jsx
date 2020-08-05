@@ -16,12 +16,12 @@ SearchResultsCount.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-const FilmResultsList = ({ results }) => (
+const FilmResultsList = ({ results, removeFilmAction }) => (
   <section className="film-results">
     <SearchResultsCount count={results.length} />
     <div className="film-results__list">
       {results.map((filmDetails) => (
-        <Film key={filmDetails.id} details={filmDetails} />
+        <Film key={filmDetails.id} details={filmDetails} removeFilmAction={removeFilmAction} />
       ))}
     </div>
   </section>

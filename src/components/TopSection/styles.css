@@ -21,6 +21,17 @@
   z-index: 1;
 }
 
+.search-preview::after {
+  background-color: #00000096;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  z-index: 1;
+}
+
 .search-preview > * {
   position: relative;
   z-index: 2;

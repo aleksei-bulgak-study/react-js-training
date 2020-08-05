@@ -4,10 +4,12 @@ import FilmResults from '../FilmResults';
 import NotFound from '../NotFound';
 import './styles.css';
 
-const SearchResults = ({ searchResults }) => (
+const SearchResults = (props) => (
   <>
-    {searchResults && <FilmResults results={searchResults} />}
-    {!searchResults && <NotFound />}
+    {console.log(props.searchResults)}
+    {console.log(!props.searchResults)}
+    {props.searchResults && <FilmResults results={props.searchResults} removeFilmAction={props.removeFilmAction} />}
+    {(!props.searchResults || !props.searchResults.length) && <NotFound />}
   </>
 );
 

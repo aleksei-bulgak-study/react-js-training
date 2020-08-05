@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FilmSettings from '../FilmSettings';
 import './styles.css';
 
-const Film = ({ details }) => (
+const Film = ({ details, removeFilmAction }) => (
   <div className="film-results__item film">
     <img className="film__logo" src={details.url} alt="Pulp fiction" />
     <div className="film__description">
@@ -13,7 +13,7 @@ const Film = ({ details }) => (
       <p className="film__genre">{details.genre}</p>
       <p className="film__release-year">{details.releaseYear}</p>
     </div>
-    <FilmSettings />
+    <FilmSettings deleteAction={() => removeFilmAction(details.id)} />
   </div>
 );
 
