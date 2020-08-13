@@ -6,15 +6,39 @@ import Filter from './Filter';
 import SearchResults from './SearchResults';
 import './styles.css';
 
-const Main = (props) => (
-  <main>
+const Main = ({
+  blur,
+  searchResults,
+  removeFilmAction,
+  editFilmAction,
+}) => (
+  <main className={blur ? 'blured' : ''}>
     <ErrorBoundary>
       <Wrapper>
         <Filter />
-        <SearchResults {...props} />
+        <SearchResults
+          searchResults={searchResults}
+          removeFilmAction={removeFilmAction}
+          editFilmAction={editFilmAction}
+        />
       </Wrapper>
     </ErrorBoundary>
   </main>
 );
+
+Main.propTypes = {
+  blur: PropTypes.bool.isRequired,
+  searchResults: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      releaseYear: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  removeFilmAction: PropTypes.func.isRequired,
+  editFilmAction: PropTypes.func.isRequired,
+};
 
 export default Main;

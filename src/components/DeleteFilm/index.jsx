@@ -1,41 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import ModalWindow from '../ModalWindow';
 import './styles.css';
+import Button from '../Common/Button';
 
-class DeleteFilm extends Component {
-  constructor(props) {
-    super(props);
-  }
+const DeleteFilm = ({ closeAction, deleteAction }) => (
+  <section className="delete-film">
+    <ModalWindow title="Delete movie" closeAction={closeAction}>
+      <p className="delete-film__description">
+        Are you sure you want to delete this movie?
+      </p>
 
-  render() {
-    const { closeAction, deleteAction } = this.props;
-    return (
-      <section className="delete-film">
-        <div className="modal-window__overlay" />
-        <div className="modal-window">
-          <div className="modal-window__wrapper">
-            <h1 className="modal-window__title">Delete movie</h1>
-            <p className="modal-window__description">
-              Are you sure you want to delete this movie?
-            </p>
-            <button
-              type="button"
-              className="button modal-window__confirm"
-              onClick={deleteAction}
-            >
-              Confirm
-            </button>
-            <button
-              type="button"
-              className="modal-window__close"
-              onClick={closeAction}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  }
-}
+      <Button
+        title="Confirm"
+        onClick={deleteAction}
+        additionalStyles="delete-film__confirm"
+      />
+    </ModalWindow>
+  </section>
+);
+
+DeleteFilm.propTypes = {
+  closeAction: PropTypes.func.isRequired,
+  deleteAction: PropTypes.func.isRequired,
+};
 
 export default DeleteFilm;

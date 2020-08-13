@@ -6,12 +6,17 @@ import PreviewMovie from '../Preview';
 import SearchBar from '../SearchBar';
 import './styles.css';
 
-const TopSection = ({ preview }) => (
-  <section className="search-preview">
+const TopSection = ({ preview, filterByName, blur, addFilmAction }) => (
+  <section className={blur ? 'search-preview blured' : 'search-preview'}>
     <ErrorBoundary>
       <Wrapper>
         {preview && <PreviewMovie preview={preview} />}
-        {!preview && <SearchBar />}
+        {!preview && (
+          <SearchBar
+            filterByName={filterByName}
+            addFilmAction={addFilmAction}
+          />
+        )}
       </Wrapper>
     </ErrorBoundary>
   </section>
@@ -26,6 +31,9 @@ TopSection.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.string.isRequired,
   }).isRequired,
+  blur: PropTypes.bool.isRequired,
+  filterByName: PropTypes.func.isRequired,
+  addFilmAction: PropTypes.func.isRequired,
 };
 
 export default TopSection;

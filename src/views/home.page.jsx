@@ -1,35 +1,95 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Header, Footer, Main, TopSection } from '../components';
+import {
+  Header,
+  Footer,
+  Main,
+  TopSection,
+} from '../components';
 import DeleteFilm from '../components/DeleteFilm';
+import EditFilm from '../components/EditFilm';
+import AddFilm from '../components/AddFilm';
 
-const Home = ({ preview, results, removeFilmById }) => {
-  const [deleteAction, setDeleteAction] = useState({
-    showDialog: false,
-    filmForDeletion: null,
-  });
+const Home = ({ preview, results, setResults }) => {
+  const [filtered, setFilteredResults] = useState(results);
+  const [showDialog, setShowDialog] = useState(false);
+  const [filmForDeletion, setFilmForDeletion] = useState();
+  const [filmForEdit, setFilmForEdit] = useState();
+  const [addNewFilm, setAddNewFilm] = useState(false);
 
   const removeFilmAction = (id) => {
-    setDeleteAction({ showDialog: true, filmForDeletion: id });
+    setShowDialog(true);
+    setFilmForDeletion(id);
+  };
+
+  const editFilmAction = (filmForUpdate) => {
+    setShowDialog(true);
+    setFilmForEdit(filmForUpdate);
+  };
+
+  const addFilmAction = () => {
+    setShowDialog(true);
+    setAddNewFilm(true);
+  };
+
+  const removeFilmById = (id) => {
+    const newResults = results.filter((film) => film.id !== id);
+    const newFilteredResult = filtered.filter((film) => film.id !== id);
+    setResults(newResults);
+    setFilteredResults(newFilteredResult);
   };
 
   const processFilmDeletion = () => {
-    removeFilmById(deleteAction.filmForDeletion);
-    hideFilmDeletionPopup();
+    removeFilmById(filmForDeletion);
+    setShowDialog(false);
+    setFilmForDeletion(null);
   };
 
-  const hideFilmDeletionPopup = () => setDeleteAction({ showDialog: false });
+  const filterByName = (query) => {
+    const pattern = new RegExp(query.toLowerCase());
+    const filteredResults = results.filter((film) => pattern.test(film.title.toLowerCase()));
+    setFilteredResults(filteredResults);
+  };
+
+  const closeDialog = () => {
+    setShowDialog(false);
+    setFilmForDeletion(null);
+    setFilmForEdit(null);
+    setAddNewFilm(false);
+  };
 
   return (
     <>
       <Header preview={preview} />
-      <TopSection preview={preview} />
-      <Main searchResults={results} removeFilmAction={removeFilmAction} />
+      <TopSection
+        preview={preview}
+        filterByName={filterByName}
+        addFilmAction={addFilmAction}
+        blur={showDialog}
+      />
+      <Main
+        searchResults={filtered}
+        removeFilmAction={removeFilmAction}
+        editFilmAction={editFilmAction}
+        blur={showDialog}
+      />
       <Footer />
-      {deleteAction.showDialog && (
+      {showDialog && filmForDeletion && (
         <DeleteFilm
-          closeAction={hideFilmDeletionPopup}
+          closeAction={closeDialog}
           deleteAction={processFilmDeletion}
+        />
+      )}
+      {showDialog && filmForEdit && (
+        <EditFilm
+          details={filmForEdit}
+          closeAction={closeDialog}
+          saveAction={(data) => console.log('saving')}
+        />
+      )}
+      {showDialog && addNewFilm && (
+        <AddFilm
+          closeAction={closeDialog}
         />
       )}
     </>
@@ -56,6 +116,7 @@ Home.propTypes = {
       releaseYear: PropTypes.string.isRequired,
     }),
   ),
+  setResults: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {

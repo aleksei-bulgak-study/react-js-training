@@ -16,12 +16,17 @@ SearchResultsCount.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-const FilmResultsList = ({ results, removeFilmAction }) => (
+const FilmResultsList = ({ results, removeFilmAction, editFilmAction }) => (
   <section className="film-results">
     <SearchResultsCount count={results.length} />
     <div className="film-results__list">
       {results.map((filmDetails) => (
-        <Film key={filmDetails.id} details={filmDetails} removeFilmAction={removeFilmAction} />
+        <Film
+          key={filmDetails.id}
+          details={filmDetails}
+          removeFilmAction={removeFilmAction}
+          editFilmAction={editFilmAction}
+        />
       ))}
     </div>
   </section>
@@ -37,6 +42,8 @@ FilmResultsList.propTypes = {
       releaseYear: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  removeFilmAction: PropTypes.func.isRequired,
+  editFilmAction: PropTypes.func.isRequired,
 };
 
 export default FilmResultsList;

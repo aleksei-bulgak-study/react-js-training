@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: start;
   position: relative;
+  min-width: 300px;
 }
 
 .film__logo {
@@ -36,11 +37,13 @@
   background-color: transparent;
   text-align: left;
   outline: none;
+  max-width: 80%;
 }
 
 .film__genre {
   font-size: 1rem;
   color: #8d8d8d;
+  max-width: 80%;
 }
 
 .film__release-year {

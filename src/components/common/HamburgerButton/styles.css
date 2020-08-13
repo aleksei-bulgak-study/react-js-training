@@ -1,0 +1,53 @@
+.hamburger {
+  background-color: var(--grey-darker-transparent);
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  width: 50px;
+  height: 50px;
+}
+
+.hamburger:hover {
+  background-color: var(--grey-transparent);
+}
+
+.hamburger:active {
+  background-color: var(--grey-darker);
+}
+
+.hamburger::before {
+  content: '';
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  top: 25%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: var(--white);
+}
+
+.hamburger::after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: var(--white);
+}
+
+.hamburger__dot {
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  top: 75%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: var(--white);
+}

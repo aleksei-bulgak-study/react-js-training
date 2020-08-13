@@ -4,12 +4,16 @@ import FilmResults from '../FilmResults';
 import NotFound from '../NotFound';
 import './styles.css';
 
-const SearchResults = (props) => (
+const SearchResults = ({ searchResults, removeFilmAction, editFilmAction }) => (
   <>
-    {console.log(props.searchResults)}
-    {console.log(!props.searchResults)}
-    {props.searchResults && <FilmResults results={props.searchResults} removeFilmAction={props.removeFilmAction} />}
-    {(!props.searchResults || !props.searchResults.length) && <NotFound />}
+    {searchResults && (
+      <FilmResults
+        results={searchResults}
+        removeFilmAction={removeFilmAction}
+        editFilmAction={editFilmAction}
+      />
+    )}
+    {(!searchResults || !searchResults.length) && <NotFound />}
   </>
 );
 
@@ -23,6 +27,8 @@ SearchResults.propTypes = {
       releaseYear: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  removeFilmAction: PropTypes.func.isRequired,
+  editFilmAction: PropTypes.func.isRequired,
 };
 
 export default SearchResults;
