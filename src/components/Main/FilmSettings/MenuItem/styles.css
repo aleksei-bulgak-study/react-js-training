@@ -1,0 +1,16 @@
+.menu__item {
+  width: 100%;
+  border-radius: 0;
+  background-color: transparent;
+  text-align: left;
+  color: var(--white);
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 200;
+  padding: 0.5rem 1rem;
+  outline: none;
+}
+
+.menu__item:hover {
+  background-color: var(--red);
+}

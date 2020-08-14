@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const LabeledInput = ({ id, title, disabled, value }) => (
+const LabeledInput = ({
+  id,
+  title,
+  disabled,
+  value,
+}) => (
   <label htmlFor={id}>
     {title}
     <input id={id} type="text" style={{ disabled }} value={value} />

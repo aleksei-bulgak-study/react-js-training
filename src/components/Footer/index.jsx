@@ -2,16 +2,16 @@ import React from 'react';
 import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
 import './styles.css';
+import Brand from '../Brand';
 
-export default () => (
+const Footer = () => (
   <footer>
     <ErrorBoundary>
       <Wrapper>
-        <p className="app-title">
-          <span className="app-title__name">netflix</span>
-          roulette
-        </p>
+        <Brand />
       </Wrapper>
     </ErrorBoundary>
   </footer>
 );
+
+export default Footer;

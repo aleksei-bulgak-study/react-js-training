@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ModalWindow from '../ModalWindow';
 import './styles.css';
 import Button, { types } from '../Common/Button';
@@ -34,5 +35,9 @@ const AddFilm = ({ closeAction }) => (
     </ModalWindow>
   </form>
 );
+
+AddFilm.propTypes = {
+  closeAction: PropTypes.func.isRequired,
+};
 
 export default AddFilm;

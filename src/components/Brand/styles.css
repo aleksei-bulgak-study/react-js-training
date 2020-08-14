@@ -2,15 +2,11 @@
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-.brand-title {
   color: var(--red);
-  position: relative;
   font-weight: 200;
   font-size: 1.5rem;
 }
 
-.brand-title__name {
+.brand__name {
   font-weight: 800;
 }

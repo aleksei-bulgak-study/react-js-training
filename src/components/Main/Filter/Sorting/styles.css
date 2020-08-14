@@ -1,0 +1,29 @@
+.sorting__title {
+  color: var(--grey);
+  font-weight: 100;
+}
+
+.sorting__select {
+  background-color: var(--grey-darker);
+  color: var(--white);
+  font-size: 1.2rem;
+  outline: none;
+  margin-left: 2rem;
+  text-transform: uppercase;
+}
+
+.sorting__select:hover {
+  cursor: pointer;
+}
+
+.sorting__select::after {
+  content: '';
+  border-top: 5px solid var(--red);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  z-index: 2;
+}

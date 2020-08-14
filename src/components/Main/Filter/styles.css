@@ -52,65 +52,9 @@
   flex-wrap: wrap;
 }
 
-.genre-filter__item{
-  text-transform: uppercase;
-}
-
-.genre-filter__item:not(:last-child) {
-  margin-right: 2rem;
-}
-
-.genre-filter__item,
-.genre-filter__item a {
-  list-style-type: none;
-  text-decoration: none;
-  color: var(--white);
-  position: relative;
-}
-
-.genre-filter__item a:hover::after {
-  position: absolute;
-  content: '';
-  border-bottom: 3px solid var(--red);
-  left: 0;
-  right: 0;
-  bottom: -1rem;
-  z-index: 2;
-  border-radius: 1px;
-}
-
 
 /* filter by date */
 .filter__by-date {
   text-align: right;
   text-transform: uppercase;
-}
-
-.filter__by-date__title {
-  color: var(--grey);
-  font-weight: 100;
-}
-
-.filter__by-date__select {
-  background-color: var(--grey-darker);
-  color: var(--white);
-  font-size: 1.2rem;
-  outline: none;
-  margin-left: 2rem;
-}
-
-.filter__by-date__select:hover {
-  cursor: pointer;
-}
-
-.filter__by-date__select::after {
-  content: '';
-  border-top: 5px solid var(--red);
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  position: absolute;
-  top:50%;
-  left: 50%;
-  z-index: 2;
 }

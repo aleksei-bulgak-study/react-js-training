@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import pageIds from './model/pages';
-import { HomePage } from './views';
+import { HomePage } from './containers';
 import './app.css';
 import data from './movies.json';
 

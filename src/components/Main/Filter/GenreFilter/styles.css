@@ -1,0 +1,30 @@
+.genre-filter__item {
+  text-transform: uppercase;
+}
+
+.genre-filter__item:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.genre-filter__item,
+.genre-filter__item button {
+  list-style-type: none;
+  text-decoration: none;
+  color: var(--white);
+  position: relative;
+  background-color: transparent;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.genre-filter__item button:hover::after,
+.genre-filter__item button.active::after {
+  position: absolute;
+  content: '';
+  border-bottom: 3px solid var(--red);
+  left: 0;
+  right: 0;
+  bottom: -1rem;
+  z-index: 2;
+  border-radius: 1px;
+}
