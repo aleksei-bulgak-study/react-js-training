@@ -14,12 +14,12 @@ const Button = ({
   title,
   onClick,
   type,
-  additionalStyles,
+  className,
 }) => (
   <button
     type="button"
     onClick={onClick}
-    className={`${type} ${additionalStyles}`}
+    className={`${type} ${className}`}
   >
     {title}
   </button>
@@ -29,12 +29,12 @@ Button.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   type: PropTypes.oneOfType(BUTTON_TYPES),
-  additionalStyles: PropTypes.string,
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {
   type: BUTTON_TYPES.PRIMARY,
-  additionalStyles: '',
+  className: '',
 };
 
 export { BUTTON_TYPES as types };

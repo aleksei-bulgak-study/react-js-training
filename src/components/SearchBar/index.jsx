@@ -32,7 +32,7 @@ const SearchBar = ({ filterByName, addFilmAction }) => {
           <Button
             title="+ Add movie"
             type={types.ADDITIONAL}
-            additionalStyles="search-bar__add-movie"
+            className="search-bar__add-movie"
             onClick={addFilmAction}
           />
         </div>

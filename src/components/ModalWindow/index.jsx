@@ -12,7 +12,7 @@ const ModalWindow = ({ title, closeAction, children }) => (
         <CloseButton
           onClick={closeAction}
           size="large"
-          positonStyles="modal-window__close"
+          className="modal-window__close"
         />
         {children}
       </div>

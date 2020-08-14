@@ -14,7 +14,7 @@ const DeleteFilm = ({ closeAction, deleteAction }) => (
       <Button
         title="Confirm"
         onClick={deleteAction}
-        additionalStyles="delete-film__confirm"
+        className="delete-film__confirm"
       />
     </ModalWindow>
   </section>

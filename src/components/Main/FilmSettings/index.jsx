@@ -12,7 +12,7 @@ const FilmMenu = ({ editAction, deleteAction, visible }) => {
         <HamburgerButton
           onClick={() => setIsOpened(true)}
           visible={visible}
-          additionalStyles="film__menu"
+          className="film__menu"
         />
       )}
       {isOpened && (

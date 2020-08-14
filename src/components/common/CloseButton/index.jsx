@@ -4,10 +4,10 @@ import './styles.css';
 
 const SIZES = ['small', 'large'];
 
-const CloseButton = ({ size, positonStyles, onClick }) => (
+const CloseButton = ({ size, className, onClick }) => (
   <button
     type="button"
-    className={`close-button ${positonStyles} ${size}`}
+    className={`close-button ${className} ${size}`}
     onClick={onClick}
   >
     Close
@@ -17,12 +17,12 @@ const CloseButton = ({ size, positonStyles, onClick }) => (
 CloseButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   size: PropTypes.oneOf(SIZES),
-  positonStyles: PropTypes.string,
+  className: PropTypes.string,
 };
 
 CloseButton.defaultProps = {
   size: SIZES[1],
-  positonStyles: '',
+  className: '',
 };
 
 export default CloseButton;

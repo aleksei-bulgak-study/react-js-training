@@ -9,7 +9,7 @@ const MenuOpened = ({ closeAction, editFilm, deleteFilm }) => (
     <MenuItem title="Edit" onClick={editFilm} />
     <MenuItem title="Delete" onClick={deleteFilm} />
     <CloseButton
-      positonStyles="film__menu__close"
+      className="film__menu__close"
       onClick={closeAction}
       size="small"
     />
