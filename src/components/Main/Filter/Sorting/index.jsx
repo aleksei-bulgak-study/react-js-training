@@ -12,7 +12,6 @@ const Sorting = ({
   const [selected, setSelected] = useState(selectedOption || options[0]);
   const onChange = (event) => {
     const { value } = event.target;
-    console.log(value);
     onAction(value);
     setSelected(value);
   };
