@@ -11,9 +11,8 @@
   margin: 0 0;
   padding: 0 0;
   box-sizing: border-box;
-  height: 4rem;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   position: relative;
 }
 
@@ -28,7 +27,12 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(180deg, rgba(122,121,121,1) 0%, rgba(85,85,85,1) 20%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(122, 121, 121, 1) 0%,
+    rgba(85, 85, 85, 1) 20%,
+    rgba(0, 0, 0, 1) 100%
+  );
   border-radius: 5px;
 }
 
@@ -45,16 +49,17 @@
   margin-right: 2%;
 }
 
-.filter__item:first-child ul{
+.filter__item:first-child ul {
   display: flex;
   flex-direction: row;
   justify-content: start;
   flex-wrap: wrap;
 }
 
-
 /* filter by date */
 .filter__by-date {
-  text-align: right;
   text-transform: uppercase;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

@@ -3,6 +3,7 @@
   height: 37vh;
   position: relative;
   overflow: hidden;
+  min-height: 250px;
 }
 
 .search-preview::before {
