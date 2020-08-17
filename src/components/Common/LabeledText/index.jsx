@@ -12,7 +12,7 @@ const LabeledText = ({ id, title, value }) => (
 LabeledText.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 LabeledText.defaultProps = {

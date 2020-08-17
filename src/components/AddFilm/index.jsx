@@ -13,20 +13,38 @@ const DEFAULT_GENRES = [
   { label: 'Crime', value: 'Crime' },
 ];
 
+const stubbedOnChange = (value) => console.log(value);
+
 const AddFilm = ({ closeAction }) => (
   <form className="add-film" onSubmit={() => console.log('form submitted')}>
     <ModalWindow title="add movie" closeAction={closeAction}>
-      <LabeledInput id="film-id" title="Movie id" />
-      <LabeledInput id="film-title" title="Title" />
-      <LabeledInput id="film-release" title="Release date" />
-      <LabeledInput id="film-url" title="Movie url" />
+      <LabeledInput id="film-id" title="Movie id" onChange={stubbedOnChange} />
+      <LabeledInput id="film-title" title="Title" onChange={stubbedOnChange} />
+      <LabeledInput
+        id="film-release"
+        title="Release date"
+        onChange={stubbedOnChange}
+      />
+      <LabeledInput
+        id="film-url"
+        title="Movie url"
+        onChange={stubbedOnChange}
+      />
       <LabeledMultiSelect
         title="genre"
         options={DEFAULT_GENRES}
         onAction={(data) => console.log(data)}
       />
-      <LabeledInput id="film-overview" title="Overview" />
-      <LabeledInput id="film-runtime" title="Runtime" />
+      <LabeledInput
+        id="film-overview"
+        title="Overview"
+        onChange={stubbedOnChange}
+      />
+      <LabeledInput
+        id="film-runtime"
+        title="Runtime"
+        onChange={stubbedOnChange}
+      />
 
       <div className="edit-film__actions">
         <Button
