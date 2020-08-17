@@ -10,7 +10,7 @@ const LabeledText = ({ id, title, value }) => (
 );
 
 LabeledText.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
   value: PropTypes.string,
 };

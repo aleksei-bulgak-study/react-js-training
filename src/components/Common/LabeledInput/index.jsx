@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LabeledInput = ({
-  id,
-  title,
-  disabled,
-  value,
-}) => (
+const LabeledInput = ({ id, title, disabled, value }) => (
   <label htmlFor={id}>
     {title}
     <input id={id} type="text" style={{ disabled }} value={value} />
@@ -14,7 +9,7 @@ const LabeledInput = ({
 );
 
 LabeledInput.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   value: PropTypes.string,

@@ -24,16 +24,20 @@ const TopSection = ({ preview, filterByName, blur, addFilmAction }) => (
 
 TopSection.propTypes = {
   preview: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   blur: PropTypes.bool.isRequired,
   filterByName: PropTypes.func.isRequired,
   addFilmAction: PropTypes.func.isRequired,
+};
+
+TopSection.defaultProps = {
+  preview: null,
 };
 
 export default TopSection;

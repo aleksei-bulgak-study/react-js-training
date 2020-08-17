@@ -41,11 +41,11 @@ const Film = ({ details, removeFilmAction, preview, editFilmAction }) => {
 
 Film.propTypes = {
   details: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-    release_date: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string,
+    poster_path: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.string),
+    release_date: PropTypes.string,
   }).isRequired,
   removeFilmAction: PropTypes.func.isRequired,
   preview: PropTypes.func.isRequired,

@@ -35,11 +35,11 @@ Main.propTypes = {
   blur: PropTypes.bool.isRequired,
   searchResults: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      releaseYear: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      title: PropTypes.string,
+      url: PropTypes.string,
+      genre: PropTypes.string,
+      releaseYear: PropTypes.string,
     }).isRequired,
   ).isRequired,
   removeFilmAction: PropTypes.func.isRequired,

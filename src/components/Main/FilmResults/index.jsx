@@ -14,6 +14,7 @@ const FilmResultsList = ({ results, removeFilmAction, editFilmAction }) => (
           details={filmDetails}
           removeFilmAction={removeFilmAction}
           editFilmAction={editFilmAction}
+          preview={() => console.log('TODO preview')}
         />
       ))}
     </div>
@@ -23,11 +24,11 @@ const FilmResultsList = ({ results, removeFilmAction, editFilmAction }) => (
 FilmResultsList.propTypes = {
   results: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      releaseYear: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      title: PropTypes.string,
+      url: PropTypes.string,
+      genre: PropTypes.string,
+      releaseYear: PropTypes.string,
     }).isRequired,
   ).isRequired,
   removeFilmAction: PropTypes.func.isRequired,

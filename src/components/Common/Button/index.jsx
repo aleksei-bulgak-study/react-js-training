@@ -10,17 +10,8 @@ const BUTTON_TYPES = {
   ADDITIONAL: `${DEFAULT} additional`,
 };
 
-const Button = ({
-  title,
-  onClick,
-  type,
-  className,
-}) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className={`${type} ${className}`}
-  >
+const Button = ({ title, onClick, type, className }) => (
+  <button type="button" onClick={onClick} className={`${type} ${className}`}>
     {title}
   </button>
 );
@@ -28,7 +19,9 @@ const Button = ({
 Button.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  type: PropTypes.oneOfType(BUTTON_TYPES),
+  type: PropTypes.oneOf(
+    Object.keys(BUTTON_TYPES).map((type) => BUTTON_TYPES[type]),
+  ),
   className: PropTypes.string,
 };
 

@@ -126,22 +126,22 @@ const Home = ({ preview, results, setResults }) => {
 
 Home.propTypes = {
   preview: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    url: PropTypes.string,
+    genre: PropTypes.string,
+    releaseYear: PropTypes.string,
   }),
 
   results: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      releaseYear: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      url: PropTypes.string,
+      genre: PropTypes.string,
+      releaseYear: PropTypes.string,
     }),
   ),
   setResults: PropTypes.func.isRequired,
