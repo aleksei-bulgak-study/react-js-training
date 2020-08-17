@@ -6,7 +6,7 @@ import Sorting from './Sorting';
 import './styles.css';
 
 const FILTERS = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
-const SORTING = ['Release date', 'Runtime'];
+const SORTING = ['Release date', 'Runtime', 'budget', 'revenue', 'vote average'];
 
 const Filter = ({ filterByGenreAction, sortingAction }) => (
   <section className="filter__list">
