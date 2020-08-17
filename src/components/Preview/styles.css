@@ -1,0 +1,9 @@
+.film-preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  padding: 5vh 0;
+}
+

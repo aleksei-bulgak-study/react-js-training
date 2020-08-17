@@ -6,21 +6,45 @@ import PreviewMovie from '../Preview';
 import SearchBar from '../SearchBar';
 import './styles.css';
 
-const TopSection = ({ preview, filterByName, blur, addFilmAction }) => (
-  <section className={blur ? 'search-preview blured' : 'search-preview'}>
-    <ErrorBoundary>
-      <Wrapper>
-        {preview && <PreviewMovie preview={preview} />}
-        {!preview && (
-          <SearchBar
-            filterByName={filterByName}
-            addFilmAction={addFilmAction}
-          />
-        )}
-      </Wrapper>
-    </ErrorBoundary>
-  </section>
-);
+const buildClassNameString = (preview, blur) => {
+  const classes = ['search-preview'];
+  classes.push(preview ? ['preview'] : ['search']);
+  classes.push(blur ? 'blured' : '');
+  return classes.join(' ');
+};
+
+const TopSection = ({
+  preview,
+  filterByName,
+  filterByNameAction,
+  blur,
+  addFilmAction,
+  closePreviewAction,
+}) => {
+  const className = buildClassNameString(preview, blur);
+
+  return (
+    <section className={className}>
+      <ErrorBoundary>
+        <Wrapper>
+          {preview && (
+            <PreviewMovie
+              preview={preview}
+              closePreviewAction={closePreviewAction}
+            />
+          )}
+          {!preview && (
+            <SearchBar
+              filterByName={filterByName}
+              filterByNameAction={filterByNameAction}
+              addFilmAction={addFilmAction}
+            />
+          )}
+        </Wrapper>
+      </ErrorBoundary>
+    </section>
+  );
+};
 
 TopSection.propTypes = {
   preview: PropTypes.shape({
@@ -32,12 +56,15 @@ TopSection.propTypes = {
     releaseYear: PropTypes.string.isRequired,
   }),
   blur: PropTypes.bool.isRequired,
-  filterByName: PropTypes.func.isRequired,
+  filterByName: PropTypes.string,
+  filterByNameAction: PropTypes.func.isRequired,
   addFilmAction: PropTypes.func.isRequired,
+  closePreviewAction: PropTypes.func.isRequired,
 };
 
 TopSection.defaultProps = {
   preview: null,
+  filterByName: '',
 };
 
 export default TopSection;

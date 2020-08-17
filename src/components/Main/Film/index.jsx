@@ -23,7 +23,7 @@ const Film = ({ details, removeFilmAction, preview, editFilmAction }) => {
         <button
           className="film__title"
           type="button"
-          onClick={() => preview(details)}
+          onClick={preview}
         >
           {details.title}
         </button>

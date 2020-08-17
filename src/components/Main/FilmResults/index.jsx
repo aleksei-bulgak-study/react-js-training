@@ -4,7 +4,7 @@ import Film from '../Film';
 import SearchResultsCount from './SearchResultsCount';
 import './styles.css';
 
-const FilmResultsList = ({ results, removeFilmAction, editFilmAction }) => (
+const FilmResultsList = ({ results, removeFilmAction, editFilmAction, previewFilmAction }) => (
   <section className="film-results">
     <SearchResultsCount count={results.length} />
     <div className="film-results__list">
@@ -14,7 +14,7 @@ const FilmResultsList = ({ results, removeFilmAction, editFilmAction }) => (
           details={filmDetails}
           removeFilmAction={removeFilmAction}
           editFilmAction={editFilmAction}
-          preview={() => console.log('TODO preview')}
+          preview={() => previewFilmAction(filmDetails)}
         />
       ))}
     </div>
@@ -33,6 +33,7 @@ FilmResultsList.propTypes = {
   ).isRequired,
   removeFilmAction: PropTypes.func.isRequired,
   editFilmAction: PropTypes.func.isRequired,
+  previewFilmAction: PropTypes.func.isRequired,
 };
 
 export default FilmResultsList;
