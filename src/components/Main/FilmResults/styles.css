@@ -10,9 +10,10 @@
 }
 .film-results__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, 350px);
   column-gap: 3rem;
   row-gap: 3rem;
   justify-items: start;
+  justify-content: center;
   margin: 1rem auto 2rem;
 }
