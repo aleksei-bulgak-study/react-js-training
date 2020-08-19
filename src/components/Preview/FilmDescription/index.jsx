@@ -4,7 +4,7 @@ import formatDate from '../../../utils/formatDate';
 
 import './styles.css';
 
-const FilmDescription = ({ details, closePreviewAction }) => (
+const FilmDescription = ({ details }) => (
   <div className="film-preview__description">
     <h1 className="description__title">{details.title}</h1>
     <p className="description__rating">{details.vote_average}</p>
@@ -12,13 +12,6 @@ const FilmDescription = ({ details, closePreviewAction }) => (
     <p className="description__release">{formatDate(details.release_date)}</p>
     <p className="description__runtime">{details.runtime}</p>
     <p className="description__overview">{details.overview}</p>
-    <button
-      className="description__search"
-      type="button"
-      onClick={closePreviewAction}
-    >
-      Back to search
-    </button>
   </div>
 );
 
@@ -31,7 +24,6 @@ FilmDescription.propTypes = {
     runtime: PropTypes.number,
     overview: PropTypes.string,
   }),
-  closePreviewAction: PropTypes.func.isRequired,
 };
 
 export default FilmDescription;

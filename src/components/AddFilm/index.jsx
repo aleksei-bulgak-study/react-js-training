@@ -15,9 +15,9 @@ const DEFAULT_GENRES = [
 
 const stubbedOnChange = (value) => console.log(value);
 
-const AddFilm = ({ closeAction }) => (
+const AddFilm = ({ onClose }) => (
   <form className="add-film" onSubmit={() => console.log('form submitted')}>
-    <ModalWindow title="add movie" closeAction={closeAction}>
+    <ModalWindow title="add movie" onClose={onClose}>
       <LabeledInput id="film-id" title="Movie id" onChange={stubbedOnChange} />
       <LabeledInput id="film-title" title="Title" onChange={stubbedOnChange} />
       <LabeledInput
@@ -62,7 +62,7 @@ const AddFilm = ({ closeAction }) => (
 );
 
 AddFilm.propTypes = {
-  closeAction: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AddFilm;

@@ -9,8 +9,14 @@ const Preview = ({ preview, closePreviewAction }) => (
     <Poster src={preview.poster_path} alt={preview.title} width={250} />
     <FilmDescription
       details={preview}
-      closePreviewAction={closePreviewAction}
     />
+    <button
+      className="film-preview__search"
+      type="button"
+      onClick={closePreviewAction}
+    >
+      Back to search
+    </button>
   </div>
 );
 

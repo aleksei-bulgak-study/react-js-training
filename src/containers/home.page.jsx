@@ -4,6 +4,7 @@ import { Header, Footer, Main, TopSection } from '../components';
 import DeleteFilm from '../components/DeleteFilm';
 import EditFilm from '../components/EditFilm';
 import AddFilm from '../components/AddFilm';
+import Congratulation from '../components/Congratulation';
 
 const ORDER_MAPPING = {
   'release date': 'release_date',
@@ -19,6 +20,7 @@ const Home = ({ results, setResults }) => {
   const [filmForDeletion, setFilmForDeletion] = useState();
   const [filmForEdit, setFilmForEdit] = useState();
   const [addNewFilm, setAddNewFilm] = useState(false);
+  const [congratulation, setCongratulation] = useState(false);
   const [filter, setFilter] = useState({
     genre: null,
     order: 'release_date',
@@ -59,6 +61,7 @@ const Home = ({ results, setResults }) => {
     setFilmForDeletion(null);
     setFilmForEdit(null);
     setAddNewFilm(false);
+    setCongratulation(false);
   };
 
   const filterByGenreAction = (genre) => {
@@ -87,7 +90,7 @@ const Home = ({ results, setResults }) => {
           return -1;
         }),
     );
-  }, [filter]);
+  }, [filter, results]);
 
   return (
     <>
@@ -114,19 +117,17 @@ const Home = ({ results, setResults }) => {
       />
       <Footer />
       {showDialog && filmForDeletion && (
-        <DeleteFilm
-          closeAction={closeDialog}
-          deleteAction={processFilmDeletion}
-        />
+        <DeleteFilm onClose={closeDialog} deleteAction={processFilmDeletion} />
       )}
       {showDialog && filmForEdit && (
         <EditFilm
           details={filmForEdit}
-          closeAction={closeDialog}
+          onClose={closeDialog}
           saveAction={(data) => console.log('saving')}
         />
       )}
-      {showDialog && addNewFilm && <AddFilm closeAction={closeDialog} />}
+      {showDialog && addNewFilm && <AddFilm onClose={closeDialog} />}
+      {showDialog && congratulation && <Congratulation onClose={closeDialog} />}
     </>
   );
 };
