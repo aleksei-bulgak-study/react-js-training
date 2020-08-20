@@ -4,7 +4,7 @@ import './styles.css';
 import MenuOpened from './MenuOpened';
 import HamburgerButton from '../../Common/HamburgerButton';
 
-const FilmMenu = ({ editAction, deleteAction, visible }) => {
+const FilmSettings = ({ editAction, deleteAction, visible }) => {
   const [isOpened, setIsOpened] = useState(false);
   return (
     <>
@@ -26,10 +26,10 @@ const FilmMenu = ({ editAction, deleteAction, visible }) => {
   );
 };
 
-FilmMenu.propTypes = {
+FilmSettings.propTypes = {
   editAction: PropTypes.func.isRequired,
   deleteAction: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
 };
 
-export default FilmMenu;
+export default FilmSettings;

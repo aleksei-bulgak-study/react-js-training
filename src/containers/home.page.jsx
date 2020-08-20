@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Header, Footer, Main, TopSection } from '../components';
 import DeleteFilm from '../components/DeleteFilm';
 import EditFilm from '../components/EditFilm';
@@ -133,34 +132,6 @@ const Home = () => {
       {showDialog && congratulation && <Congratulation onClose={closeDialog} />}
     </>
   );
-};
-
-Home.propTypes = {
-  preview: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    url: PropTypes.string,
-    genre: PropTypes.string,
-    releaseYear: PropTypes.string,
-  }),
-
-  results: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string,
-      description: PropTypes.string,
-      url: PropTypes.string,
-      genre: PropTypes.string,
-      releaseYear: PropTypes.string,
-    }),
-  ),
-  setResults: PropTypes.func.isRequired,
-};
-
-Home.defaultProps = {
-  preview: null,
-  results: [],
 };
 
 export default Home;
