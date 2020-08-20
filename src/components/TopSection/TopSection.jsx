@@ -16,10 +16,10 @@ const buildClassNameString = (preview, blur) => {
 const TopSection = ({
   preview,
   filterByName,
-  filterByNameAction,
+  onFilterByName,
   blur,
-  addFilmAction,
-  closePreviewAction,
+  onFilmAdd,
+  onPreviewClose,
 }) => {
   const className = buildClassNameString(preview, blur);
 
@@ -30,14 +30,14 @@ const TopSection = ({
           {preview && (
             <PreviewMovie
               preview={preview}
-              closePreviewAction={closePreviewAction}
+              onPreviewClose={onPreviewClose}
             />
           )}
           {!preview && (
             <SearchBar
               filterByName={filterByName}
-              filterByNameAction={filterByNameAction}
-              addFilmAction={addFilmAction}
+              onFilterByName={onFilterByName}
+              onFilmAdd={onFilmAdd}
             />
           )}
         </Wrapper>
@@ -57,9 +57,9 @@ TopSection.propTypes = {
   }),
   blur: PropTypes.bool.isRequired,
   filterByName: PropTypes.string,
-  filterByNameAction: PropTypes.func.isRequired,
-  addFilmAction: PropTypes.func.isRequired,
-  closePreviewAction: PropTypes.func.isRequired,
+  onFilterByName: PropTypes.func.isRequired,
+  onFilmAdd: PropTypes.func.isRequired,
+  onPreviewClose: PropTypes.func.isRequired,
 };
 
 TopSection.defaultProps = {

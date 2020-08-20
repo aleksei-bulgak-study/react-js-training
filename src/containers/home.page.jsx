@@ -30,17 +30,17 @@ const Home = () => {
   const [preview, setPreview] = useState();
   const [results, setResults] = useState(data.slice(0, 10));
 
-  const removeFilmAction = (id) => {
+  const onFilmDeletion = (id) => {
     setShowDialog(true);
     setFilmForDeletion(id);
   };
 
-  const editFilmAction = (filmForUpdate) => {
+  const onFilmEdit = (filmForUpdate) => {
     setShowDialog(true);
     setFilmForEdit(filmForUpdate);
   };
 
-  const addFilmAction = () => {
+  const onFilmAdd = () => {
     setShowDialog(true);
     setAddNewFilm(true);
   };
@@ -66,15 +66,15 @@ const Home = () => {
     setCongratulation(false);
   };
 
-  const filterByGenreAction = (genre) => {
+  const onFilterByGenre = (genre) => {
     setFilter({ ...filter, genre: genre === 'All' ? null : genre });
   };
 
-  const sortingAction = (sortingField) => {
+  const onSorting = (sortingField) => {
     setFilter({ ...filter, order: ORDER_MAPPING[sortingField.toLowerCase()] });
   };
 
-  const filterByNameAction = (query) => {
+  const onFilterByName = (query) => {
     setFilter({ ...filter, searchString: query.toLowerCase() });
   };
 
@@ -100,32 +100,31 @@ const Home = () => {
       <TopSection
         preview={preview}
         filterByName={filter.searchString}
-        filterByNameAction={filterByNameAction}
-        addFilmAction={addFilmAction}
+        onFilterByName={onFilterByName}
+        onFilmAdd={onFilmAdd}
         blur={showDialog}
-        closePreviewAction={() => setPreview(null)}
+        onPreviewClose={() => setPreview(null)}
       />
       <Main
         searchResults={filtered}
-        removeFilmAction={removeFilmAction}
-        editFilmAction={editFilmAction}
+        onFilmDeletion={onFilmDeletion}
+        onFilmEdit={onFilmEdit}
         blur={showDialog}
-        filterByGenreAction={filterByGenreAction}
-        sortingAction={sortingAction}
-        previewFilmAction={(details) => {
+        onFilterByGenre={onFilterByGenre}
+        onSorting={onSorting}
+        onFilmPreview={(details) => {
           setPreview(details);
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         }}
       />
       <Footer />
       {showDialog && filmForDeletion && (
-        <DeleteFilm onClose={closeDialog} deleteAction={processFilmDeletion} />
+        <DeleteFilm onClose={closeDialog} onDelete={processFilmDeletion} />
       )}
       {showDialog && filmForEdit && (
         <EditFilm
           details={filmForEdit}
           onClose={closeDialog}
-          saveAction={(data) => console.log('saving')}
         />
       )}
       {showDialog && addNewFilm && <AddFilm onClose={closeDialog} />}

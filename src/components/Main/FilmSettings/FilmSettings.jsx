@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 import MenuOpened from './MenuOpened';
 import HamburgerButton from '../../Common/HamburgerButton';
 
-const FilmSettings = ({ editAction, deleteAction, visible }) => {
+const FilmSettings = ({ onEdit, onDelete, visible }) => {
   const [isOpened, setIsOpened] = useState(false);
+  const onOpen = useCallback((value) => setIsOpened(value), [setIsOpened]);
+  const onClose = useCallback(() => setIsOpened(false), [setIsOpened]);
+
   return (
     <>
       {!isOpened && (
-        <HamburgerButton
-          onClick={() => setIsOpened(true)}
-          visible={visible}
-          className="film__menu"
-        />
+        <HamburgerButton onClick={onOpen} visible={visible} className="film__menu" />
       )}
       {isOpened && (
         <MenuOpened
-          onClose={() => setIsOpened(false)}
-          editFilm={editAction}
-          deleteFilm={deleteAction}
+          onClose={onClose}
+          onEdit={onEdit}
+          onDelete={onDelete}
         />
       )}
     </>
@@ -27,8 +26,8 @@ const FilmSettings = ({ editAction, deleteAction, visible }) => {
 };
 
 FilmSettings.propTypes = {
-  editAction: PropTypes.func.isRequired,
-  deleteAction: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
 };
 

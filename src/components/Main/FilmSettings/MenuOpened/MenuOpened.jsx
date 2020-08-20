@@ -4,10 +4,10 @@ import './styles.css';
 import CloseButton from '../../../Common/CloseButton';
 import MenuItem from '../MenuItem';
 
-const MenuOpened = ({ onClose, editFilm, deleteFilm }) => (
+const MenuOpened = ({ onClose, onEdit, onDelete }) => (
   <div className="film__menu film__menu--opened">
-    <MenuItem title="Edit" onClick={editFilm} />
-    <MenuItem title="Delete" onClick={deleteFilm} />
+    <MenuItem title="Edit" onClick={onEdit} />
+    <MenuItem title="Delete" onClick={onDelete} />
     <CloseButton
       className="film__menu__close"
       onClick={onClose}
@@ -18,8 +18,8 @@ const MenuOpened = ({ onClose, editFilm, deleteFilm }) => (
 
 MenuOpened.propTypes = {
   onClose: PropTypes.func.isRequired,
-  editFilm: PropTypes.func.isRequired,
-  deleteFilm: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default MenuOpened;

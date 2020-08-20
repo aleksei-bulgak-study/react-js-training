@@ -9,24 +9,24 @@ import './styles.css';
 const Main = ({
   blur,
   searchResults,
-  removeFilmAction,
-  editFilmAction,
-  filterByGenreAction,
-  sortingAction,
-  previewFilmAction,
+  onFilmDeletion,
+  onFilmEdit,
+  onFilterByGenre,
+  onSorting,
+  onFilmPreview,
 }) => (
   <main className={blur ? 'blured' : ''}>
     <ErrorBoundary>
       <Wrapper>
         <Filter
-          filterByGenreAction={filterByGenreAction}
-          sortingAction={sortingAction}
+          onFilterByGenre={onFilterByGenre}
+          onSorting={onSorting}
         />
         <SearchResults
           searchResults={searchResults}
-          removeFilmAction={removeFilmAction}
-          editFilmAction={editFilmAction}
-          previewFilmAction={previewFilmAction}
+          onFilmDeletion={onFilmDeletion}
+          onFilmEdit={onFilmEdit}
+          onFilmPreview={onFilmPreview}
         />
       </Wrapper>
     </ErrorBoundary>
@@ -44,11 +44,11 @@ Main.propTypes = {
       releaseYear: PropTypes.string,
     }).isRequired,
   ).isRequired,
-  removeFilmAction: PropTypes.func.isRequired,
-  editFilmAction: PropTypes.func.isRequired,
-  filterByGenreAction: PropTypes.func.isRequired,
-  sortingAction: PropTypes.func.isRequired,
-  previewFilmAction: PropTypes.func.isRequired,
+  onFilmDeletion: PropTypes.func.isRequired,
+  onFilmEdit: PropTypes.func.isRequired,
+  onFilterByGenre: PropTypes.func.isRequired,
+  onSorting: PropTypes.func.isRequired,
+  onFilmPreview: PropTypes.func.isRequired,
 };
 
 export default Main;

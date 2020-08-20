@@ -4,7 +4,12 @@ import Film from '../Film';
 import SearchResultsCount from './SearchResultsCount';
 import './styles.css';
 
-const FilmResultsList = ({ results, removeFilmAction, editFilmAction, previewFilmAction }) => (
+const FilmResultsList = ({
+  results,
+  onFilmDeletion,
+  onFilmEdit,
+  onFilmPreview,
+}) => (
   <section className="film-results">
     <SearchResultsCount count={results.length} />
     <div className="film-results__list">
@@ -12,9 +17,9 @@ const FilmResultsList = ({ results, removeFilmAction, editFilmAction, previewFil
         <Film
           key={filmDetails.id}
           details={filmDetails}
-          removeFilmAction={removeFilmAction}
-          editFilmAction={editFilmAction}
-          preview={() => previewFilmAction(filmDetails)}
+          onFilmDeletion={onFilmDeletion}
+          onFilmEdit={onFilmEdit}
+          onFilmPreview={() => onFilmPreview(filmDetails)}
         />
       ))}
     </div>
@@ -31,9 +36,9 @@ FilmResultsList.propTypes = {
       releaseYear: PropTypes.string,
     }).isRequired,
   ).isRequired,
-  removeFilmAction: PropTypes.func.isRequired,
-  editFilmAction: PropTypes.func.isRequired,
-  previewFilmAction: PropTypes.func.isRequired,
+  onFilmDeletion: PropTypes.func.isRequired,
+  onFilmEdit: PropTypes.func.isRequired,
+  onFilmPreview: PropTypes.func.isRequired,
 };
 
 export default FilmResultsList;

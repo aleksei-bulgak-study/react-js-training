@@ -4,7 +4,7 @@ import ModalWindow from '../ModalWindow';
 import './styles.css';
 import Button from '../Common/Button';
 
-const DeleteFilm = ({ onClose, deleteAction }) => (
+const DeleteFilm = ({ onClose, onDelete }) => (
   <section className="delete-film">
     <ModalWindow title="Delete movie" onClose={onClose}>
       <p className="delete-film__description">
@@ -13,7 +13,7 @@ const DeleteFilm = ({ onClose, deleteAction }) => (
 
       <Button
         title="Confirm"
-        onClick={deleteAction}
+        onClick={onDelete}
         className="delete-film__confirm"
       />
     </ModalWindow>
@@ -22,7 +22,7 @@ const DeleteFilm = ({ onClose, deleteAction }) => (
 
 DeleteFilm.propTypes = {
   onClose: PropTypes.func.isRequired,
-  deleteAction: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default DeleteFilm;
