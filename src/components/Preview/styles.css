@@ -20,3 +20,7 @@
   transform: rotate(90deg);
   overflow: hidden;
 }
+
+.film-preview__logo {
+  width: 250px;
+}

@@ -1,15 +1,17 @@
 import React from 'react';
-import Poster from './Poster';
 import FilmDescription from './FilmDescription';
 import PropTypes from 'prop-types';
 import './styles.css';
+import Poster from '../Common/Poster';
 
 const Preview = ({ preview, onPreviewClose }) => (
   <div className="film-preview">
-    <Poster src={preview.poster_path} alt={preview.title} width={250} />
-    <FilmDescription
-      details={preview}
+    <Poster
+      src={preview.poster_path}
+      alt={preview.title}
+      className="film-preview__logo"
     />
+    <FilmDescription details={preview} />
     <button
       className="film-preview__search"
       type="button"

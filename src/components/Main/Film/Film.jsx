@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import FilmSettings from '../FilmSettings';
 import dateFormat from '../../../utils/formatDate';
 import genresFormatter from '../../../utils/arrayToStringFormatter';
+import Poster from '../../Common/Poster';
+
+import defaultPoster from '../../../../public/images/default_poster.png';
 import './styles.css';
 
 const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
   const [hovered, setHovered] = useState(false);
-  const onEdit = useCallback(() => onFilmEdit(details), [
-    onFilmEdit,
-    details,
-  ]);
+  const onEdit = useCallback(() => onFilmEdit(details), [onFilmEdit, details]);
   const onDelete = useCallback(() => onFilmDeletion(details.id), [
     onFilmDeletion,
     details,
@@ -22,10 +22,11 @@ const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img
-        className="film__logo"
+      <Poster
         src={details.poster_path}
         alt={details.title}
+        fallback={defaultPoster}
+        className="film__logo"
       />
       <div className="film__description">
         <button className="film__title" type="button" onClick={onFilmPreview}>
