@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import MultiSelect from 'react-multi-select-component';
 import './styles.css';
@@ -6,12 +6,7 @@ import './styles.css';
 const buildValues = (elems) => elems.map((e) => ({ label: e, value: e }));
 
 const LabeledMultiSelect = ({ title, options, onAction, preselected }) => {
-  const [selected, setSelected] = useState(buildValues(preselected) || []);
-
-  const onChange = (selectedElements) => {
-    onAction(selectedElements);
-    setSelected(selectedElements);
-  };
+  const selected = useMemo(() => buildValues(preselected) || [], [preselected]);
 
   return (
     <label htmlFor="genres" className="genres">
@@ -20,7 +15,7 @@ const LabeledMultiSelect = ({ title, options, onAction, preselected }) => {
         id="genres"
         options={options}
         value={selected}
-        onChange={onChange}
+        onChange={onAction}
         hasSelectAll={false}
         disableSearch
       />

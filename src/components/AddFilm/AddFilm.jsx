@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ModalWindow from '../ModalWindow';
 import './styles.css';
@@ -13,53 +13,85 @@ const DEFAULT_GENRES = [
   { label: 'Crime', value: 'Crime' },
 ];
 
-const stubbedOnChange = (value) => console.log(value);
+const AddFilm = ({ onClose }) => {
+  const [data, setData] = useState({});
 
-const AddFilm = ({ onClose }) => (
-  <form className="add-film" onSubmit={() => console.log('form submitted')}>
-    <ModalWindow title="add movie" onClose={onClose}>
-      <LabeledInput id="film-id" title="Movie id" onChange={stubbedOnChange} />
-      <LabeledInput id="film-title" title="Title" onChange={stubbedOnChange} />
-      <LabeledInput
-        id="film-release"
-        title="Release date"
-        onChange={stubbedOnChange}
-      />
-      <LabeledInput
-        id="film-url"
-        title="Movie url"
-        onChange={stubbedOnChange}
-      />
-      <LabeledMultiSelect
-        title="genre"
-        options={DEFAULT_GENRES}
-        onAction={(data) => console.log(data)}
-      />
-      <LabeledInput
-        id="film-overview"
-        title="Overview"
-        onChange={stubbedOnChange}
-      />
-      <LabeledInput
-        id="film-runtime"
-        title="Runtime"
-        onChange={stubbedOnChange}
-      />
+  const onDataChange = ({ target: { name, value } }) => {
+    setData({ ...data, [name]: value });
+  };
 
-      <div className="edit-film__actions">
-        <Button
-          title="reset"
-          onClick={() => console.log('TODO reset action')}
-          type={types.SECONDARY}
+  const onSelectStateChange = (key) => (values) => {
+    if (values) {
+      const genres = values.map((item) => item.value);
+      setData({ ...data, [key]: genres });
+    }
+  };
+
+  const onReset = () => setData({});
+
+  return (
+    <form className="add-film" onSubmit={() => console.log('form submitted')}>
+      <ModalWindow title="add movie" onClose={onClose}>
+        <LabeledInput
+          id="film-id"
+          name="id"
+          title="Movie id"
+          value={data.id}
+          onChange={onDataChange}
         />
-        <Button
-          title="submit"
-          onClick={() => console.log('TODO submit action')}
+        <LabeledInput
+          id="film-title"
+          name="title"
+          title="Title"
+          value={data.title}
+          onChange={onDataChange}
         />
-      </div>
-    </ModalWindow>
-  </form>
-);
+        <LabeledInput
+          id="film-release"
+          name="release_date"
+          title="Release date"
+          type="date"
+          value={data.release_date}
+          onChange={onDataChange}
+        />
+        <LabeledInput
+          id="film-url"
+          name="url"
+          title="Movie url"
+          type="url"
+          value={data.url}
+          onChange={onDataChange}
+        />
+        <LabeledMultiSelect
+          title="genre"
+          options={DEFAULT_GENRES}
+          onAction={onSelectStateChange('genre')}
+          preselected={data.genre}
+        />
+        <LabeledInput
+          id="film-overview"
+          name="overview"
+          title="Overview"
+          value={data.overview}
+          onChange={onDataChange}
+        />
+        <LabeledInput
+          id="film-runtime"
+          name="runtime"
+          title="Runtime"
+          type="number"
+          value={data.runtime}
+          onChange={onDataChange}
+        />
+
+        <div className="edit-film__actions">
+          <Button title="reset" onClick={onReset} type={types.SECONDARY} />
+          <Button title="submit" onClick={() => console.log(data)} />
+        </div>
+      </ModalWindow>
+    </form>
+  );
+};
 
 AddFilm.propTypes = {
   onClose: PropTypes.func.isRequired,
