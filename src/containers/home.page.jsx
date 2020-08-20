@@ -6,6 +6,8 @@ import EditFilm from '../components/EditFilm';
 import AddFilm from '../components/AddFilm';
 import Congratulation from '../components/Congratulation';
 
+import data from '../movies.json';
+
 const ORDER_MAPPING = {
   'release date': 'release_date',
   runtime: 'runtime',
@@ -14,7 +16,7 @@ const ORDER_MAPPING = {
   'vote average': 'vote_average',
 };
 
-const Home = ({ results, setResults }) => {
+const Home = () => {
   const [filtered, setFilteredResults] = useState(results);
   const [showDialog, setShowDialog] = useState(false);
   const [filmForDeletion, setFilmForDeletion] = useState();
@@ -27,6 +29,7 @@ const Home = ({ results, setResults }) => {
     searchString: '',
   });
   const [preview, setPreview] = useState();
+  const [results, setResults] = useState(data.slice(0, 10));
 
   const removeFilmAction = (id) => {
     setShowDialog(true);

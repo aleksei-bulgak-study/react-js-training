@@ -17,7 +17,7 @@ const FilmMenu = ({ editAction, deleteAction, visible }) => {
       )}
       {isOpened && (
         <MenuOpened
-          closeAction={() => setIsOpened(false)}
+          onClose={() => setIsOpened(false)}
           editFilm={editAction}
           deleteFilm={deleteAction}
         />
