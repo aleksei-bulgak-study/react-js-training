@@ -13,6 +13,7 @@ const Main = ({
   editFilmAction,
   filterByGenreAction,
   sortingAction,
+  previewFilmAction,
 }) => (
   <main className={blur ? 'blured' : ''}>
     <ErrorBoundary>
@@ -25,6 +26,7 @@ const Main = ({
           searchResults={searchResults}
           removeFilmAction={removeFilmAction}
           editFilmAction={editFilmAction}
+          previewFilmAction={previewFilmAction}
         />
       </Wrapper>
     </ErrorBoundary>
@@ -46,6 +48,7 @@ Main.propTypes = {
   editFilmAction: PropTypes.func.isRequired,
   filterByGenreAction: PropTypes.func.isRequired,
   sortingAction: PropTypes.func.isRequired,
+  previewFilmAction: PropTypes.func.isRequired,
 };
 
 export default Main;

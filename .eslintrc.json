@@ -13,10 +13,12 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "jest"],
+  "plugins": ["react", "jest", "react-hooks"],
   "rules": {
     "import/no-dynamic-require": "off",
     "import/prefer-default-export": "off",
-    "linebreak-style": ["error", "unix"]
+    "linebreak-style": ["error", "unix"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

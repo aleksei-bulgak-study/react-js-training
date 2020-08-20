@@ -4,9 +4,9 @@ import ModalWindow from '../ModalWindow';
 import './styles.css';
 import Button from '../Common/Button';
 
-const DeleteFilm = ({ closeAction, deleteAction }) => (
+const DeleteFilm = ({ onClose, deleteAction }) => (
   <section className="delete-film">
-    <ModalWindow title="Delete movie" closeAction={closeAction}>
+    <ModalWindow title="Delete movie" onClose={onClose}>
       <p className="delete-film__description">
         Are you sure you want to delete this movie?
       </p>
@@ -21,7 +21,7 @@ const DeleteFilm = ({ closeAction, deleteAction }) => (
 );
 
 DeleteFilm.propTypes = {
-  closeAction: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   deleteAction: PropTypes.func.isRequired,
 };
 

@@ -1,9 +1,17 @@
 /* header section */
 .search-preview {
-  height: 37vh;
   position: relative;
   overflow: hidden;
   min-height: 250px;
+  transition: height 0.5s;
+}
+
+.search {
+  height: 40vh;
+}
+
+.preview {
+  height: 50vh;
 }
 
 .search-preview::before {

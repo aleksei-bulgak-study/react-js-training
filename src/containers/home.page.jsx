@@ -4,6 +4,7 @@ import { Header, Footer, Main, TopSection } from '../components';
 import DeleteFilm from '../components/DeleteFilm';
 import EditFilm from '../components/EditFilm';
 import AddFilm from '../components/AddFilm';
+import Congratulation from '../components/Congratulation';
 
 const ORDER_MAPPING = {
   'release date': 'release_date',
@@ -13,17 +14,19 @@ const ORDER_MAPPING = {
   'vote average': 'vote_average',
 };
 
-const Home = ({ preview, results, setResults }) => {
+const Home = ({ results, setResults }) => {
   const [filtered, setFilteredResults] = useState(results);
   const [showDialog, setShowDialog] = useState(false);
   const [filmForDeletion, setFilmForDeletion] = useState();
   const [filmForEdit, setFilmForEdit] = useState();
   const [addNewFilm, setAddNewFilm] = useState(false);
+  const [congratulation, setCongratulation] = useState(false);
   const [filter, setFilter] = useState({
     genre: null,
     order: 'release_date',
     searchString: '',
   });
+  const [preview, setPreview] = useState();
 
   const removeFilmAction = (id) => {
     setShowDialog(true);
@@ -58,6 +61,7 @@ const Home = ({ preview, results, setResults }) => {
     setFilmForDeletion(null);
     setFilmForEdit(null);
     setAddNewFilm(false);
+    setCongratulation(false);
   };
 
   const filterByGenreAction = (genre) => {
@@ -68,7 +72,7 @@ const Home = ({ preview, results, setResults }) => {
     setFilter({ ...filter, order: ORDER_MAPPING[sortingField.toLowerCase()] });
   };
 
-  const filterByName = (query) => {
+  const filterByNameAction = (query) => {
     setFilter({ ...filter, searchString: query.toLowerCase() });
   };
 
@@ -86,16 +90,18 @@ const Home = ({ preview, results, setResults }) => {
           return -1;
         }),
     );
-  }, [filter]);
+  }, [filter, results]);
 
   return (
     <>
-      <Header preview={preview} />
+      <Header />
       <TopSection
         preview={preview}
-        filterByName={filterByName}
+        filterByName={filter.searchString}
+        filterByNameAction={filterByNameAction}
         addFilmAction={addFilmAction}
         blur={showDialog}
+        closePreviewAction={() => setPreview(null)}
       />
       <Main
         searchResults={filtered}
@@ -104,22 +110,24 @@ const Home = ({ preview, results, setResults }) => {
         blur={showDialog}
         filterByGenreAction={filterByGenreAction}
         sortingAction={sortingAction}
+        previewFilmAction={(details) => {
+          setPreview(details);
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        }}
       />
       <Footer />
       {showDialog && filmForDeletion && (
-        <DeleteFilm
-          closeAction={closeDialog}
-          deleteAction={processFilmDeletion}
-        />
+        <DeleteFilm onClose={closeDialog} deleteAction={processFilmDeletion} />
       )}
       {showDialog && filmForEdit && (
         <EditFilm
           details={filmForEdit}
-          closeAction={closeDialog}
+          onClose={closeDialog}
           saveAction={(data) => console.log('saving')}
         />
       )}
-      {showDialog && addNewFilm && <AddFilm closeAction={closeDialog} />}
+      {showDialog && addNewFilm && <AddFilm onClose={closeDialog} />}
+      {showDialog && congratulation && <Congratulation onClose={closeDialog} />}
     </>
   );
 };

@@ -7,7 +7,6 @@ import data from './movies.json';
 export default () => {
   const [state, setState] = useState({
     page: pageIds.home,
-    preview: null,
     results: data.slice(0, 10),
   });
 
@@ -19,7 +18,6 @@ export default () => {
     <>
       {(state.page === pageIds.home || state.page === pageIds.view) && (
         <HomePage
-          preview={state.preview}
           results={state.results}
           setResults={setResults}
         />

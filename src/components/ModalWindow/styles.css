@@ -7,6 +7,7 @@
   background-color: var(--grey-darker);
   filter: blur(1px) grayscale(50%);
   opacity: 0.8;
+  z-index: 2;
 }
 
 .modal-window {
@@ -23,6 +24,7 @@
   box-shadow: 0 0 10px 0 #000000b3;
   padding: 4rem 5rem;
   overflow: auto;
+  z-index: 2;
 }
 
 .modal-window__wrapper {
