@@ -1,4 +1,4 @@
-.add-film label {
+.film-form label {
   display: block;
   text-transform: uppercase;
   color: var(--red);
@@ -6,33 +6,33 @@
   margin-bottom: 1.5rem;
 }
 
-.add-film label:last-child {
+.film-form label:last-child {
   margin: 0;
 }
 
-.add-film label > *{
+.film-form label > * {
   display: block;
   width: 100%;
 }
 
-.add-film input,
-.add-film select {
+.film-form input,
+.film-form select {
   line-height: 2rem;
   font-size: 1rem;
-  background-color: #2E2E2E;
+  background-color: #2e2e2e;
   color: var(--white);
   padding: 0.5rem 1rem;
   width: 100%;
   margin-top: 0.5rem;
 }
 
-.add-film__actions {
+.film-form__actions {
   margin-top: 2rem;
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
 }
 
-.add-film__actions button:first-child {
+.film-form__actions button:first-child {
   margin-right: 1rem;
 }
