@@ -4,15 +4,15 @@ import './styles.css';
 import MenuOpened from './MenuOpened';
 import HamburgerButton from '../../Common/HamburgerButton';
 
-const FilmSettings = ({ onEdit, onDelete, visible }) => {
+const FilmSettings = ({ onEdit, onDelete, className}) => {
   const [isOpened, setIsOpened] = useState(false);
   const onOpen = useCallback((value) => setIsOpened(value), [setIsOpened]);
   const onClose = useCallback(() => setIsOpened(false), [setIsOpened]);
 
   return (
-    <>
+    <div className={className}>
       {!isOpened && (
-        <HamburgerButton onClick={onOpen} visible={visible} className="film__menu" />
+        <HamburgerButton onClick={onOpen} className="film__menu" />
       )}
       {isOpened && (
         <MenuOpened
@@ -21,14 +21,18 @@ const FilmSettings = ({ onEdit, onDelete, visible }) => {
           onDelete={onDelete}
         />
       )}
-    </>
+    </div>
   );
 };
 
 FilmSettings.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
+  className: PropTypes.string,
 };
+
+FilmSettings.defaultProps = {
+  className: '',
+}
 
 export default FilmSettings;

@@ -2,13 +2,11 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const HamburgerButton = ({ onClick, visible, className }) => {
-  const display = useMemo(() => (visible ? 'inline-block' : 'none'), [visible]);
+const HamburgerButton = ({ onClick, className }) => {
   return (
     <button
       type="button"
       className={`hamburger ${className}`}
-      style={{ display }}
       onClick={onClick}
     >
       <div className="hamburger__dot" />
@@ -18,8 +16,12 @@ const HamburgerButton = ({ onClick, visible, className }) => {
 
 HamburgerButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
   className: PropTypes.string.isRequired,
 };
+
+HamburgerButton.defaultProps = {
+  visible: false,
+}
 
 export default HamburgerButton;

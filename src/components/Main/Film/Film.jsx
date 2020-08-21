@@ -35,7 +35,12 @@ const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
         <p className="film__genre">{genresFormatter(details.genres, ', ')}</p>
         <p className="film__release-year">{dateFormat(details.release_date)}</p>
       </div>
-      <FilmSettings onDelete={onDelete} onEdit={onEdit} visible={hovered} />
+      <FilmSettings
+        onDelete={onDelete}
+        onEdit={onEdit}
+        visible={hovered}
+        className="film-results__settings"
+      />
     </div>
   );
 };
