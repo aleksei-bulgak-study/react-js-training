@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ModalWindow from '../ModalWindow';
+import BaseModalWindow from '../BaseModalWindow';
 import './styles.css';
-import Button from '../Common/Button';
+import Button from '../../Common/Button';
 
 const DeleteFilm = ({ onClose, onDelete }) => (
   <section className="delete-film">
-    <ModalWindow title="Delete movie" onClose={onClose}>
+    <BaseModalWindow title="Delete movie" onClose={onClose}>
       <p className="delete-film__description">
         Are you sure you want to delete this movie?
       </p>
@@ -16,7 +16,7 @@ const DeleteFilm = ({ onClose, onDelete }) => (
         onClick={onDelete}
         className="delete-film__confirm"
       />
-    </ModalWindow>
+    </BaseModalWindow>
   </section>
 );
 

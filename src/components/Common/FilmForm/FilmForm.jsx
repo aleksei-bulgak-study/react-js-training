@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import LabeledInput from '../LabeledInput';
-import ModalWindow from '../../ModalWindow';
+import BaseModalWindow from '../../ModalWindows/BaseModalWindow';
 import LabeledMultiSelect from '../LabeledMultiSelect';
 import Button, { types } from '../Button';
 
@@ -18,7 +18,7 @@ const FilmForm = ({
   defaultGenres,
   readOnlyFields,
 }) => {
-  const [data, setData] = useState(initialState);
+  const [data, setData] = useState({ ...initialState });
 
   const onDataChange = useCallback(
     ({ target: { name, value } }) => {
@@ -48,7 +48,7 @@ const FilmForm = ({
 
   return (
     <form className="film-form" onSubmit={onSave}>
-      <ModalWindow title={title} onClose={onClose}>
+      <BaseModalWindow title={title} onClose={onClose}>
         <LabeledInput
           id="film-id"
           name="id"
@@ -114,7 +114,7 @@ const FilmForm = ({
             className="film-form__actions__submit"
           />
         </div>
-      </ModalWindow>
+      </BaseModalWindow>
     </form>
   );
 };
@@ -134,6 +134,7 @@ FilmForm.propTypes = {
   title: PropTypes.string.isRequired,
   defaultGenres: PropTypes.arrayOf(
     PropTypes.shape({
+      label: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }),
   ).isRequired,

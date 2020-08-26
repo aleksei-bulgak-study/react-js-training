@@ -1,32 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import FilmResults from '../FilmResults';
 import NotFound from '../NotFound';
+
 import './styles.css';
 
-const SearchResults = ({
-  searchResults,
-}) => (
+const SearchResults = ({ filmsCount }) => (
   <>
-    {searchResults && (
-      <FilmResults
-        results={searchResults}
-      />
-    )}
-    {(!searchResults || !searchResults.length) && <NotFound />}
+    {filmsCount && <FilmResults />}
+    {!filmsCount && <NotFound />}
   </>
 );
 
 SearchResults.propTypes = {
-  searchResults: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string,
-      url: PropTypes.string,
-      genre: PropTypes.string,
-      releaseYear: PropTypes.string,
-    }).isRequired,
-  ).isRequired,
+  filmsCount: PropTypes.number,
 };
 
-export default SearchResults;
+SearchResults.defaultProps = {
+  filmsCount: 0,
+};
+
+const mapStateToProps = (state) => ({
+  filmsCount: state.films.filteredResults.length || 0,
+});
+
+export default connect(mapStateToProps)(SearchResults);

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import GenreFilter from './GenreFilter';
 import Sorting from './Sorting';
+import { filterByGenre, changeOrder } from '../../../actions/filter';
 
 import './styles.css';
 
@@ -24,4 +26,9 @@ Filter.propTypes = {
   onSorting: PropTypes.func.isRequired,
 };
 
-export default Filter;
+const mapDispatchToProps = (dispatch) => ({
+  onFilterByGenre: (genre) => dispatch(filterByGenre(genre)),
+  onSorting: (order) => dispatch(changeOrder(order)),
+});
+
+export default connect(null, mapDispatchToProps)(Filter);

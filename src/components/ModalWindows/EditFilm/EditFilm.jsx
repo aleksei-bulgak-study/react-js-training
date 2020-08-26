@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import defaultGenres from '../../model/genres';
-import FilmForm from '../Common/FilmForm';
+import defaultGenres from '../../../model/genres';
+import FilmForm from '../../Common/FilmForm';
 
 const readOnlyFields = ['id'];
 
