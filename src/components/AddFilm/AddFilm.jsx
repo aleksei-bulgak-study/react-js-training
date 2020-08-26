@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import FilmForm from '../Common/FilmForm';
 import defaultGenres from '../../model/genres';

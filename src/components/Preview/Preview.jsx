@@ -1,6 +1,6 @@
 import React from 'react';
-import FilmDescription from './FilmDescription';
 import PropTypes from 'prop-types';
+import FilmDescription from './FilmDescription';
 import './styles.css';
 import Poster from '../Common/Poster';
 
@@ -31,7 +31,7 @@ Preview.propTypes = {
     runtime: PropTypes.number,
     overview: PropTypes.string,
     poster_path: PropTypes.string,
-  }),
+  }).isRequired,
   onPreviewClose: PropTypes.func.isRequired,
 };
 

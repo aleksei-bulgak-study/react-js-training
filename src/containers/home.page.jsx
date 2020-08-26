@@ -16,6 +16,7 @@ const ORDER_MAPPING = {
 };
 
 const Home = () => {
+  const [results, setResults] = useState(data.slice(0, 10));
   const [filtered, setFilteredResults] = useState(results);
   const [showDialog, setShowDialog] = useState(false);
   const [filmForDeletion, setFilmForDeletion] = useState();
@@ -28,7 +29,6 @@ const Home = () => {
     searchString: '',
   });
   const [preview, setPreview] = useState();
-  const [results, setResults] = useState(data.slice(0, 10));
 
   const onFilmDeletion = (id) => {
     setShowDialog(true);

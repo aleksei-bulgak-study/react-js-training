@@ -16,12 +16,7 @@ const HamburgerButton = ({ onClick, className }) => {
 
 HamburgerButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  visible: PropTypes.bool,
   className: PropTypes.string.isRequired,
 };
-
-HamburgerButton.defaultProps = {
-  visible: false,
-}
 
 export default HamburgerButton;

@@ -23,12 +23,13 @@ const Poster = ({ src, alt, fallback, className }) => {
 Poster.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
-  fallback: PropTypes.string.isRequired,
+  fallback: PropTypes.string,
   className: PropTypes.string
 };
 
 Poster.defaultProps = {
   alt: 'film poster logo',
+  src: defaultPoster,
   fallback: defaultPoster,
   className: 'logo'
 };

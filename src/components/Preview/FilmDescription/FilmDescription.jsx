@@ -23,7 +23,7 @@ FilmDescription.propTypes = {
     release_date: PropTypes.string,
     runtime: PropTypes.number,
     overview: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default FilmDescription;

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Epam ReactJs training",
   "scripts": {
-    "start": "webpack-dev-server --open --hot",
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --open --hot",
     "build:prod": "cross-env NODE_ENV=prod webpack",
     "build:dev": "cross-env NODE_ENV=dev webpack",
     "lint": "eslint ./src --ext .js,.jsx",

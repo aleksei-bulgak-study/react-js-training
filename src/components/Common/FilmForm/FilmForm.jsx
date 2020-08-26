@@ -114,7 +114,11 @@ FilmForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  defaultGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  defaultGenres: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   readOnlyFields: PropTypes.arrayOf(PropTypes.string),
 };
 

@@ -33,7 +33,8 @@ ModalWindow.propTypes = {
 };
 
 ModalWindow.defaultProps = {
-  className: ''
-}
+  className: '',
+  Logo: null,
+};
 
 export default ModalWindow;
