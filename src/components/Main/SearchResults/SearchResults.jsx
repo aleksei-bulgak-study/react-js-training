@@ -8,7 +8,7 @@ import './styles.css';
 
 const SearchResults = ({ filmsCount }) => (
   <>
-    {filmsCount && <FilmResults />}
+    {filmsCount > 0 && <FilmResults />}
     {!filmsCount && <NotFound />}
   </>
 );
