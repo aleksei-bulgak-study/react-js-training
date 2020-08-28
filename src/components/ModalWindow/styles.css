@@ -16,19 +16,15 @@
   position: fixed;
   left: 50vw;
   top: 50vh;
-  min-height: 35vh;
   max-height: 80vh;
-  min-width: 40%;
+  min-width: 500px;
+  width: 40%;
   transform: translate(-50%, -50%);
   border-radius: 4px;
   box-shadow: 0 0 10px 0 #000000b3;
   padding: 4rem 5rem;
   overflow: auto;
   z-index: 2;
-}
-
-.modal-window__wrapper {
-  position: relative;
 }
 
 .modal-window__title {
@@ -42,6 +38,16 @@
 
 .modal-window__close {
   position: absolute;
-  right: -3rem;
-  top: -2.5rem;
+  right: 2rem;
+  top: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .modal-window {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 2rem 2rem;
+    z-index: 5;
+  }
 }

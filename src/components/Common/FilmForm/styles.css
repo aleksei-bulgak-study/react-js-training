@@ -33,6 +33,12 @@
   flex-wrap: wrap;
 }
 
-.film-form__actions button:first-child {
-  margin-right: 1rem;
+.film-form__actions__submit {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.film-form__actions__reset {
+  margin-bottom: 1rem;
+  padding: 0.5rem 3.5rem;
 }

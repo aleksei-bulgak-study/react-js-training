@@ -93,8 +93,17 @@ const FilmForm = ({
         />
 
         <div className="film-form__actions">
-          <Button title="reset" onClick={onReset} type={types.SECONDARY} />
-          <Button title="save" onClick={onSave} />
+          <Button
+            title="reset"
+            onClick={onReset}
+            type={types.SECONDARY}
+            className="film-form__actions__reset"
+          />
+          <Button
+            title="save"
+            onClick={onSave}
+            className="film-form__actions__submit"
+          />
         </div>
       </ModalWindow>
     </form>
