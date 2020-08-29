@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-  FunctionalComponent,
-  CreateElementComponent,
-  ClassComponent,
-  PureClassComponent,
-} from './components';
-import './styles.css';
+import { HomePage } from './containers';
+import './app.css';
 
-export default () => (
-  <>
-    <FunctionalComponent />
-    <CreateElementComponent />
-    <ClassComponent />
-    <PureClassComponent />
-  </>
-);
+const App = () => <HomePage />;
+
+export default App;

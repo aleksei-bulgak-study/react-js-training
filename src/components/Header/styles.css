@@ -1,0 +1,9 @@
+/* header section */
+header {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  background-color: transparent;
+  z-index: 3;
+  height: 5vh;
+}

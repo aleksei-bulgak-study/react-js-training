@@ -1,0 +1,6 @@
+# 2010
+*.js -crlf
+
+# 2020
+*.jsx text eol=lf
+*.js text eol=lf

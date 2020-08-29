@@ -1,0 +1,65 @@
+.filter__list {
+  --red: #f65261;
+  --grey: #555555;
+  --grey-transparent: #55555570;
+  --grey-darker: #232323;
+  --white: #ffffff;
+
+  color: var(--white);
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  margin: 0 0;
+  padding: 0 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.filter__list * {
+  letter-spacing: 0.1rem;
+}
+
+.filter__list::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    180deg,
+    rgba(122, 121, 121, 1) 0%,
+    rgba(85, 85, 85, 1) 20%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  border-radius: 5px;
+}
+
+.filter__item {
+  display: inline-block;
+  width: 49%;
+  margin: 0 0;
+  padding: 0 0;
+  box-sizing: border-box;
+}
+
+/* filter by genre */
+.filter__item:not(:last-child) {
+  margin-right: 2%;
+}
+
+.filter__item:first-child ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+/* filter by date */
+.filter__by-date {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

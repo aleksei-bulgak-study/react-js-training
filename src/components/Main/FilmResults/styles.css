@@ -1,0 +1,19 @@
+.film-results {
+  --red: #f65261;
+  --grey: #555555;
+  --grey-transparent: #55555570;
+  --grey-darker: #232323;
+  --grey-darker-transparent: #232323d7;
+  --white: #ffffff;
+
+  color: var(--white);
+}
+.film-results__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 350px);
+  column-gap: 3rem;
+  row-gap: 3rem;
+  justify-items: start;
+  justify-content: center;
+  margin: 1rem auto 2rem;
+}
