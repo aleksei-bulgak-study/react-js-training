@@ -9,7 +9,6 @@ import defaultPoster from '../../../../public/images/default_poster.png';
 import './styles.css';
 
 const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
-  const [hovered, setHovered] = useState(false);
   const onEdit = useCallback(() => onFilmEdit(details), [onFilmEdit, details]);
   const onDelete = useCallback(() => onFilmDeletion(details.id), [
     onFilmDeletion,
@@ -17,11 +16,7 @@ const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
   ]);
 
   return (
-    <div
-      className="film-results__item film"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="film-results__item film">
       <Poster
         src={details.poster_path}
         alt={details.title}
@@ -38,7 +33,6 @@ const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
       <FilmSettings
         onDelete={onDelete}
         onEdit={onEdit}
-        visible={hovered}
         className="film-results__settings"
       />
     </div>
