@@ -9,11 +9,8 @@ import './styles.css';
 const Main = ({
   blur,
   searchResults,
-  onFilmDeletion,
-  onFilmEdit,
   onFilterByGenre,
   onSorting,
-  onFilmPreview,
 }) => (
   <main className={blur ? 'blured' : ''}>
     <ErrorBoundary>
@@ -24,9 +21,6 @@ const Main = ({
         />
         <SearchResults
           searchResults={searchResults}
-          onFilmDeletion={onFilmDeletion}
-          onFilmEdit={onFilmEdit}
-          onFilmPreview={onFilmPreview}
         />
       </Wrapper>
     </ErrorBoundary>
@@ -44,11 +38,8 @@ Main.propTypes = {
       releaseYear: PropTypes.string,
     }).isRequired,
   ).isRequired,
-  onFilmDeletion: PropTypes.func.isRequired,
-  onFilmEdit: PropTypes.func.isRequired,
   onFilterByGenre: PropTypes.func.isRequired,
   onSorting: PropTypes.func.isRequired,
-  onFilmPreview: PropTypes.func.isRequired,
 };
 
 export default Main;

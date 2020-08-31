@@ -18,7 +18,6 @@ const TopSection = ({
   filterByName,
   onFilterByName,
   blur,
-  onFilmAdd,
   onPreviewClose,
 }) => {
   const className = useMemo(() => buildClassNameString(preview, blur), [preview, blur]);
@@ -37,7 +36,6 @@ const TopSection = ({
             <SearchBar
               filterByName={filterByName}
               onFilterByName={onFilterByName}
-              onFilmAdd={onFilmAdd}
             />
           )}
         </Wrapper>
@@ -58,7 +56,6 @@ TopSection.propTypes = {
   blur: PropTypes.bool.isRequired,
   filterByName: PropTypes.string,
   onFilterByName: PropTypes.func.isRequired,
-  onFilmAdd: PropTypes.func.isRequired,
   onPreviewClose: PropTypes.func.isRequired,
 };
 
