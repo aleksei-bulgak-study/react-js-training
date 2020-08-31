@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import LabeledInput from '../LabeledInput';
 import ModalWindow from '../../ModalWindow';
@@ -20,22 +20,31 @@ const FilmForm = ({
 }) => {
   const [data, setData] = useState(initialState);
 
-  const onDataChange = ({ target: { name, value } }) => {
-    if (isFieldEditable(name, readOnlyFields)) {
-      setData({ ...data, [name]: value });
-    }
-  };
+  const onDataChange = useCallback(
+    ({ target: { name, value } }) => {
+      if (isFieldEditable(name, readOnlyFields)) {
+        setData({ ...data, [name]: value });
+      }
+    },
+    [data, readOnlyFields],
+  );
 
-  const onSelectStateChange = (key) => (values) => {
-    if (values && isFieldEditable(key, readOnlyFields)) {
-      const genres = values.map((item) => item.value);
-      setData({ ...data, [key]: genres });
-    }
-  };
+  const onSelectStateChange = useCallback(
+    (key) => (values) => {
+      if (values && isFieldEditable(key, readOnlyFields)) {
+        const genres = values.map((item) => item.value);
+        setData({ ...data, [key]: genres });
+      }
+    },
+    [data, readOnlyFields, setData],
+  );
 
-  const onReset = () => setData(initialState);
+  const onReset = useCallback(() => setData(initialState), [
+    initialState,
+    setData,
+  ]);
 
-  const onSave = () => onSubmit(data);
+  const onSave = useCallback(() => onSubmit(data), [data, onSubmit]);
 
   return (
     <form className="film-form" onSubmit={onSave}>

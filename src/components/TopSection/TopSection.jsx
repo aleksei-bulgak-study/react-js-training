@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
@@ -21,7 +21,7 @@ const TopSection = ({
   onFilmAdd,
   onPreviewClose,
 }) => {
-  const className = buildClassNameString(preview, blur);
+  const className = useMemo(() => buildClassNameString(preview, blur), [preview, blur]);
 
   return (
     <section className={className}>

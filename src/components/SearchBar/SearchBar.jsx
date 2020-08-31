@@ -6,11 +6,11 @@ import Button, { types } from '../Common/Button';
 const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {
   const [searchString, setSearchString] = useState(filterByName);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = useCallback((event) => {
     if (event.key === 'Enter') {
       onFilterByName(searchString);
     }
-  };
+  }, [searchString, onFilterByName]);
 
   const onSearch = useCallback(() => onFilterByName(searchString), [
     searchString,

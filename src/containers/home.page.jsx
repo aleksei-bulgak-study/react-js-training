@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Header, Footer, Main, TopSection } from '../components';
 import DeleteFilm from '../components/DeleteFilm';
 import EditFilm from '../components/EditFilm';
@@ -45,18 +45,21 @@ const Home = () => {
     setAddNewFilm(true);
   };
 
-  const removeFilmById = (id) => {
-    const newResults = results.filter((film) => film.id !== id);
-    const newFilteredResult = filtered.filter((film) => film.id !== id);
-    setResults(newResults);
-    setFilteredResults(newFilteredResult);
-  };
+  const removeFilmById = useCallback(
+    (id) => {
+      const newResults = results.filter((film) => film.id !== id);
+      const newFilteredResult = filtered.filter((film) => film.id !== id);
+      setResults(newResults);
+      setFilteredResults(newFilteredResult);
+    },
+    [results, filtered],
+  );
 
-  const processFilmDeletion = () => {
+  const processFilmDeletion = useCallback(() => {
     removeFilmById(filmForDeletion);
     setShowDialog(false);
     setFilmForDeletion(null);
-  };
+  }, [filmForDeletion, removeFilmById]);
 
   const closeDialog = () => {
     setShowDialog(false);
@@ -66,17 +69,29 @@ const Home = () => {
     setCongratulation(false);
   };
 
-  const onFilterByGenre = (genre) => {
-    setFilter({ ...filter, genre: genre === 'All' ? null : genre });
-  };
+  const onFilterByGenre = useCallback(
+    (genre) => {
+      setFilter({ ...filter, genre: genre === 'All' ? null : genre });
+    },
+    [filter],
+  );
 
-  const onSorting = (sortingField) => {
-    setFilter({ ...filter, order: ORDER_MAPPING[sortingField.toLowerCase()] });
-  };
+  const onSorting = useCallback(
+    (sortingField) => {
+      setFilter({
+        ...filter,
+        order: ORDER_MAPPING[sortingField.toLowerCase()],
+      });
+    },
+    [filter],
+  );
 
-  const onFilterByName = (query) => {
-    setFilter({ ...filter, searchString: query.toLowerCase() });
-  };
+  const onFilterByName = useCallback(
+    (query) => {
+      setFilter({ ...filter, searchString: query.toLowerCase() });
+    },
+    [filter],
+  );
 
   useEffect(() => {
     const { searchString, order, genre } = filter;
@@ -122,10 +137,7 @@ const Home = () => {
         <DeleteFilm onClose={closeDialog} onDelete={processFilmDeletion} />
       )}
       {showDialog && filmForEdit && (
-        <EditFilm
-          details={filmForEdit}
-          onClose={closeDialog}
-        />
+        <EditFilm details={filmForEdit} onClose={closeDialog} />
       )}
       {showDialog && addNewFilm && <AddFilm onClose={closeDialog} />}
       {showDialog && congratulation && <Congratulation onClose={closeDialog} />}
