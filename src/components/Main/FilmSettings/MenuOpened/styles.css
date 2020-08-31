@@ -1,0 +1,13 @@
+/* opened */
+.film__menu--opened {
+  border-radius: 5px;
+  width: 10rem;
+  height: 7rem;
+  padding: 1.5rem 0 1rem;
+  cursor: default;
+  background-color: var(--grey-darker-transparent);
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 10px 0 #000000b3;
+}

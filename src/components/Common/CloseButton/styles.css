@@ -1,0 +1,44 @@
+.close-button {
+  background-color: transparent;
+  color: transparent;
+  border: transparent;
+  outline: none;
+}
+
+.close-button::before {
+  content: '';
+  position: absolute;
+  border-top: 2px solid var(--white);
+  transform: rotate(45deg);
+  left: 0%;
+  top: 50%;
+}
+
+.close-button::after {
+  content: '';
+  position: absolute;
+  border-top: 2px solid var(--white);
+  transform: rotate(-45deg);
+  left: 0%;
+  top: 50%;
+}
+
+.close-button.small {
+  width: 1rem;
+  height: 1rem;
+}
+
+.close-button.small::after,
+.close-button.small::before{
+  width: 1rem;
+}
+
+.close-button.large {
+  width: 2rem;
+  height: 2rem;
+}
+
+.close-button.large::after,
+.close-button.large::before{
+  width: 2rem;
+}

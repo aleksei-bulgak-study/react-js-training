@@ -1,0 +1,49 @@
+/* header section */
+.search-preview {
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  transition: height 0.5s;
+}
+
+.search {
+  min-height: 40vh;
+  height: 1px;
+}
+
+.preview {
+  min-height: 50vh;
+  height: 1px;
+}
+
+.search-preview::before {
+  background-color: #00000096;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  background-image: url(./../../../public/images/favorite-sci-fi-posters.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: 1;
+}
+
+.search-preview::after {
+  background-color: #00000096;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  z-index: 1;
+}
+
+.search-preview > * {
+  position: relative;
+  z-index: 2;
+}

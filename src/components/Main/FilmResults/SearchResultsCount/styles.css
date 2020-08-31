@@ -1,0 +1,12 @@
+.film-results__title {
+  height: 5rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.film-results__count::after {
+  content: '';
+  display: inline-block;
+  width: 0.5rem;
+}

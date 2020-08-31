@@ -1,0 +1,11 @@
+.film__menu {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.film__menu__close {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
