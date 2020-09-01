@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
@@ -18,10 +18,9 @@ const TopSection = ({
   filterByName,
   onFilterByName,
   blur,
-  onFilmAdd,
   onPreviewClose,
 }) => {
-  const className = buildClassNameString(preview, blur);
+  const className = useMemo(() => buildClassNameString(preview, blur), [preview, blur]);
 
   return (
     <section className={className}>
@@ -37,7 +36,6 @@ const TopSection = ({
             <SearchBar
               filterByName={filterByName}
               onFilterByName={onFilterByName}
-              onFilmAdd={onFilmAdd}
             />
           )}
         </Wrapper>
@@ -58,7 +56,6 @@ TopSection.propTypes = {
   blur: PropTypes.bool.isRequired,
   filterByName: PropTypes.string,
   onFilterByName: PropTypes.func.isRequired,
-  onFilmAdd: PropTypes.func.isRequired,
   onPreviewClose: PropTypes.func.isRequired,
 };
 

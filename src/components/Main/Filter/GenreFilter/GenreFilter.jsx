@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
@@ -10,7 +10,10 @@ const GenreFilter = ({ genres, action, active }) => {
     setActiveGenre(genre);
   };
 
-  const className = (genre) => (genre === activeGenre ? 'active' : '');
+  const className = useCallback(
+    (genre) => (genre === activeGenre ? 'active' : ''),
+    [activeGenre],
+  );
 
   return (
     <ul className="genre-filter">

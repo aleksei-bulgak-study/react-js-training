@@ -1,27 +1,27 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import FilmSettings from '../FilmSettings';
 import dateFormat from '../../../utils/formatDate';
 import genresFormatter from '../../../utils/arrayToStringFormatter';
 import Poster from '../../Common/Poster';
-
+import FilmActions from '../../../providers/filmActionsProvider';
 import defaultPoster from '../../../../public/images/default_poster.png';
 import './styles.css';
 
-const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
-  const [hovered, setHovered] = useState(false);
+const Film = ({ details }) => {
+  const { onFilmDeletion, onFilmEdit, onFilmPreview } = useContext(FilmActions);
   const onEdit = useCallback(() => onFilmEdit(details), [onFilmEdit, details]);
-  const onDelete = useCallback(() => onFilmDeletion(details.id), [
+  const onDelete = useCallback(() => onFilmDeletion(details), [
     onFilmDeletion,
     details,
   ]);
+  const onPreview = useCallback(() => onFilmPreview(details), [
+    details,
+    onFilmPreview,
+  ]);
 
   return (
-    <div
-      className="film-results__item film"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="film-results__item film">
       <Poster
         src={details.poster_path}
         alt={details.title}
@@ -29,7 +29,7 @@ const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
         className="film__logo"
       />
       <div className="film__description">
-        <button className="film__title" type="button" onClick={onFilmPreview}>
+        <button className="film__title" type="button" onClick={onPreview}>
           {details.title}
         </button>
         <p className="film__genre">{genresFormatter(details.genres, ', ')}</p>
@@ -38,7 +38,6 @@ const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
       <FilmSettings
         onDelete={onDelete}
         onEdit={onEdit}
-        visible={hovered}
         className="film-results__settings"
       />
     </div>
@@ -53,9 +52,6 @@ Film.propTypes = {
     genres: PropTypes.arrayOf(PropTypes.string),
     release_date: PropTypes.string,
   }).isRequired,
-  onFilmDeletion: PropTypes.func.isRequired,
-  onFilmPreview: PropTypes.func.isRequired,
-  onFilmEdit: PropTypes.func.isRequired,
 };
 
 export default Film;

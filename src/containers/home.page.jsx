@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Header, Footer, Main, TopSection } from '../components';
 import DeleteFilm from '../components/DeleteFilm';
 import EditFilm from '../components/EditFilm';
@@ -6,6 +6,9 @@ import AddFilm from '../components/AddFilm';
 import Congratulation from '../components/Congratulation';
 
 import data from '../movies.json';
+import useFilmsWithFilter from '../hooks/useFilmsWithFilter';
+import DIALOG_TYPES from '../model/dialogType';
+import FilmActions from '../providers/filmActionsProvider';
 
 const ORDER_MAPPING = {
   'release date': 'release_date',
@@ -17,119 +20,122 @@ const ORDER_MAPPING = {
 
 const Home = () => {
   const [results, setResults] = useState(data.slice(0, 10));
-  const [filtered, setFilteredResults] = useState(results);
-  const [showDialog, setShowDialog] = useState(false);
-  const [filmForDeletion, setFilmForDeletion] = useState();
-  const [filmForEdit, setFilmForEdit] = useState();
-  const [addNewFilm, setAddNewFilm] = useState(false);
-  const [congratulation, setCongratulation] = useState(false);
   const [filter, setFilter] = useState({
     genre: null,
     order: 'release_date',
     searchString: '',
   });
+  const filtered = useFilmsWithFilter(results, filter);
   const [preview, setPreview] = useState();
+  const [filmForProcessing, setFilmForProcessing] = useState();
+  const [dialogType, setDialogType] = useState();
 
-  const onFilmDeletion = (id) => {
-    setShowDialog(true);
-    setFilmForDeletion(id);
+  const openModalWindow = useCallback(
+    (type, details) => {
+      setDialogType(type);
+      setFilmForProcessing(details);
+    },
+    [setFilmForProcessing, setDialogType],
+  );
+
+  const closeModalWindow = () => {
+    setDialogType(null);
+    setFilmForProcessing(null);
   };
 
-  const onFilmEdit = (filmForUpdate) => {
-    setShowDialog(true);
-    setFilmForEdit(filmForUpdate);
-  };
+  const onFilmDeletion = useCallback(
+    (film) => openModalWindow(DIALOG_TYPES.delete, film),
+    [openModalWindow],
+  );
+  const onFilmEdit = useCallback(
+    (film) => openModalWindow(DIALOG_TYPES.edit, film),
+    [openModalWindow],
+  );
+  const onFilmAdd = useCallback(
+    () => openModalWindow(DIALOG_TYPES.add, null),
+    [openModalWindow],
+  );
+  const onFilmPreview = useCallback(
+    (details) => {
+      setPreview(details);
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    },
+    [setPreview],
+  );
+  const onPreviewClose = useCallback(() => setPreview(null), [setPreview]);
 
-  const onFilmAdd = () => {
-    setShowDialog(true);
-    setAddNewFilm(true);
-  };
+  const removeFilmById = useCallback(
+    (id) => {
+      const newResults = results.filter((film) => film.id !== id);
+      setResults(newResults);
+    },
+    [results],
+  );
 
-  const removeFilmById = (id) => {
-    const newResults = results.filter((film) => film.id !== id);
-    const newFilteredResult = filtered.filter((film) => film.id !== id);
-    setResults(newResults);
-    setFilteredResults(newFilteredResult);
-  };
+  const processFilmDeletion = useCallback(() => {
+    removeFilmById(filmForProcessing.id);
+    closeModalWindow();
+  }, [filmForProcessing, removeFilmById]);
 
-  const processFilmDeletion = () => {
-    removeFilmById(filmForDeletion);
-    setShowDialog(false);
-    setFilmForDeletion(null);
-  };
+  const onFilterByGenre = useCallback(
+    (genre) => {
+      setFilter({ ...filter, genre: genre === 'All' ? null : genre });
+    },
+    [filter],
+  );
 
-  const closeDialog = () => {
-    setShowDialog(false);
-    setFilmForDeletion(null);
-    setFilmForEdit(null);
-    setAddNewFilm(false);
-    setCongratulation(false);
-  };
+  const onSorting = useCallback(
+    (sortingField) => {
+      setFilter({
+        ...filter,
+        order: ORDER_MAPPING[sortingField.toLowerCase()],
+      });
+    },
+    [filter],
+  );
 
-  const onFilterByGenre = (genre) => {
-    setFilter({ ...filter, genre: genre === 'All' ? null : genre });
-  };
+  const onFilterByName = useCallback(
+    (query) => {
+      setFilter({ ...filter, searchString: query.toLowerCase() });
+    },
+    [filter],
+  );
 
-  const onSorting = (sortingField) => {
-    setFilter({ ...filter, order: ORDER_MAPPING[sortingField.toLowerCase()] });
-  };
-
-  const onFilterByName = (query) => {
-    setFilter({ ...filter, searchString: query.toLowerCase() });
-  };
-
-  useEffect(() => {
-    const { searchString, order, genre } = filter;
-    const pattern = new RegExp(searchString);
-    setFilteredResults(
-      results
-        .filter((film) => genre === null || film.genres.indexOf(genre) !== -1)
-        .filter((film) => pattern.test(film.title.toLowerCase()))
-        .sort((f, s) => {
-          if (f[order] > s[order]) {
-            return 1;
-          }
-          return -1;
-        }),
-    );
-  }, [filter, results]);
+  const filmActions = useMemo(
+    () => ({ onFilmAdd, onFilmDeletion, onFilmEdit, onFilmPreview }),
+    [onFilmAdd, onFilmDeletion, onFilmEdit, onFilmPreview],
+  );
 
   return (
-    <>
+    <FilmActions.Provider value={filmActions}>
       <Header />
       <TopSection
         preview={preview}
         filterByName={filter.searchString}
         onFilterByName={onFilterByName}
-        onFilmAdd={onFilmAdd}
-        blur={showDialog}
-        onPreviewClose={() => setPreview(null)}
+        blur={!!dialogType}
+        onPreviewClose={onPreviewClose}
       />
       <Main
         searchResults={filtered}
-        onFilmDeletion={onFilmDeletion}
-        onFilmEdit={onFilmEdit}
-        blur={showDialog}
+        blur={!!dialogType}
         onFilterByGenre={onFilterByGenre}
         onSorting={onSorting}
-        onFilmPreview={(details) => {
-          setPreview(details);
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        }}
       />
       <Footer />
-      {showDialog && filmForDeletion && (
-        <DeleteFilm onClose={closeDialog} onDelete={processFilmDeletion} />
+      {dialogType === DIALOG_TYPES.delete && (
+        <DeleteFilm onClose={closeModalWindow} onDelete={processFilmDeletion} />
       )}
-      {showDialog && filmForEdit && (
-        <EditFilm
-          details={filmForEdit}
-          onClose={closeDialog}
-        />
+      {dialogType === DIALOG_TYPES.edit && (
+        <EditFilm details={filmForProcessing} onClose={closeModalWindow} />
       )}
-      {showDialog && addNewFilm && <AddFilm onClose={closeDialog} />}
-      {showDialog && congratulation && <Congratulation onClose={closeDialog} />}
-    </>
+      {dialogType === DIALOG_TYPES.add && (
+        <AddFilm onClose={closeModalWindow} />
+      )}
+      {dialogType === DIALOG_TYPES.congratulation && (
+        <Congratulation onClose={closeModalWindow} />
+      )}
+    </FilmActions.Provider>
   );
 };
 

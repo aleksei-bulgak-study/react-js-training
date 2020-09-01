@@ -27,6 +27,12 @@
   z-index: 2;
 }
 
+.modal-window__wrapper::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
 .modal-window__title {
   text-transform: uppercase;
   font-weight: 300;

@@ -6,9 +6,6 @@ import './styles.css';
 
 const FilmResultsList = ({
   results,
-  onFilmDeletion,
-  onFilmEdit,
-  onFilmPreview,
 }) => (
   <section className="film-results">
     <SearchResultsCount count={results.length} />
@@ -17,9 +14,6 @@ const FilmResultsList = ({
         <Film
           key={filmDetails.id}
           details={filmDetails}
-          onFilmDeletion={onFilmDeletion}
-          onFilmEdit={onFilmEdit}
-          onFilmPreview={() => onFilmPreview(filmDetails)}
         />
       ))}
     </div>
@@ -36,9 +30,6 @@ FilmResultsList.propTypes = {
       releaseYear: PropTypes.string,
     }).isRequired,
   ).isRequired,
-  onFilmDeletion: PropTypes.func.isRequired,
-  onFilmEdit: PropTypes.func.isRequired,
-  onFilmPreview: PropTypes.func.isRequired,
 };
 
 export default FilmResultsList;
