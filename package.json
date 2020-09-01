@@ -7,7 +7,8 @@
     "build:prod": "cross-env NODE_ENV=prod webpack",
     "build:dev": "cross-env NODE_ENV=dev webpack",
     "lint": "eslint ./src --ext .js,.jsx",
-    "test": "jest --no-cache --coverage --config jest.config.json"
+    "test": "jest --no-cache --coverage --config jest.config.json",
+    "clean": "rm -rf node_modules/ && npm i"
   },
   "keywords": [
     "react-js"

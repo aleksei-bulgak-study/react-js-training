@@ -6,7 +6,7 @@ import {
   DELETE_FILM,
 } from './filmActionType';
 import { loader, error, openModalWindow, closeModalWindow } from '../common';
-import { filmService } from '../../service';
+import { filmService } from '../../api';
 
 export const filmsLoaded = (payload) => ({
   type: FETCH_FILM_LIST_SUCCESS,

@@ -1,11 +1,9 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 import Button, { types } from '../Common/Button';
-import FilmActions from '../../providers/filmActionsProvider';
 
-const SearchBar = ({ filterByName, onFilterByName }) => {
-  const { onFilmAdd } = useContext(FilmActions);
+const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {
   const [searchString, setSearchString] = useState(filterByName);
 
   const handleKeyDown = useCallback(
@@ -52,6 +50,7 @@ const SearchBar = ({ filterByName, onFilterByName }) => {
 SearchBar.propTypes = {
   filterByName: PropTypes.string,
   onFilterByName: PropTypes.func.isRequired,
+  onFilmAdd: PropTypes.func.isRequired,
 };
 
 SearchBar.defaultProps = {

@@ -4,12 +4,10 @@ import FilmSettings from '../FilmSettings';
 import dateFormat from '../../../utils/formatDate';
 import genresFormatter from '../../../utils/arrayToStringFormatter';
 import Poster from '../../Common/Poster';
-import FilmActions from '../../../providers/filmActionsProvider';
 import defaultPoster from '../../../../public/images/default_poster.png';
 import './styles.css';
 
-const Film = ({ details }) => {
-  const { onFilmDeletion, onFilmEdit, onFilmPreview } = useContext(FilmActions);
+const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
   const onEdit = useCallback(() => onFilmEdit(details), [onFilmEdit, details]);
   const onDelete = useCallback(() => onFilmDeletion(details), [
     onFilmDeletion,
@@ -52,6 +50,9 @@ Film.propTypes = {
     genres: PropTypes.arrayOf(PropTypes.string),
     release_date: PropTypes.string,
   }).isRequired,
+  onFilmDeletion: PropTypes.func.isRequired,
+  onFilmEdit: PropTypes.func.isRequired,
+  onFilmPreview: PropTypes.func.isRequired,
 };
 
 export default Film;
