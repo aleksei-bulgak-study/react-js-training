@@ -4,10 +4,9 @@ import FilmSettings from '../FilmSettings';
 import dateFormat from '../../../utils/formatDate';
 import genresFormatter from '../../../utils/arrayToStringFormatter';
 import Poster from '../../Common/Poster';
-
+import FilmActions from '../../../providers/filmActionsProvider';
 import defaultPoster from '../../../../public/images/default_poster.png';
 import './styles.css';
-import FilmActions from '../../../providers/filmActionsProvider';
 
 const Film = ({ details }) => {
   const { onFilmDeletion, onFilmEdit, onFilmPreview } = useContext(FilmActions);
