@@ -12,17 +12,19 @@ const buildRequestUrl = ({
   offset,
   sortBy,
   sortOrder,
+  genre,
 }) => {
-  return `${url}/${path}?search=${query}&searchBy=${searchBy}&limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+  return `${url}/${path}?search=${query}&searchBy=${searchBy}&limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}&filter=${genre}`;
 };
 
 export const getFilms = ({
   query,
   searchBy = 'title',
-  limit = 20,
+  limit = 2,
   offset = 0,
   sortBy,
   sortOrder = 'asc',
+  genre,
 }) => {
   const url = buildRequestUrl({
     url: baseUrl,
@@ -33,6 +35,7 @@ export const getFilms = ({
     offset,
     sortBy,
     sortOrder,
+    genre,
   });
   return axios
     .get(url)

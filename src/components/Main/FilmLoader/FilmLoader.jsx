@@ -1,24 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import LinkButton from '../../Common/LinkButton';
 import { filmActions } from '../../../store/actions';
 
-const options = {
-  rootMargin: '100px',
-  threshold: 0,
-};
+import './styles.css';
 
 const FilmLoader = ({ loadFilms }) => {
-  const loaderRef = useRef();
-  useEffect(() => {
-    const intersectionObserver = new IntersectionObserver(
-      () => loadFilms(),
-      options,
-    );
-    intersectionObserver.observe(loaderRef.current);
-  }, [loaderRef, loadFilms]);
+  useEffect(() => loadFilms(), []);
+  const onLoadFilms = useCallback(() => loadFilms(), [loadFilms]);
 
-  return <div ref={loaderRef} className="film-loader" />;
+  return (
+    <div className="film-loader">
+      <LinkButton title="Load more" onClick={onLoadFilms} />
+    </div>
+  );
 };
 
 const mapDispatchToProps = (dispatch) => ({

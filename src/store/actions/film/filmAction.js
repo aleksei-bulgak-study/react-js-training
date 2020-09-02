@@ -19,7 +19,8 @@ export const loadFilms = () => (dispatch, getState) => {
     .getFilms({
       query: getState().films.query || '',
       offset: getState().films.offset || 0,
-      sortBy: getState().filters.order
+      sortBy: getState().filters.order,
+      genre: getState().filters.genre || ''
     })
     .then((data) => dispatch(filmsLoaded(data)))
     .catch((err) => dispatch(commonActions.error(err)))

@@ -9,6 +9,7 @@ import {
   Congratulation,
 } from '../components/ModalWindows';
 import { filmActions, commonActions } from '../store/actions';
+import Loader from '../components/ModalWindows/Loader';
 
 const Home = ({
   films,
@@ -61,6 +62,7 @@ const Home = ({
       {common.modalWindow === commonActions.types.CONGRATULATION && (
         <Congratulation onClose={onModalClose} />
       )}
+      {common.loader && <Loader />}
     </>
   );
 };
@@ -93,6 +95,7 @@ Home.propTypes = {
   }).isRequired,
   common: PropTypes.shape({
     modalWindow: PropTypes.string,
+    loader: PropTypes.bool,
   }).isRequired,
   onFilterFilms: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired,
