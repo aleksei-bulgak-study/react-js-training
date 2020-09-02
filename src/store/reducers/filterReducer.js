@@ -1,8 +1,4 @@
-import {
-  FILTER_GENRE,
-  FILTER_ORDER,
-  FILTER_QUERY,
-} from '../actions/filter/filterActionType';
+import { filterActions } from '../actions';
 
 const initialState = {
   genre: null,
@@ -12,13 +8,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FILTER_GENRE: {
+    case filterActions.types.FILTER_GENRE: {
       return { ...state, genre: action.payload };
     }
-    case FILTER_ORDER: {
+    case filterActions.types.FILTER_ORDER: {
       return { ...state, order: action.payload };
     }
-    case FILTER_QUERY: {
+    case filterActions.types.FILTER_QUERY: {
       return { ...state, searchString: action.payload };
     }
     default:

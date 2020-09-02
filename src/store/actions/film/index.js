@@ -8,7 +8,9 @@ import {
   deleteFilm,
 } from './filmAction';
 
-export {
+import * as types from './filmActionType';
+
+export default {
   filmsLoaded,
   loadFilms,
   previewFilm,
@@ -16,4 +18,5 @@ export {
   closeFilmPreview,
   filmForProcessing,
   deleteFilm,
+  types,
 };

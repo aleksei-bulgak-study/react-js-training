@@ -1,8 +1,4 @@
-import {
-  LOADER,
-  ERROR,
-  MODAL_WINDOW,
-} from '../actions/common/commonActionType';
+import { commonActions } from '../actions';
 
 const initialState = {
   loader: false,
@@ -11,13 +7,13 @@ const initialState = {
 
 const commonReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOADER: {
+    case commonActions.types.LOADER: {
       return { ...state, loader: action.payload };
     }
-    case ERROR: {
+    case commonActions.types.ERROR: {
       return { ...state, loader: false, error: action.payload };
     }
-    case MODAL_WINDOW: {
+    case commonActions.types.MODAL_WINDOW: {
       return { ...state, modalWindow: action.payload };
     }
     default: {

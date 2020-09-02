@@ -3,15 +3,26 @@ import axios from 'axios';
 const baseUrl = process.env.REACT_APP_API || '';
 const basePath = 'movies';
 
-const buildRequestUrl = ({ url, path, query, searchBy, limit, page }) => {
-  return `${url}/${path}?search=${query}&searchBy=${searchBy}&limit=${limit}&offset=${page}`;
+const buildRequestUrl = ({
+  url,
+  path,
+  query,
+  searchBy,
+  limit,
+  offset,
+  sortBy,
+  sortOrder,
+}) => {
+  return `${url}/${path}?search=${query}&searchBy=${searchBy}&limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 };
 
 export const getFilms = ({
   query,
   searchBy = 'title',
-  limit = 13,
-  page = 0,
+  limit = 20,
+  offset = 0,
+  sortBy,
+  sortOrder = 'asc',
 }) => {
   const url = buildRequestUrl({
     url: baseUrl,
@@ -19,14 +30,16 @@ export const getFilms = ({
     query,
     searchBy,
     limit,
-    page,
+    offset,
+    sortBy,
+    sortOrder,
   });
   return axios
     .get(url)
     .then((response) => response.data)
     .then((data) => ({
       films: data.data,
-      page: data.offset,
+      offset: data.offset,
       total: data.totalAmount,
     }));
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GenreFilter from './GenreFilter';
 import Sorting from './Sorting';
-import { filterByGenre, changeOrder } from '../../../actions/filter';
+import { filterActions } from '../../../store/actions';
 
 import './styles.css';
 
@@ -27,8 +27,8 @@ Filter.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onFilterByGenre: (genre) => dispatch(filterByGenre(genre)),
-  onSorting: (order) => dispatch(changeOrder(order)),
+  onFilterByGenre: (genre) => dispatch(filterActions.filterByGenre(genre)),
+  onSorting: (order) => dispatch(filterActions.changeOrder(order)),
 });
 
 export default connect(null, mapDispatchToProps)(Filter);

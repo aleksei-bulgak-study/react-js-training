@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Film from '../Film';
 import SearchResultsCount from './SearchResultsCount';
-
-import { previewFilm, filmForProcessing } from '../../../actions/film';
-import {
-  EDIT_FILM,
-  DELETE_FILM,
-} from '../../../actions/common/modalWindowType';
+import { filmActions, commonActions } from '../../../store/actions';
 
 import './styles.css';
 
@@ -51,10 +46,21 @@ FilmResultsList.propTypes = {
 
 const mapStateToProps = (state) => ({ films: state.films.filteredResults });
 const mapDispatchToProps = (dispatch) => ({
-  onFilmPreview: (film) => dispatch(previewFilm(film)),
+  onFilmPreview: (film) => dispatch(filmActions.previewFilm(film)),
   onFilmDeletion: (film) =>
-    dispatch(filmForProcessing({ type: DELETE_FILM, film })),
-  onFilmEdit: (film) => dispatch(filmForProcessing({ type: EDIT_FILM, film })),
+    dispatch(
+      filmActions.filmForProcessing({
+        type: commonActions.types.DELETE_FILM,
+        film,
+      }),
+    ),
+  onFilmEdit: (film) =>
+    dispatch(
+      filmActions.filmForProcessing({
+        type: commonActions.types.EDIT_FILM,
+        film,
+      }),
+    ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmResultsList);

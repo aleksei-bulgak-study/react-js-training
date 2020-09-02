@@ -8,15 +8,9 @@ import {
   DeleteFilm,
   Congratulation,
 } from '../components/ModalWindows';
-import {
-  loadFilms,
-  filteredFilms,
-  deleteFilm,
-} from '../actions/film';
-import { closeModalWindow, modalTypes } from '../actions/common';
+import { filmActions, commonActions } from '../store/actions';
 
 const Home = ({
-  onLoadFilms,
   films,
   filmForProcessing,
   filters,
@@ -25,7 +19,6 @@ const Home = ({
   onModalClose,
   onFilmDeletion,
 }) => {
-  useEffect(() => onLoadFilms(), [onLoadFilms]);
   useEffect(() => {
     const { searchString, order, genre } = filters;
     const pattern = new RegExp(searchString);
@@ -56,16 +49,16 @@ const Home = ({
       <TopSection active={!isModalWindoOpened} />
       <Main active={!isModalWindoOpened} />
       <Footer />
-      {common.modalWindow === modalTypes.DELETE_FILM && (
+      {common.modalWindow === commonActions.types.DELETE_FILM && (
         <DeleteFilm onDelete={onFilmDeletion} onClose={onModalClose} />
       )}
-      {common.modalWindow === modalTypes.EDIT_FILM && (
+      {common.modalWindow === commonActions.types.EDIT_FILM && (
         <EditFilm details={filmForProcessing} onClose={onModalClose} />
       )}
-      {common.modalWindow === modalTypes.ADD_FILM && (
+      {common.modalWindow === commonActions.types.ADD_FILM && (
         <AddFilm onClose={onModalClose} />
       )}
-      {common.modalWindow === modalTypes.CONGRATULATION && (
+      {common.modalWindow === commonActions.types.CONGRATULATION && (
         <Congratulation onClose={onModalClose} />
       )}
     </>
@@ -102,7 +95,6 @@ Home.propTypes = {
     modalWindow: PropTypes.string,
   }).isRequired,
   onFilterFilms: PropTypes.func.isRequired,
-  onLoadFilms: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired,
   onFilmDeletion: PropTypes.func.isRequired,
 };
@@ -112,10 +104,9 @@ Home.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadFilms: () => dispatch(loadFilms()),
-  onFilterFilms: (films) => dispatch(filteredFilms(films)),
-  onModalClose: () => dispatch(closeModalWindow()),
-  onFilmDeletion: () => dispatch(deleteFilm()),
+  onFilterFilms: (films) => dispatch(filmActions.filteredFilms(films)),
+  onModalClose: () => dispatch(commonActions.closeModalWindow()),
+  onFilmDeletion: () => dispatch(filmActions.deleteFilm()),
 });
 
 const mapStateToProps = (state) => ({

@@ -5,11 +5,13 @@ import FilmResults from '../FilmResults';
 import NotFound from '../NotFound';
 
 import './styles.css';
+import FilmLoader from '../FilmLoader/FilmLoader';
 
 const SearchResults = ({ filmsCount }) => (
   <>
     {filmsCount > 0 && <FilmResults />}
     {!filmsCount && <NotFound />}
+    <FilmLoader />
   </>
 );
 

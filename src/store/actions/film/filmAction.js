@@ -5,8 +5,8 @@ import {
   FILM_FOR_PROCESSING,
   DELETE_FILM,
 } from './filmActionType';
-import { loader, error, openModalWindow, closeModalWindow } from '../common';
-import { filmService } from '../../api';
+import commonActions from '../common';
+import { filmService } from '../../../api';
 
 export const filmsLoaded = (payload) => ({
   type: FETCH_FILM_LIST_SUCCESS,
@@ -14,15 +14,16 @@ export const filmsLoaded = (payload) => ({
 });
 
 export const loadFilms = () => (dispatch, getState) => {
-  dispatch(loader(true));
+  dispatch(commonActions.loader(true));
   filmService
     .getFilms({
-      query: getState().query || '',
-      page: getState().page || 0,
+      query: getState().films.query || '',
+      offset: getState().films.offset || 0,
+      sortBy: getState().filters.order
     })
     .then((data) => dispatch(filmsLoaded(data)))
-    .catch((err) => dispatch(error(err)))
-    .finally(() => dispatch(dispatch(loader(false))));
+    .catch((err) => dispatch(commonActions.error(err)))
+    .finally(() => dispatch(dispatch(commonActions.loader(false))));
 };
 
 export const filteredFilms = (payload) => ({
@@ -41,13 +42,13 @@ export const closeFilmPreview = () => ({
 });
 
 export const filmForProcessing = (payload) => (dispatch) => {
-  dispatch(loader(true));
+  dispatch(commonActions.loader(true));
   dispatch({
     type: FILM_FOR_PROCESSING,
     payload: payload.film,
   });
-  dispatch(openModalWindow(payload.type));
-  dispatch(loader(false));
+  dispatch(commonActions.openModalWindow(payload.type));
+  dispatch(commonActions.loader(false));
 };
 
 export const deleteFilmFromStore = (payload) => ({
@@ -57,13 +58,13 @@ export const deleteFilmFromStore = (payload) => ({
 
 export const deleteFilm = () => (dispatch, getState) => {
   const filmIdForDeletion = getState().films.filmForProcessing.id;
-  dispatch(loader(true));
+  dispatch(commonActions.loader(true));
   filmService
     .deleteFilm(filmIdForDeletion)
     .then(() => {
       dispatch(deleteFilmFromStore(filmIdForDeletion));
-      dispatch(closeModalWindow());
+      dispatch(commonActions.closeModalWindow());
     })
-    .catch((err) => error(err.message))
-    .finally(() => dispatch(loader(false)));
+    .catch((err) => commonActions.error(err.message))
+    .finally(() => dispatch(commonActions.loader(false)));
 };

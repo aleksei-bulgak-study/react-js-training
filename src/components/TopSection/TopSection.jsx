@@ -5,10 +5,7 @@ import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
 import PreviewMovie from '../Preview';
 import SearchBar from '../SearchBar';
-import { closeFilmPreview } from '../../actions/film';
-import { filterByQuery } from '../../actions/filter';
-import { openModalWindow, modalTypes } from '../../actions/common';
-
+import { filterActions, commonActions, filmActions } from '../../store/actions';
 import './styles.css';
 
 const buildClassNameString = (preview, active) => {
@@ -75,9 +72,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearchString: (query) => dispatch(filterByQuery(query)),
-  onPreviewClose: () => dispatch(closeFilmPreview()),
-  onFilmAdd: () => dispatch(openModalWindow(modalTypes.ADD_FILM)),
+  onSearchString: (query) => dispatch(filterActions.filterByQuery(query)),
+  onPreviewClose: () => dispatch(filmActions.closeFilmPreview()),
+  onFilmAdd: () => dispatch(commonActions.openModalWindow(commonActions.types.ADD_FILM)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopSection);
