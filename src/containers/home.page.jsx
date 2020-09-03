@@ -22,7 +22,7 @@ const Home = ({
 }) => {
   useEffect(() => {
     const { searchString, order, genre } = filters;
-    const pattern = new RegExp(searchString);
+    const pattern = new RegExp(searchString, 'gi');
     const filteredResults = films
       .filter(
         (film) =>

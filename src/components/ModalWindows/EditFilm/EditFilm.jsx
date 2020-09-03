@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import defaultGenres from '../../../model/genres';
@@ -7,14 +7,21 @@ import { filmActions } from '../../../store/actions';
 
 const readOnlyFields = ['id'];
 
-const EditFilm = ({ details, onClose, onSubmit }) => {
+const EditFilm = ({ genres, details, onClose, onSubmit }) => {
+  const availableGenres = useMemo(() => {
+    const defaultGenresNames = defaultGenres.map((genre) => genre.value);
+    const uniqueGenres = [
+      ...new Set([...genres, ...defaultGenresNames]),
+    ].sort();
+    return uniqueGenres.map((genre) => ({ label: genre, value: genre }));
+  }, [genres]);
   return (
     <FilmForm
       title="edit movie"
       initialState={details}
       onClose={onClose}
       onSubmit={onSubmit}
-      defaultGenres={defaultGenres}
+      defaultGenres={availableGenres}
       readOnlyFields={readOnlyFields}
     />
   );
@@ -32,10 +39,15 @@ EditFilm.propTypes = {
     runtime: PropTypes.number,
   }).isRequired,
   onSubmit: PropTypes.func.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapDispathToProps = (dispatch) => ({
   onSubmit: (data) => dispatch(filmActions.editFilm(data)),
 });
 
-export default connect(null, mapDispathToProps)(EditFilm);
+const mapStateToProps = (state) => ({
+  genres: state.films.genres.filter((genre) => genre !== 'All'),
+});
+
+export default connect(mapStateToProps, mapDispathToProps)(EditFilm);

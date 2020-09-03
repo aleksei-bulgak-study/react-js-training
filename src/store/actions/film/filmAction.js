@@ -25,7 +25,7 @@ export const loadFilms = () => (dispatch, getState) => {
   dispatch(commonActions.loader(true));
   filmService
     .getFilms({
-      query: getState().films.query || '',
+      query: getState().filters.searchString || '',
       offset: getState().films.offset || 0,
       sortBy: getState().filters.order,
       genre: getState().filters.genre || ''
