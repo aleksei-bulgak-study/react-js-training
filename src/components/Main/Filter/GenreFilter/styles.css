@@ -29,3 +29,12 @@
   z-index: 2;
   border-radius: 1px;
 }
+
+select.genre-filter {
+  background-color: var(--grey-darker);
+  color: var(--white);
+  font-size: 1.2rem;
+  outline: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}

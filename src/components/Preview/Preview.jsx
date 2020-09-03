@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FilmDescription from './FilmDescription';
-import './styles.css';
 import Poster from '../Common/Poster';
+
+import './styles.css';
 
 const Preview = ({ preview, onPreviewClose }) => (
   <div className="film-preview">

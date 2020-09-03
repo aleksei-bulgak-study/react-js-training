@@ -1,25 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Film from '../Film';
 import SearchResultsCount from './SearchResultsCount';
+import { filmActions, commonActions } from '../../../store/actions';
+
 import './styles.css';
 
 const FilmResultsList = ({
-  results,
+  films,
   onFilmDeletion,
   onFilmEdit,
   onFilmPreview,
 }) => (
   <section className="film-results">
-    <SearchResultsCount count={results.length} />
+    <SearchResultsCount count={films.length} />
     <div className="film-results__list">
-      {results.map((filmDetails) => (
+      {films.map((filmDetails) => (
         <Film
           key={filmDetails.id}
           details={filmDetails}
           onFilmDeletion={onFilmDeletion}
           onFilmEdit={onFilmEdit}
-          onFilmPreview={() => onFilmPreview(filmDetails)}
+          onFilmPreview={onFilmPreview}
         />
       ))}
     </div>
@@ -27,7 +30,7 @@ const FilmResultsList = ({
 );
 
 FilmResultsList.propTypes = {
-  results: PropTypes.arrayOf(
+  films: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       title: PropTypes.string,
@@ -41,4 +44,23 @@ FilmResultsList.propTypes = {
   onFilmPreview: PropTypes.func.isRequired,
 };
 
-export default FilmResultsList;
+const mapStateToProps = (state) => ({ films: state.films.filteredResults });
+const mapDispatchToProps = (dispatch) => ({
+  onFilmPreview: (film) => dispatch(filmActions.previewFilm(film)),
+  onFilmDeletion: (film) =>
+    dispatch(
+      filmActions.filmForProcessing({
+        type: commonActions.types.DELETE_FILM,
+        film,
+      }),
+    ),
+  onFilmEdit: (film) =>
+    dispatch(
+      filmActions.filmForProcessing({
+        type: commonActions.types.EDIT_FILM,
+        film,
+      }),
+    ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmResultsList);

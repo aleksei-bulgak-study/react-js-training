@@ -1,18 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
 const GenreFilter = ({ genres, action, active }) => {
   const [activeGenre, setActiveGenre] = useState(active || genres[0]);
 
-  const onClick = (genre) => {
+  const onClick =useCallback((genre) => {
     action(genre);
     setActiveGenre(genre);
-  };
+  }, [action]);
 
-  const className = (genre) => (genre === activeGenre ? 'active' : '');
+  const onSelect = useCallback(
+    (event) => {
+      const { value } = event.target;
+      action(value);
+      setActiveGenre(value);
+    },
+    [action, setActiveGenre],
+  );
 
-  return (
+  const className = useCallback(
+    (genre) => (genre === activeGenre ? 'active' : ''),
+    [activeGenre],
+  );
+
+  const select = (
+    <select
+      id="genre-filter"
+      className="genre-filter"
+      onChange={onSelect}
+      value={activeGenre}
+    >
+      {genres.map((option) => (
+        <option key={option} className="genre-filter__item" value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+
+  const list = (
     <ul className="genre-filter">
       {genres.map((genre) => (
         <li key={genre} className="genre-filter__item">
@@ -26,6 +53,13 @@ const GenreFilter = ({ genres, action, active }) => {
         </li>
       ))}
     </ul>
+  );
+
+  return (
+    <>
+      {genres.length <= 6 && list}
+      {genres.length > 6 && select}
+    </>
   );
 };
 

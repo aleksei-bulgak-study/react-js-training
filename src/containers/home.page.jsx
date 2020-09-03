@@ -1,136 +1,122 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Header, Footer, Main, TopSection } from '../components';
-import DeleteFilm from '../components/DeleteFilm';
-import EditFilm from '../components/EditFilm';
-import AddFilm from '../components/AddFilm';
-import Congratulation from '../components/Congratulation';
+import {
+  AddFilm,
+  EditFilm,
+  DeleteFilm,
+  Congratulation,
+} from '../components/ModalWindows';
+import { filmActions, commonActions } from '../store/actions';
+import Loader from '../components/ModalWindows/Loader';
 
-import data from '../movies.json';
-
-const ORDER_MAPPING = {
-  'release date': 'release_date',
-  runtime: 'runtime',
-  budget: 'budget',
-  revenue: 'revenue',
-  'vote average': 'vote_average',
-};
-
-const Home = () => {
-  const [results, setResults] = useState(data.slice(0, 10));
-  const [filtered, setFilteredResults] = useState(results);
-  const [showDialog, setShowDialog] = useState(false);
-  const [filmForDeletion, setFilmForDeletion] = useState();
-  const [filmForEdit, setFilmForEdit] = useState();
-  const [addNewFilm, setAddNewFilm] = useState(false);
-  const [congratulation, setCongratulation] = useState(false);
-  const [filter, setFilter] = useState({
-    genre: null,
-    order: 'release_date',
-    searchString: '',
-  });
-  const [preview, setPreview] = useState();
-
-  const onFilmDeletion = (id) => {
-    setShowDialog(true);
-    setFilmForDeletion(id);
-  };
-
-  const onFilmEdit = (filmForUpdate) => {
-    setShowDialog(true);
-    setFilmForEdit(filmForUpdate);
-  };
-
-  const onFilmAdd = () => {
-    setShowDialog(true);
-    setAddNewFilm(true);
-  };
-
-  const removeFilmById = (id) => {
-    const newResults = results.filter((film) => film.id !== id);
-    const newFilteredResult = filtered.filter((film) => film.id !== id);
-    setResults(newResults);
-    setFilteredResults(newFilteredResult);
-  };
-
-  const processFilmDeletion = () => {
-    removeFilmById(filmForDeletion);
-    setShowDialog(false);
-    setFilmForDeletion(null);
-  };
-
-  const closeDialog = () => {
-    setShowDialog(false);
-    setFilmForDeletion(null);
-    setFilmForEdit(null);
-    setAddNewFilm(false);
-    setCongratulation(false);
-  };
-
-  const onFilterByGenre = (genre) => {
-    setFilter({ ...filter, genre: genre === 'All' ? null : genre });
-  };
-
-  const onSorting = (sortingField) => {
-    setFilter({ ...filter, order: ORDER_MAPPING[sortingField.toLowerCase()] });
-  };
-
-  const onFilterByName = (query) => {
-    setFilter({ ...filter, searchString: query.toLowerCase() });
-  };
-
+const Home = ({
+  films,
+  filmForProcessing,
+  filters,
+  common,
+  onFilterFilms,
+  onModalClose,
+  onFilmDeletion,
+}) => {
   useEffect(() => {
-    const { searchString, order, genre } = filter;
-    const pattern = new RegExp(searchString);
-    setFilteredResults(
-      results
-        .filter((film) => genre === null || film.genres.indexOf(genre) !== -1)
-        .filter((film) => pattern.test(film.title.toLowerCase()))
-        .sort((f, s) => {
-          if (f[order] > s[order]) {
-            return 1;
-          }
-          return -1;
-        }),
-    );
-  }, [filter, results]);
+    const { searchString, order, genre } = filters;
+    const pattern = new RegExp(searchString, 'gi');
+    const filteredResults = films
+      .filter(
+        (film) =>
+          genre === null ||
+          genre.toLowerCase() === 'all' ||
+          film.genres.indexOf(genre) !== -1,
+      )
+      .filter((film) => pattern.test(film.title.toLowerCase()))
+      .sort((f, s) => {
+        if (f[order] > s[order]) {
+          return 1;
+        }
+        return -1;
+      });
+    onFilterFilms(filteredResults);
+  }, [films, filters, onFilterFilms]);
+
+  const isModalWindoOpened = useMemo(() => common.modalWindow !== null, [
+    common.modalWindow,
+  ]);
 
   return (
     <>
       <Header />
-      <TopSection
-        preview={preview}
-        filterByName={filter.searchString}
-        onFilterByName={onFilterByName}
-        onFilmAdd={onFilmAdd}
-        blur={showDialog}
-        onPreviewClose={() => setPreview(null)}
-      />
-      <Main
-        searchResults={filtered}
-        onFilmDeletion={onFilmDeletion}
-        onFilmEdit={onFilmEdit}
-        blur={showDialog}
-        onFilterByGenre={onFilterByGenre}
-        onSorting={onSorting}
-        onFilmPreview={(details) => {
-          setPreview(details);
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        }}
-      />
+      <TopSection active={!isModalWindoOpened} />
+      <Main active={!isModalWindoOpened} />
       <Footer />
-      {showDialog && filmForDeletion && (
-        <DeleteFilm onClose={closeDialog} onDelete={processFilmDeletion} />
+      {common.modalWindow === commonActions.types.DELETE_FILM && (
+        <DeleteFilm onDelete={onFilmDeletion} onClose={onModalClose} />
       )}
-      {showDialog && filmForEdit && (
-        <EditFilm
-          details={filmForEdit}
-          onClose={closeDialog}
-        />
+      {common.modalWindow === commonActions.types.EDIT_FILM && (
+        <EditFilm details={filmForProcessing} onClose={onModalClose} />
       )}
-      {showDialog && addNewFilm && <AddFilm onClose={closeDialog} />}
-      {showDialog && congratulation && <Congratulation onClose={closeDialog} />}
+      {common.modalWindow === commonActions.types.ADD_FILM && (
+        <AddFilm onClose={onModalClose} />
+      )}
+      {common.modalWindow === commonActions.types.CONGRATULATION && (
+        <Congratulation onClose={onModalClose} />
+      )}
+      {common.loader && <Loader />}
     </>
   );
 };
 
-export default Home;
+Home.propTypes = {
+  films: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      title: PropTypes.string,
+      release_date: PropTypes.string,
+      url: PropTypes.string,
+      genre: PropTypes.arrayOf(PropTypes.string),
+      overview: PropTypes.string,
+      runtime: PropTypes.number,
+    }),
+  ).isRequired,
+  filmForProcessing: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    release_date: PropTypes.string,
+    url: PropTypes.string,
+    genre: PropTypes.arrayOf(PropTypes.string),
+    overview: PropTypes.string,
+    runtime: PropTypes.number,
+  }),
+  filters: PropTypes.shape({
+    searchString: PropTypes.string,
+    order: PropTypes.string,
+    genre: PropTypes.string,
+  }).isRequired,
+  common: PropTypes.shape({
+    modalWindow: PropTypes.string,
+    loader: PropTypes.bool,
+  }).isRequired,
+  onFilterFilms: PropTypes.func.isRequired,
+  onModalClose: PropTypes.func.isRequired,
+  onFilmDeletion: PropTypes.func.isRequired,
+};
+
+Home.defaultProps = {
+  filmForProcessing: {},
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onFilterFilms: (films) => dispatch(filmActions.filteredFilms(films)),
+  onModalClose: () => dispatch(commonActions.closeModalWindow()),
+  onFilmDeletion: () => dispatch(filmActions.deleteFilm()),
+});
+
+const mapStateToProps = (state) => ({
+  films: state.films.films,
+  filters: state.filters,
+  common: state.common,
+  filmForProcessing: state.films.filmForProcessing,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

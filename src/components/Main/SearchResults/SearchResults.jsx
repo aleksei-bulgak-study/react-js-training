@@ -1,41 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import FilmResults from '../FilmResults';
 import NotFound from '../NotFound';
-import './styles.css';
 
-const SearchResults = ({
-  searchResults,
-  onFilmDeletion,
-  onFilmEdit,
-  onFilmPreview,
-}) => (
+import './styles.css';
+import FilmLoader from '../FilmLoader/FilmLoader';
+
+const SearchResults = ({ filmsCount }) => (
   <>
-    {searchResults && (
-      <FilmResults
-        results={searchResults}
-        onFilmDeletion={onFilmDeletion}
-        onFilmEdit={onFilmEdit}
-        onFilmPreview={onFilmPreview}
-      />
-    )}
-    {(!searchResults || !searchResults.length) && <NotFound />}
+    {filmsCount > 0 && <FilmResults />}
+    {!filmsCount && <NotFound />}
+    <FilmLoader />
   </>
 );
 
 SearchResults.propTypes = {
-  searchResults: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string,
-      url: PropTypes.string,
-      genre: PropTypes.string,
-      releaseYear: PropTypes.string,
-    }).isRequired,
-  ).isRequired,
-  onFilmDeletion: PropTypes.func.isRequired,
-  onFilmEdit: PropTypes.func.isRequired,
-  onFilmPreview: PropTypes.func.isRequired,
+  filmsCount: PropTypes.number,
 };
 
-export default SearchResults;
+SearchResults.defaultProps = {
+  filmsCount: 0,
+};
+
+const mapStateToProps = (state) => ({
+  filmsCount: state.films.filteredResults.length || 0,
+});
+
+export default connect(mapStateToProps)(SearchResults);

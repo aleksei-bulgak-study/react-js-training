@@ -64,3 +64,7 @@
 .film-results__settings {
   display: none;
 }
+
+.film-results__item .film-results__settings--opened {
+  display: inline-block;
+}

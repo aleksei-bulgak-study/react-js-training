@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
-import CloseButton from '../Common/CloseButton';
+import CloseButton from '../../Common/CloseButton';
 
-const ModalWindow = ({ title, onClose, children, className, Logo }) => (
+const BaseModalWindow = ({ title, onClose, children, className, Logo }) => (
   <>
     <div className="modal-window__overlay" />
     <div className="modal-window">
@@ -21,7 +21,7 @@ const ModalWindow = ({ title, onClose, children, className, Logo }) => (
   </>
 );
 
-ModalWindow.propTypes = {
+BaseModalWindow.propTypes = {
   title: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
@@ -32,9 +32,9 @@ ModalWindow.propTypes = {
   Logo: PropTypes.node,
 };
 
-ModalWindow.defaultProps = {
+BaseModalWindow.defaultProps = {
   className: '',
   Logo: null,
 };
 
-export default ModalWindow;
+export default BaseModalWindow;

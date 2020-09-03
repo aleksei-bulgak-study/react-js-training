@@ -14,7 +14,5 @@
 }
 
 .delete-film__confirm {
-  position: absolute;
-  right: 0;
-  bottom: -7rem;
+  float: right;
 }

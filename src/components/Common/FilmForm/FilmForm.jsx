@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import LabeledInput from '../LabeledInput';
-import ModalWindow from '../../ModalWindow';
+import BaseModalWindow from '../../ModalWindows/BaseModalWindow';
 import LabeledMultiSelect from '../LabeledMultiSelect';
 import Button, { types } from '../Button';
 
@@ -9,6 +9,13 @@ import './styles.css';
 
 const isFieldEditable = (fieldName, readOnlyFields) =>
   readOnlyFields.indexOf(fieldName) === -1;
+
+const convertBasedOnType = (type, value) => {
+  if (type === 'number') {
+    return +value;
+  }
+  return value;
+};
 
 const FilmForm = ({
   title,
@@ -18,28 +25,37 @@ const FilmForm = ({
   defaultGenres,
   readOnlyFields,
 }) => {
-  const [data, setData] = useState(initialState);
+  const [data, setData] = useState({ ...initialState });
 
-  const onDataChange = ({ target: { name, value } }) => {
-    if (isFieldEditable(name, readOnlyFields)) {
-      setData({ ...data, [name]: value });
-    }
-  };
+  const onDataChange = useCallback(
+    ({ target: { name, value, type } }) => {
+      if (isFieldEditable(name, readOnlyFields)) {
+        setData({ ...data, [name]: convertBasedOnType(type, value) });
+      }
+    },
+    [data, readOnlyFields],
+  );
 
-  const onSelectStateChange = (key) => (values) => {
-    if (values && isFieldEditable(key, readOnlyFields)) {
-      const genres = values.map((item) => item.value);
-      setData({ ...data, [key]: genres });
-    }
-  };
+  const onSelectStateChange = useCallback(
+    (key) => (values) => {
+      if (values && isFieldEditable(key, readOnlyFields)) {
+        const genres = values.map((item) => item.value);
+        setData({ ...data, [key]: genres });
+      }
+    },
+    [data, readOnlyFields, setData],
+  );
 
-  const onReset = () => setData(initialState);
+  const onReset = useCallback(() => setData(initialState), [
+    initialState,
+    setData,
+  ]);
 
-  const onSave = () => onSubmit(data);
+  const onSave = useCallback(() => onSubmit(data), [data, onSubmit]);
 
   return (
     <form className="film-form" onSubmit={onSave}>
-      <ModalWindow title={title} onClose={onClose}>
+      <BaseModalWindow title={title} onClose={onClose}>
         <LabeledInput
           id="film-id"
           name="id"
@@ -64,17 +80,17 @@ const FilmForm = ({
         />
         <LabeledInput
           id="film-url"
-          name="url"
+          name="poster_path"
           title="Movie url"
           type="url"
-          value={data.url}
+          value={data.poster_path}
           onChange={onDataChange}
         />
         <LabeledMultiSelect
-          title="genre"
+          title="genres"
           options={defaultGenres}
-          onAction={onSelectStateChange('genre')}
-          preselected={data.genre}
+          onAction={onSelectStateChange('genres')}
+          preselected={data.genres}
         />
         <LabeledInput
           id="film-overview"
@@ -105,7 +121,7 @@ const FilmForm = ({
             className="film-form__actions__submit"
           />
         </div>
-      </ModalWindow>
+      </BaseModalWindow>
     </form>
   );
 };
@@ -125,6 +141,7 @@ FilmForm.propTypes = {
   title: PropTypes.string.isRequired,
   defaultGenres: PropTypes.arrayOf(
     PropTypes.shape({
+      label: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }),
   ).isRequired,

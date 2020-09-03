@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MultiSelect from 'react-multi-select-component';
 import './styles.css';
@@ -6,7 +6,7 @@ import './styles.css';
 const buildValues = (elems) => elems.map((e) => ({ label: e, value: e }));
 
 const LabeledMultiSelect = ({ title, options, onAction, preselected }) => {
-  const selected = useMemo(() => buildValues(preselected) || [], [preselected]);
+  const selected = buildValues(preselected) || [];
 
   return (
     <label htmlFor="genres" className="genres">
@@ -28,6 +28,7 @@ LabeledMultiSelect.propTypes = {
   onAction: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
+      label: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }),
   ).isRequired,
