@@ -7,7 +7,7 @@ import { filmActions } from '../../../store/actions';
 import './styles.css';
 
 const FilmLoader = ({ loadFilms }) => {
-  useEffect(() => loadFilms(), []);
+  useEffect(() => loadFilms(), [loadFilms]);
   const onLoadFilms = useCallback(() => loadFilms(), [loadFilms]);
 
   return (

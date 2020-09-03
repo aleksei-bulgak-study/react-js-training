@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import FilmForm from '../../Common/FilmForm';
 import defaultGenres from '../../../model/genres';
+import { filmActions } from '../../../store/actions';
 
-const AddFilm = ({ onClose }) => {
-  const onSubmit = (data) => console.log(data);
-
+const AddFilm = ({ onClose, onSubmit }) => {
   return (
     <FilmForm
       title="add movie"
@@ -18,6 +18,11 @@ const AddFilm = ({ onClose }) => {
 
 AddFilm.propTypes = {
   onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
-export default AddFilm;
+const mapDispathToProps = (dispatch) => ({
+  onSubmit: (data) => dispatch(filmActions.addFilm(data)),
+});
+
+export default connect(null, mapDispathToProps)(AddFilm);

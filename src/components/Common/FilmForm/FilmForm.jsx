@@ -10,6 +10,13 @@ import './styles.css';
 const isFieldEditable = (fieldName, readOnlyFields) =>
   readOnlyFields.indexOf(fieldName) === -1;
 
+const convertBasedOnType = (type, value) => {
+  if (type === 'number') {
+    return +value;
+  }
+  return value;
+};
+
 const FilmForm = ({
   title,
   initialState = {},
@@ -21,9 +28,9 @@ const FilmForm = ({
   const [data, setData] = useState({ ...initialState });
 
   const onDataChange = useCallback(
-    ({ target: { name, value } }) => {
+    ({ target: { name, value, type } }) => {
       if (isFieldEditable(name, readOnlyFields)) {
-        setData({ ...data, [name]: value });
+        setData({ ...data, [name]: convertBasedOnType(type, value) });
       }
     },
     [data, readOnlyFields],
@@ -73,17 +80,17 @@ const FilmForm = ({
         />
         <LabeledInput
           id="film-url"
-          name="url"
+          name="poster_path"
           title="Movie url"
           type="url"
-          value={data.url}
+          value={data.poster_path}
           onChange={onDataChange}
         />
         <LabeledMultiSelect
-          title="genre"
+          title="genres"
           options={defaultGenres}
-          onAction={onSelectStateChange('genre')}
-          preselected={data.genre}
+          onAction={onSelectStateChange('genres')}
+          preselected={data.genres}
         />
         <LabeledInput
           id="film-overview"

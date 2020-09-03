@@ -12,7 +12,7 @@ const Loader = () => {
     <>
       <div className="modal-window__overlay" />
       <div className="modal-window">
-        <div className="modal-window__wrapper">Loading...</div>
+        <div className="modal-window__loader">Loading...</div>
       </div>
     </>
   );

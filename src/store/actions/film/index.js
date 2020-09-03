@@ -6,6 +6,8 @@ import {
   closeFilmPreview,
   filmForProcessing,
   deleteFilm,
+  addFilm,
+  editFilm,
 } from './filmAction';
 
 import * as types from './filmActionType';
@@ -18,5 +20,7 @@ export default {
   closeFilmPreview,
   filmForProcessing,
   deleteFilm,
+  addFilm,
+  editFilm,
   types,
 };

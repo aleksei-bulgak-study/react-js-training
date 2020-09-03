@@ -20,7 +20,7 @@ const buildRequestUrl = ({
 export const getFilms = ({
   query,
   searchBy = 'title',
-  limit = 2,
+  limit = 20,
   offset = 0,
   sortBy,
   sortOrder = 'asc',
@@ -50,4 +50,14 @@ export const getFilms = ({
 export const deleteFilm = (id) => {
   const url = buildRequestUrl({ url: baseUrl, path: `${basePath}/${id}` });
   return axios.delete(url);
+};
+
+export const addFilm = (data) => {
+  const url = `${baseUrl}/${basePath}`;
+  return axios.post(url, data).then((response) => response.data);
+};
+
+export const editFilm = (data) => {
+  const url = `${baseUrl}/${basePath}`;
+  return axios.put(url, data).then((response) => response.data);
 };

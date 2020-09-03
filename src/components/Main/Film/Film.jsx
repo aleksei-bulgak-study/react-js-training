@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FilmSettings from '../FilmSettings';
 import dateFormat from '../../../utils/formatDate';

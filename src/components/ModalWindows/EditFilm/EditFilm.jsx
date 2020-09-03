@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import defaultGenres from '../../../model/genres';
 import FilmForm from '../../Common/FilmForm';
+import { filmActions } from '../../../store/actions';
 
 const readOnlyFields = ['id'];
 
-const EditFilm = ({ onClose, details }) => {
-  const onSubmit = (data) => console.log(data);
-
+const EditFilm = ({ details, onClose, onSubmit }) => {
   return (
     <FilmForm
       title="edit movie"
@@ -31,6 +31,11 @@ EditFilm.propTypes = {
     overview: PropTypes.string,
     runtime: PropTypes.number,
   }).isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
-export default EditFilm;
+const mapDispathToProps = (dispatch) => ({
+  onSubmit: (data) => dispatch(filmActions.editFilm(data)),
+});
+
+export default connect(null, mapDispathToProps)(EditFilm);

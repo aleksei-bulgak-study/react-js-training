@@ -12,3 +12,5 @@ export const SET_FILTERED_RESULTS = 'films/filteredResuls';
 export const PREVIEW_FILM = 'films/preview';
 
 export const FILM_FOR_PROCESSING = 'films/filmForProcessing';
+
+export const UPDATE_GENRES = 'genres/updateGenres';

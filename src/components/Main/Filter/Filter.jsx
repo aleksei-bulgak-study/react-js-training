@@ -7,7 +7,6 @@ import { filterActions } from '../../../store/actions';
 
 import './styles.css';
 
-const FILTERS = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 const SORTING = [
   'Release date',
   'Runtime',
@@ -16,22 +15,22 @@ const SORTING = [
   'vote average',
 ];
 
-const Filter = ({ onFilterByGenre, onSorting }) => {
+const Filter = ({ genres, onFilterByGenre, onSorting }) => {
   const onGenreFiltering = useCallback(
     (genre) => {
-      if (genre === FILTERS[0]) {
+      if (genre === genres[0]) {
         onFilterByGenre(null);
       } else {
         onFilterByGenre(genre);
       }
     },
-    [onFilterByGenre],
+    [genres, onFilterByGenre],
   );
 
   return (
     <section className="filter__list">
       <div className="filter__item filter__by-genre">
-        <GenreFilter genres={FILTERS} action={onGenreFiltering} />
+        <GenreFilter genres={genres} action={onGenreFiltering} />
       </div>
       <div className="filter__item filter__by-date">
         <Sorting title="Sort by" options={SORTING} onAction={onSorting} />
@@ -41,13 +40,18 @@ const Filter = ({ onFilterByGenre, onSorting }) => {
 };
 
 Filter.propTypes = {
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   onFilterByGenre: PropTypes.func.isRequired,
   onSorting: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  genres: state.films.genres,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onFilterByGenre: (genre) => dispatch(filterActions.filterByGenre(genre)),
   onSorting: (order) => dispatch(filterActions.changeOrder(order)),
 });
 
-export default connect(null, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

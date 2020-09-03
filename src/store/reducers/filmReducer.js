@@ -6,6 +6,7 @@ const initialState = {
   preview: null,
   filmForProcessing: null,
   offset: 0,
+  genres: ['All'],
 };
 
 const filmResucer = (state = initialState, action) => {
@@ -28,6 +29,19 @@ const filmResucer = (state = initialState, action) => {
     case filmActions.types.DELETE_FILM: {
       const result = state.films.filter((film) => film.id !== action.payload);
       return { ...state, films: result, offset: state.offset - 1 };
+    }
+    case filmActions.types.UPDATE_GENRES: {
+      const newGenres = new Set(state.films.map((film) => film.genres).flat());
+      return { ...state, genres: ['All', ...newGenres] };
+    }
+    case filmActions.types.EDIT_FILM_SUCCESS: {
+      const updatedFilm = action.payload;
+      const films = state.films.filter((film) => film.id !== updatedFilm.id);
+      return { ...state, films: [...films, updatedFilm] };
+    }
+    case filmActions.types.ADD_FILM_SUCCESS: {
+      const newFilm = action.payload;
+      return { ...state, films: [...state.films, newFilm] };
     }
     default: {
       return state;
