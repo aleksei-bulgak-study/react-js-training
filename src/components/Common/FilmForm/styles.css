@@ -1,4 +1,6 @@
-.film-form label {
+.film-form .labeled-input,
+.film-form .labeled-title,
+.film-form .genres {
   display: block;
   text-transform: uppercase;
   color: var(--red);
@@ -6,11 +8,11 @@
   margin-bottom: 1.5rem;
 }
 
-.film-form label:last-child {
+.film-form labeled-input:last-child {
   margin: 0;
 }
 
-.film-form label > * {
+.film-form labeled-input > * {
   display: block;
   width: 100%;
 }
@@ -41,4 +43,11 @@
 .film-form__actions__reset {
   margin-bottom: 1rem;
   padding: 0.5rem 3.5rem;
+}
+
+.film-form .labeled-input__error {
+  font-size: 0.8rem;
+  font-weight: 100;
+  color: var(--red);
+  text-transform: none;
 }
