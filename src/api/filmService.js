@@ -61,3 +61,8 @@ export const editFilm = (data) => {
   const url = `${baseUrl}/${basePath}`;
   return axios.put(url, data).then((response) => response.data);
 };
+
+export const getFilmById = (id) => {
+  const url = `${baseUrl}/${basePath}/${id}`;
+  return axios.get(url).then((response) => response.data);
+};

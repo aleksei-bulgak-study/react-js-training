@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LinkButton from '../../Common/LinkButton';
@@ -7,7 +7,6 @@ import { filmActions } from '../../../store/actions';
 import './styles.css';
 
 const FilmLoader = ({ loadFilms }) => {
-  useEffect(() => loadFilms(), [loadFilms]);
   const onLoadFilms = useCallback(() => loadFilms(), [loadFilms]);
 
   return (

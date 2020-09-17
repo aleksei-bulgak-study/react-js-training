@@ -4,14 +4,6 @@
   overflow: hidden;
   min-height: 250px;
   transition: height 0.5s;
-}
-
-.search {
-  min-height: 40vh;
-  height: 1px;
-}
-
-.preview {
   min-height: 50vh;
   height: 1px;
 }

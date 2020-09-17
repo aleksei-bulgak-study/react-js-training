@@ -1,5 +1,5 @@
 import {
-  FETCH_FILM_LIST_SUCCESS,
+  ADD_FILMS_INTO_LIST,
   SET_FILTERED_RESULTS,
   PREVIEW_FILM,
   FILM_FOR_PROCESSING,
@@ -7,12 +7,13 @@ import {
   UPDATE_GENRES,
   EDIT_FILM_SUCCESS,
   ADD_FILM_SUCCESS,
+  RESET_FILM_RESULTS,
 } from './filmActionType';
 import commonActions from '../common';
 import { filmService } from '../../../api';
 
-export const filmsLoaded = (payload) => ({
-  type: FETCH_FILM_LIST_SUCCESS,
+export const setFilmsInStore = (payload) => ({
+  type: ADD_FILMS_INTO_LIST,
   payload,
 });
 
@@ -28,12 +29,12 @@ export const loadFilms = () => (dispatch, getState) => {
       query: getState().filters.searchString || '',
       offset: getState().films.offset || 0,
       sortBy: getState().filters.order,
-      genre: getState().filters.genre || ''
+      genre: getState().filters.genre || '',
     })
-    .then((data) => dispatch(filmsLoaded(data)))
+    .then((data) => dispatch(setFilmsInStore(data)))
     .then(() => dispatch(updateGenres()))
     .catch((err) => dispatch(commonActions.error(err)))
-    .finally(() => dispatch(dispatch(commonActions.loader(false))));
+    .finally(() => dispatch(commonActions.loader(false)));
 };
 
 export const filteredFilms = (payload) => ({
@@ -93,7 +94,7 @@ export const addFilm = (film) => (dispatch) => {
       dispatch(commonActions.closeModalWindow());
     })
     .catch((err) => dispatch(commonActions.error(err)))
-    .finally(() => dispatch(dispatch(commonActions.loader(false))));
+    .finally(() => dispatch(commonActions.loader(false)));
 };
 
 export const editFilmInStore = (data) => ({
@@ -110,5 +111,25 @@ export const editFilm = (film) => (dispatch) => {
       dispatch(commonActions.closeModalWindow());
     })
     .catch((err) => dispatch(commonActions.error(err)))
-    .finally(() => dispatch(dispatch(commonActions.loader(false))));
+    .finally(() => dispatch(commonActions.loader(false)));
+};
+
+export const resetFilmList = () => ({
+  type: RESET_FILM_RESULTS,
+  payload: 0,
+});
+
+export const renewedFilmsSearch = () => (dispatch) => {
+  dispatch(commonActions.loader(true));
+  dispatch(resetFilmList());
+  dispatch(loadFilms());
+};
+
+export const getFilmById = (id) => (dispatch) => {
+  dispatch(commonActions.loader(true));
+  filmService
+    .getFilmById(id)
+    .then((data) => dispatch(previewFilm(data)))
+    .catch((err) => dispatch(commonActions.error(err)))
+    .finally(() => dispatch(commonActions.loader(false)));
 };

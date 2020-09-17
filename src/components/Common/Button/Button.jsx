@@ -18,7 +18,7 @@ const Button = ({ title, onClick, type, className }) => (
 
 Button.propTypes = {
   title: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   type: PropTypes.oneOf(
     Object.keys(BUTTON_TYPES).map((type) => BUTTON_TYPES[type]),
   ),
@@ -28,6 +28,7 @@ Button.propTypes = {
 Button.defaultProps = {
   type: BUTTON_TYPES.PRIMARY,
   className: '',
+  onClick: null,
 };
 
 export { BUTTON_TYPES as types };

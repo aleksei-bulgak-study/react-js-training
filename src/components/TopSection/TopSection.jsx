@@ -3,78 +3,37 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
-import PreviewMovie from '../Preview';
-import SearchBar from '../SearchBar';
-import { filterActions, commonActions, filmActions } from '../../store/actions';
+
 import './styles.css';
 
-const buildClassNameString = (preview, active) => {
+const buildClassNameString = (active) => {
   const classes = ['search-preview'];
-  classes.push(preview ? ['preview'] : ['search']);
   classes.push(active ? '' : 'blured');
   return classes.join(' ');
 };
 
-const TopSection = ({
-  active,
-  preview,
-  searchString,
-  onSearchString,
-  onFilmAdd,
-  onPreviewClose,
-}) => {
-  const className = useMemo(() => buildClassNameString(preview, active), [preview, active]);
+const TopSection = ({ children, active }) => {
+  const className = useMemo(() => buildClassNameString(active), [active]);
 
   return (
     <section className={className}>
       <ErrorBoundary>
-        <Wrapper>
-          {preview && (
-            <PreviewMovie preview={preview} onPreviewClose={onPreviewClose} />
-          )}
-          {!preview && (
-            <SearchBar
-              filterByName={searchString}
-              onFilterByName={onSearchString}
-              onFilmAdd={onFilmAdd}
-            />
-          )}
-        </Wrapper>
+        <Wrapper>{children}</Wrapper>
       </ErrorBoundary>
     </section>
   );
 };
 
 TopSection.propTypes = {
-  preview: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
-    tagline: PropTypes.string,
-    release_date: PropTypes.string,
-    runtime: PropTypes.number,
-    overview: PropTypes.string,
-  }),
   active: PropTypes.bool.isRequired,
-  searchString: PropTypes.string.isRequired,
-  onFilmAdd: PropTypes.func.isRequired,
-  onPreviewClose: PropTypes.func.isRequired,
-  onSearchString: PropTypes.func.isRequired,
-};
-
-TopSection.defaultProps = {
-  preview: null,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   preview: state.films.preview,
-  searchString: state.filters.searchString,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onSearchString: (query) => dispatch(filterActions.filterByQuery(query)),
-  onPreviewClose: () => dispatch(filmActions.closeFilmPreview()),
-  onFilmAdd: () => dispatch(commonActions.openModalWindow(commonActions.types.ADD_FILM)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopSection);
+export default connect(mapStateToProps)(TopSection);

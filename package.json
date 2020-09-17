@@ -21,6 +21,7 @@
     "formik": "^2.1.5",
     "moment": "^2.27.0",
     "prop-types": "^15.7.2",
+    "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-multi-select-component": "^3.0.1",

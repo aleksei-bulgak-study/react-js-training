@@ -11,7 +11,7 @@ const initialState = {
 
 const filmResucer = (state = initialState, action) => {
   switch (action.type) {
-    case filmActions.types.FETCH_FILM_LIST_SUCCESS: {
+    case filmActions.types.ADD_FILMS_INTO_LIST: {
       const { films, total } = action.payload;
       const newFilmList = [...state.films, ...films];
       const offset = state.offset + films.length;
@@ -42,6 +42,9 @@ const filmResucer = (state = initialState, action) => {
     case filmActions.types.ADD_FILM_SUCCESS: {
       const newFilm = action.payload;
       return { ...state, films: [...state.films, newFilm] };
+    }
+    case filmActions.types.RESET_FILM_RESULTS: {
+      return { ...state, films: [], offset: 0 };
     }
     default: {
       return state;
