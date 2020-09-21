@@ -26,10 +26,3 @@
   color: #B7B7B7;
   text-transform: capitalize;
 }
-
-.genres__error {
-  font-size: 0.8rem;
-  font-weight: 100;
-  color: var(--red);
-  text-transform: none;
-}

@@ -3,7 +3,7 @@ import { filmActions } from '../actions';
 const initialState = {
   films: [],
   filteredResults: [],
-  preview: null,
+  preview: undefined,
   filmForProcessing: null,
   offset: 0,
   genres: ['All'],

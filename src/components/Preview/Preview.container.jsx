@@ -19,18 +19,18 @@ const PreviewContainer = ({
 
   const { id } = useParams();
   useEffect(() => {
-    if (!preview && id) {
+    if (!preview.id && id) {
       onLoadFilmById(id);
     }
   }, []);
-
-  return <Preview preview={preview || {}} onPreviewClose={onClose} />;
+  return <Preview preview={preview} onPreviewClose={onClose} />;
 };
 
 PreviewContainer.propTypes = {
   preview: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    vote_average: PropTypes.number,
     tagline: PropTypes.string,
     release_date: PropTypes.string,
     runtime: PropTypes.number,
@@ -44,7 +44,14 @@ PreviewContainer.propTypes = {
 
 PreviewContainer.defaultProps = {
   searchString: '',
-  preview: {},
+  preview: {
+    id: null,
+    title: 'Default title',
+    vote_average: 0,
+    tagline: '',
+    release_date: new Date().toString(),
+    runtime: 0,
+  },
 };
 
 const mapStateToProps = (state) => ({
