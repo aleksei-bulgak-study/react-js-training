@@ -1,32 +1,21 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import {
   Switch,
   Route,
   useRouteMatch,
   Redirect,
+  useHistory,
 } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import qs from 'qs';
 import Home from './Home';
 import SearchBar from '../SearchBar';
 import Preview from '../Preview';
 import { filmActions, filterActions } from '../../store/actions';
 
-const HomeContainer = ({ films, filters, common, onFilterFilms, onSearchString, location }) => {
+const HomeContainer = ({ films, filters, common, onFilterFilms }) => {
   const { path } = useRouteMatch();
-
-  const searchStringValue = useMemo(() => {
-    if (filters.searchString) {
-      return filters.searchString;
-    }
-    if (location.search) {
-      const searchQuery = qs.parse(location.search, { ignoreQueryPrefix: true }).query;
-      onSearchString(searchQuery);
-      return searchQuery;
-    }
-    return '';
-  }, [filters.searchString, location]);
+  const history = useHistory();
 
   useEffect(() => {
     const { searchString, order, genre } = filters;
@@ -52,6 +41,11 @@ const HomeContainer = ({ films, filters, common, onFilterFilms, onSearchString, 
     common.modalWindow,
   ]);
 
+  const onGoToSearch = useCallback(
+    (searchString) => history.push(`/search?query=${searchString}`),
+    [history],
+  );
+
   const buildHome = (TopSection) => (
     <Home
       isModalWindoOpened={isModalWindoOpened}
@@ -64,10 +58,10 @@ const HomeContainer = ({ films, filters, common, onFilterFilms, onSearchString, 
   return (
     <Switch>
       <Route exact path={`${path}films/:id`}>
-        {buildHome(<Preview />)}
+        {buildHome(<Preview onGoToSearch={onGoToSearch} />)}
       </Route>
       <Route exact path={[path, `${path}search`]}>
-        {buildHome(<SearchBar searchString={searchStringValue} />)}
+        {buildHome(<SearchBar />)}
       </Route>
       <Redirect to="/404" />
     </Switch>
@@ -99,7 +93,6 @@ HomeContainer.propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string,
   }).isRequired,
-  onSearchString: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

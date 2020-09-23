@@ -1,28 +1,30 @@
 import React, { useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Preview from './Preview';
 import { filmActions } from '../../store/actions';
 
 const PreviewContainer = ({
   preview,
   searchString,
+  onGoToSearch,
   onPreviewClose,
   onLoadFilmById,
 }) => {
-  const history = useHistory();
-  const onClose = useCallback(() => {
-    history.push(`/search?query=${searchString}`);
-    onPreviewClose();
-  }, [history, searchString, onPreviewClose]);
-
   const { id } = useParams();
+
   useEffect(() => {
     if (!preview.id && id) {
       onLoadFilmById(id);
     }
   }, []);
+
+  const onClose = useCallback(() => {
+    onGoToSearch(searchString);
+    onPreviewClose();
+  }, [searchString, onPreviewClose, onGoToSearch]);
+
   return <Preview preview={preview} onPreviewClose={onClose} />;
 };
 
@@ -40,6 +42,7 @@ PreviewContainer.propTypes = {
   onPreviewClose: PropTypes.func.isRequired,
   searchString: PropTypes.string,
   onLoadFilmById: PropTypes.func.isRequired,
+  onGoToSearch: PropTypes.func.isRequired,
 };
 
 PreviewContainer.defaultProps = {
