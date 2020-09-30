@@ -5,8 +5,6 @@ import defaultGenres from '../../../model/genres';
 import FilmForm from '../../Common/FilmForm';
 import { filmActions } from '../../../store/actions';
 
-const readOnlyFields = ['id'];
-
 const EditFilm = ({ genres, details, onClose, onSubmit }) => {
   const availableGenres = useMemo(() => {
     const defaultGenresNames = defaultGenres.map((genre) => genre.value);
@@ -22,7 +20,6 @@ const EditFilm = ({ genres, details, onClose, onSubmit }) => {
       onClose={onClose}
       onSubmit={onSubmit}
       defaultGenres={availableGenres}
-      readOnlyFields={readOnlyFields}
     />
   );
 };
@@ -33,7 +30,7 @@ EditFilm.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string,
     release_date: PropTypes.string,
-    url: PropTypes.string,
+    poster_path: PropTypes.string,
     genres: PropTypes.arrayOf(PropTypes.string),
     overview: PropTypes.string,
     runtime: PropTypes.number,

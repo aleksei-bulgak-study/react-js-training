@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -26,14 +27,16 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
-        use: [{
+        use: [
+          {
             loader: 'file-loader',
             options: {
-                name: '[name].[ext]',
-                outputPath: 'images/'
-            }
-        }]
-    }
+              name: '[name].[ext]',
+              outputPath: 'images/',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -43,6 +46,9 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
     new Dotenv(),
+    new CopyPlugin({
+      patterns: [{ from: 'public/images/favicon.ico', to: 'images/favicon.ico' }],
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],

@@ -34,7 +34,7 @@ FilmResultsList.propTypes = {
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       title: PropTypes.string,
-      url: PropTypes.string,
+      poster_path: PropTypes.string,
       genre: PropTypes.string,
       releaseYear: PropTypes.string,
     }).isRequired,
