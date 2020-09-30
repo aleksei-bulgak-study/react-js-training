@@ -30,7 +30,7 @@ EditFilm.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string,
     release_date: PropTypes.string,
-    url: PropTypes.string,
+    poster_path: PropTypes.string,
     genres: PropTypes.arrayOf(PropTypes.string),
     overview: PropTypes.string,
     runtime: PropTypes.number,

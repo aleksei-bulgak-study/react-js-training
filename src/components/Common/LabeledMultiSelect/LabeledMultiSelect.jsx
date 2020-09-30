@@ -5,7 +5,7 @@ import './styles.css';
 
 const buildValues = (elems) => elems.map((e) => ({ label: e, value: e }));
 
-const LabeledMultiSelect = ({ title, options, onAction, preselected }) => {
+const LabeledMultiSelect = ({ title, options, onAction, preselected, error }) => {
   const selected = buildValues(preselected) || [];
 
   return (
@@ -19,6 +19,7 @@ const LabeledMultiSelect = ({ title, options, onAction, preselected }) => {
         hasSelectAll={false}
         disableSearch
       />
+      {error !== '' && <p className="genres__error">{error}</p>}
     </label>
   );
 };
@@ -33,10 +34,12 @@ LabeledMultiSelect.propTypes = {
     }),
   ).isRequired,
   preselected: PropTypes.arrayOf(PropTypes.string),
+  error: PropTypes.string,
 };
 
 LabeledMultiSelect.defaultProps = {
   preselected: [],
+  error: '',
 };
 
 export default LabeledMultiSelect;

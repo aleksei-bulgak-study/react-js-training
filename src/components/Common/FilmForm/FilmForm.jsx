@@ -36,7 +36,7 @@ const FilmForm = ({
       runtime: Yup.number()
         .min(0)
         .required('Runtime should be numeric value more then 0'),
-      genres: Yup.array().min(1),
+      genres: Yup.array().min(1).required('At least 1 genre must be selected'),
     }),
     onSubmit: onSave,
   });
@@ -104,6 +104,7 @@ const FilmForm = ({
           options={defaultGenres}
           onAction={onSelectStateChange}
           preselected={formik.values.genres}
+          error={getErrorMessageForField('genres')}
         />
         <LabeledInput
           id="film-overview"
@@ -147,8 +148,8 @@ FilmForm.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     release_date: PropTypes.string,
-    url: PropTypes.string,
-    genre: PropTypes.arrayOf(PropTypes.string),
+    poster_path: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.string),
     overview: PropTypes.string,
     runtime: PropTypes.number,
   }),
@@ -164,7 +165,15 @@ FilmForm.propTypes = {
 };
 
 FilmForm.defaultProps = {
-  initialState: {},
+  initialState: {
+    id: undefined,
+    title: undefined,
+    poster_path: undefined,
+    release_date: undefined,
+    genres: [],
+    overview: undefined,
+    runtime: undefined,
+  },
 };
 
 export default FilmForm;
