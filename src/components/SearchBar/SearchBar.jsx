@@ -20,6 +20,8 @@ const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {
     [onSearch],
   );
 
+  const onChange = useCallback((e) => setSearchString(e.target.value), []);
+
   return (
     <div className="search-bar">
       <label htmlFor="search-bar__input" className="search-bar__title">
@@ -32,7 +34,7 @@ const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {
             placeholder="What do you want to watch?"
             value={searchString}
             onKeyDown={handleKeyDown}
-            onChange={(e) => setSearchString(e.target.value)}
+            onChange={onChange}
           />
           <Button title="Search" onClick={onSearch} />
           <Button

@@ -50,6 +50,7 @@ PreviewContainer.defaultProps = {
   preview: {
     id: null,
     title: 'Default title',
+    poster_path: '',
     vote_average: 0,
     tagline: '',
     release_date: new Date().toString(),

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Home from './Home';
 import SearchBar from '../SearchBar';
 import Preview from '../Preview';
-import { filmActions, filterActions } from '../../store/actions';
+import { filmActions } from '../../store/actions';
 
 const HomeContainer = ({ films, filters, common, onFilterFilms }) => {
   const { path } = useRouteMatch();
@@ -97,10 +97,6 @@ HomeContainer.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onFilterFilms: (films) => dispatch(filmActions.filteredFilms(films)),
-  onSearchString: (query) => {
-    dispatch(filterActions.filterByQuery(query));
-    dispatch(filmActions.renewedFilmsSearch());
-  },
 });
 
 const mapStateToProps = (state) => ({

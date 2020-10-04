@@ -49,7 +49,6 @@ export const previewFilm = (payload) => ({
 
 export const closeFilmPreview = () => ({
   type: PREVIEW_FILM,
-  payload: null,
 });
 
 export const filmForProcessing = (payload) => (dispatch) => {

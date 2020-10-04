@@ -1,25 +1,23 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import qs from 'qs';
 import SearchBar from './SearchBar';
 import { filterActions, filmActions, commonActions } from '../../store/actions';
 
 const SearchBarContainer = ({
-  searchString,
   onFilmAdd,
   onSearchString,
   onEmptySearch,
+  onFilterByName,
 }) => {
   const history = useHistory();
+  const location = useLocation();
 
   const searchStringValue = useMemo(() => {
-    if (searchString) {
-      return searchString;
-    }
-    if (history.location.search) {
-      const searchQuery = qs.parse(history.location.search, {
+    if (location.search) {
+      const searchQuery = qs.parse(location.search, {
         ignoreQueryPrefix: true,
       }).query;
       onSearchString(searchQuery);
@@ -28,14 +26,14 @@ const SearchBarContainer = ({
 
     onEmptySearch();
     return '';
-  }, [searchString, history.location.search, onEmptySearch]);
+  }, [onSearchString, location, onEmptySearch]);
 
   const onSearch = useCallback(
     (data) => {
       history.push(`/search?query=${data}`);
-      onSearchString(data);
+      onFilterByName(data);
     },
-    [history, onSearchString],
+    [history, onFilterByName],
   );
 
   return (
@@ -48,14 +46,10 @@ const SearchBarContainer = ({
 };
 
 SearchBarContainer.propTypes = {
-  searchString: PropTypes.string,
   onFilmAdd: PropTypes.func.isRequired,
   onSearchString: PropTypes.func.isRequired,
   onEmptySearch: PropTypes.func.isRequired,
-};
-
-SearchBarContainer.defaultProps = {
-  searchString: '',
+  onFilterByName: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -67,6 +61,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(filterActions.filterByQuery(query));
     dispatch(filmActions.renewedFilmsSearch());
   },
+  onFilterByName: (query) => dispatch(filterActions.filterByQuery(query)),
   onFilmAdd: () =>
     dispatch(commonActions.openModalWindow(commonActions.types.ADD_FILM)),
   onEmptySearch: () => dispatch(commonActions.loader(false)),
