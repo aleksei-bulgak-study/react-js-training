@@ -10,6 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '..', '/dist'),
     filename: 'app.bundle.js',
+    publicPath: '/',
   },
 
   module: {
@@ -43,6 +44,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+      favicon: 'public/images/favicon.ico'
     }),
     new MiniCssExtractPlugin(),
     new Dotenv(),

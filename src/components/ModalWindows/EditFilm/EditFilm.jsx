@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import defaultGenres from '../../../model/genres';
 import FilmForm from '../../Common/FilmForm';
-import { filmActions } from '../../../store/actions';
+import { filmActions, commonActions } from '../../../store/actions';
 
 const EditFilm = ({ genres, details, onClose, onSubmit }) => {
   const availableGenres = useMemo(() => {
@@ -41,10 +41,12 @@ EditFilm.propTypes = {
 
 const mapDispathToProps = (dispatch) => ({
   onSubmit: (data) => dispatch(filmActions.editFilm(data)),
+  onClose: () => dispatch(commonActions.closeModalWindow()),
 });
 
 const mapStateToProps = (state) => ({
   genres: state.films.genres.filter((genre) => genre !== 'All'),
+  details: state.films.filmForProcessing,
 });
 
 export default connect(mapStateToProps, mapDispathToProps)(EditFilm);

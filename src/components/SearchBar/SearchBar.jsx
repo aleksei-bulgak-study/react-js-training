@@ -6,19 +6,21 @@ import Button, { types } from '../Common/Button';
 const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {
   const [searchString, setSearchString] = useState(filterByName);
 
-  const handleKeyDown = useCallback(
-    (event) => {
-      if (event.key === 'Enter') {
-        onFilterByName(searchString);
-      }
-    },
-    [searchString, onFilterByName],
-  );
-
   const onSearch = useCallback(() => onFilterByName(searchString), [
     searchString,
     onFilterByName,
   ]);
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (event.key === 'Enter') {
+        onSearch();
+      }
+    },
+    [onSearch],
+  );
+
+  const onChange = useCallback((e) => setSearchString(e.target.value), []);
 
   return (
     <div className="search-bar">
@@ -32,7 +34,7 @@ const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {
             placeholder="What do you want to watch?"
             value={searchString}
             onKeyDown={handleKeyDown}
-            onChange={(e) => setSearchString(e.target.value)}
+            onChange={onChange}
           />
           <Button title="Search" onClick={onSearch} />
           <Button

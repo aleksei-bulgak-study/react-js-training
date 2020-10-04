@@ -1,5 +1,5 @@
 import {
-  filmsLoaded,
+  setFilmsInStore,
   loadFilms,
   previewFilm,
   filteredFilms,
@@ -8,12 +8,14 @@ import {
   deleteFilm,
   addFilm,
   editFilm,
+  renewedFilmsSearch,
+  getFilmById,
 } from './filmAction';
 
 import * as types from './filmActionType';
 
 export default {
-  filmsLoaded,
+  setFilmsInStore,
   loadFilms,
   previewFilm,
   filteredFilms,
@@ -22,5 +24,7 @@ export default {
   deleteFilm,
   addFilm,
   editFilm,
+  renewedFilmsSearch,
+  getFilmById,
   types,
 };

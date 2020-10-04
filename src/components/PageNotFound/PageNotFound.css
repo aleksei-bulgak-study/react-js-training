@@ -1,0 +1,19 @@
+.page-not-found {
+  background-color: #121212;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.page-not-found > * {
+  margin: 1rem 0;
+}
+
+.page-not-found__title {
+  color: var(--white);
+  font-weight: 100;
+  font-size: 3rem;
+  letter-spacing: 0.2rem;
+  text-transform: capitalize;
+}

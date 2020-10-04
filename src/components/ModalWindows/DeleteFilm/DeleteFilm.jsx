@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import BaseModalWindow from '../BaseModalWindow';
 import './styles.css';
 import Button from '../../Common/Button';
+import { commonActions, filmActions } from '../../../store/actions';
 
 const DeleteFilm = ({ onClose, onDelete }) => (
   <section className="delete-film">
@@ -25,4 +27,9 @@ DeleteFilm.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default DeleteFilm;
+const mapDispathToProps = (dispatch) => ({
+  onClose: () => dispatch(commonActions.closeModalWindow()),
+  onDelete: () => dispatch(filmActions.deleteFilm()),
+});
+
+export default connect(null, mapDispathToProps)(DeleteFilm);

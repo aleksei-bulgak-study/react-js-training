@@ -26,14 +26,18 @@ const Preview = ({ preview, onPreviewClose }) => (
 Preview.propTypes = {
   preview: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
+    vote_average: PropTypes.number,
     tagline: PropTypes.string,
     release_date: PropTypes.string,
     runtime: PropTypes.number,
     overview: PropTypes.string,
     poster_path: PropTypes.string,
-  }).isRequired,
+  }),
   onPreviewClose: PropTypes.func.isRequired,
+};
+
+Preview.defaultProps = {
+  preview: {},
 };
 
 export default Preview;
