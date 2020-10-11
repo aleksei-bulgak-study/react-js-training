@@ -1,4 +1,13 @@
 {
+  "verbose": true,
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "**/src/**/*.{js,jsx}",
+    "!**/node_modules/**",
+    "!**/coverage/**",
+    "!**/components/**/*.js"
+
+  ],
   "transform": {
     "^.+\\.(js|jsx)$": "babel-jest"
   },
@@ -6,7 +15,8 @@
     "/node_modules/"
   ],
   "moduleNameMapper": {
-    "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+    "\\.(css)$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.(png)$": "<rootDir>/__mocks__/styleMock.js"
   },
   "setupFilesAfterEnv": [
     "<rootDir>/__tests__/configs/enzyme.config.js"

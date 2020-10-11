@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when Image with src and alt provided then cmponent will be rendered 1`] = `ShallowWrapper {}`;
