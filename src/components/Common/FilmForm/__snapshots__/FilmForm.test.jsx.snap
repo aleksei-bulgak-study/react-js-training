@@ -878,7 +878,7 @@ Object {
                   id="film-title"
                   name="title"
                   type="text"
-                  value=""
+                  value="test title"
                 />
               </label>
             </div>
@@ -894,7 +894,7 @@ Object {
                   id="film-release"
                   name="release_date"
                   type="date"
-                  value=""
+                  value="2020-10-30"
                 />
               </label>
             </div>
@@ -910,7 +910,7 @@ Object {
                   id="film-url"
                   name="poster_path"
                   type="url"
-                  value=""
+                  value="https://example.com"
                 />
               </label>
             </div>
@@ -934,10 +934,8 @@ Object {
                     <div
                       class="dropdown-heading-value"
                     >
-                      <span
-                        class="gray"
-                      >
-                        Select...
+                      <span>
+                        All items are selected.
                       </span>
                     </div>
                     <svg
@@ -968,7 +966,7 @@ Object {
                   id="film-overview"
                   name="overview"
                   type="text"
-                  value=""
+                  value="test description"
                 />
               </label>
             </div>
@@ -1045,7 +1043,7 @@ Object {
                 id="film-title"
                 name="title"
                 type="text"
-                value=""
+                value="test title"
               />
             </label>
           </div>
@@ -1061,7 +1059,7 @@ Object {
                 id="film-release"
                 name="release_date"
                 type="date"
-                value=""
+                value="2020-10-30"
               />
             </label>
           </div>
@@ -1077,7 +1075,7 @@ Object {
                 id="film-url"
                 name="poster_path"
                 type="url"
-                value=""
+                value="https://example.com"
               />
             </label>
           </div>
@@ -1101,10 +1099,8 @@ Object {
                   <div
                     class="dropdown-heading-value"
                   >
-                    <span
-                      class="gray"
-                    >
-                      Select...
+                    <span>
+                      All items are selected.
                     </span>
                   </div>
                   <svg
@@ -1135,7 +1131,7 @@ Object {
                 id="film-overview"
                 name="overview"
                 type="text"
-                value=""
+                value="test description"
               />
             </label>
           </div>

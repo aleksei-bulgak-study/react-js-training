@@ -58,7 +58,7 @@ describe('FilmForm', () => {
     });
     await waitFor(() => {
       fireEvent.change(form.container.querySelector('#film-release'), {
-        target: { value: '11/10/2020' },
+        target: { value: '2020-10-30' },
       });
     });
     await waitFor(() => {
@@ -113,7 +113,7 @@ describe('FilmForm', () => {
     });
     await waitFor(() => {
       fireEvent.change(form.container.querySelector('#film-release'), {
-        target: { value: '11/10/2020' },
+        target: { value: '2020-10-30' },
       });
     });
     await waitFor(() => {
