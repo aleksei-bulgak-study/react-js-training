@@ -28,7 +28,8 @@ const filmResucer = (state = initialState, action) => {
     }
     case filmActions.types.DELETE_FILM: {
       const result = state.films.filter((film) => film.id !== action.payload);
-      return { ...state, films: result, offset: state.offset - 1 };
+      const newOffset = state.films.length - (state.films.length - result.length);
+      return { ...state, films: result, offset: newOffset };
     }
     case filmActions.types.UPDATE_GENRES: {
       const newGenres = new Set(state.films.map((film) => film.genres).flat());
@@ -37,7 +38,10 @@ const filmResucer = (state = initialState, action) => {
     case filmActions.types.EDIT_FILM_SUCCESS: {
       const updatedFilm = action.payload;
       const films = state.films.filter((film) => film.id !== updatedFilm.id);
-      return { ...state, films: [...films, updatedFilm] };
+      if(films.length + 1 === state.films.length) {
+        return { ...state, films: [...films, updatedFilm] };
+      }
+      return state;
     }
     case filmActions.types.ADD_FILM_SUCCESS: {
       const newFilm = action.payload;
