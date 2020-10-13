@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './MenuOpened.css';
 import CloseButton from '../../../Common/CloseButton';
 import MenuItem from '../MenuItem';
 

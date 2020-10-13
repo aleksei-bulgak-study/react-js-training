@@ -5,7 +5,7 @@ import dateFormat from '../../../utils/formatDate';
 import genresFormatter from '../../../utils/arrayToStringFormatter';
 import Poster from '../../Common/Poster';
 import defaultPoster from '../../../../public/images/default_poster.png';
-import './styles.css';
+import './Film.css';
 
 const Film = ({ details, onFilmDeletion, onFilmEdit, onFilmPreview }) => {
   const onEdit = useCallback(() => onFilmEdit(details), [onFilmEdit, details]);

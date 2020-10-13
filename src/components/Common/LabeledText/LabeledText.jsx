@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './LabeledText.css';
 
 const LabeledText = ({ id, title, value, className }) => (
   <label htmlFor={id} className='labeled-title'>

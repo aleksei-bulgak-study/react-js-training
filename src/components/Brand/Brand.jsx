@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import './Brand.css';
 
 const Brand = () => (
   <p className="brand">

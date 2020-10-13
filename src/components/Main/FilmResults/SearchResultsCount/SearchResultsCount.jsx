@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './SearchResultsCount.css';
 
 const SearchResultsCount = ({ count }) => (
   <div className="film-results__title">

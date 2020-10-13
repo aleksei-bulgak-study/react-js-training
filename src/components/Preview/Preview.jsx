@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FilmDescription from './FilmDescription';
 import Poster from '../Common/Poster';
 
-import './styles.css';
+import './Preview.css';
 
 const Preview = ({ preview, onPreviewClose }) => (
   <div className="film-preview">

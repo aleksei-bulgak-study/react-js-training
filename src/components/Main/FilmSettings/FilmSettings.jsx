@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './FilmSettings.css';
 import MenuOpened from './MenuOpened';
 import HamburgerButton from '../../Common/HamburgerButton';
 

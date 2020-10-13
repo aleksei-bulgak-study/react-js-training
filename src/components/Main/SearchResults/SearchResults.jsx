@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import FilmResults from '../FilmResults';
 import NotFound from '../NotFound';
 
-import './styles.css';
+import './SearchResults.css';
 import FilmLoader from '../FilmLoader/FilmLoader';
 
 const SearchResults = ({ filmsCount }) => (

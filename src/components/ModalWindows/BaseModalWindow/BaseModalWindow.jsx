@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './BaseModalWindow.css';
 import CloseButton from '../../Common/CloseButton';
 
 const BaseModalWindow = ({ title, onClose, children, className, Logo }) => (

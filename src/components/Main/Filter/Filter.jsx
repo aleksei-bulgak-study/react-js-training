@@ -5,7 +5,7 @@ import GenreFilter from './GenreFilter';
 import Sorting from './Sorting';
 import { filterActions } from '../../../store/actions';
 
-import './styles.css';
+import './Filter.css';
 
 const SORTING = [
   'Release date',

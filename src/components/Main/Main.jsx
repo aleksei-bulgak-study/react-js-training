@@ -4,7 +4,7 @@ import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
 import Filter from './Filter';
 import SearchResults from './SearchResults';
-import './styles.css';
+import './Main.css';
 
 const buildClassName = (active) => (active ? '' : 'blured');
 

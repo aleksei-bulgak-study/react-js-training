@@ -6,7 +6,7 @@ import Film from '../Film';
 import SearchResultsCount from './SearchResultsCount';
 import { filmActions, commonActions } from '../../../store/actions';
 
-import './styles.css';
+import './FilmResults.css';
 
 const FilmResultsList = ({
   films,

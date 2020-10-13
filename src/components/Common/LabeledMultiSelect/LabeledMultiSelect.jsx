@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MultiSelect from 'react-multi-select-component';
-import './styles.css';
+import './LabeledMultiSelect.css';
 
 const buildValues = (elems) => elems.map((e) => ({ label: e, value: e }));
 

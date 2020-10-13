@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LinkButton from '../../Common/LinkButton';
 import { filmActions } from '../../../store/actions';
 
-import './styles.css';
+import './FilmLoader.css';
 
 const FilmLoader = ({ loadFilms }) => {
   const onLoadFilms = useCallback(() => loadFilms(), [loadFilms]);

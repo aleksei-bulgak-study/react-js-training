@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './GenreFilter.css';
 
 const GenreFilter = ({ genres, action, active }) => {
   const [activeGenre, setActiveGenre] = useState(active || genres[0]);

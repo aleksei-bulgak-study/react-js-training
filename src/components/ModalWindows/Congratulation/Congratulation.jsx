@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BaseModalWindow from '../BaseModalWindow';
 
 import icon from '../../../../public/images/check-circle-regular.svg';
-import './styles.css';
+import './Congratulation.css';
 
 const Logo = <img src={icon} className="congratulation__icon" alt="success image logo"/>;
 
