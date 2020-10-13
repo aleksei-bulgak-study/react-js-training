@@ -1,8 +1,24 @@
 {
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "**/src/**/*.{js,jsx}",
+    "!**/node_modules/**",
+    "!**/coverage/**",
+    "!**/components/**/*.js"
+
+  ],
   "transform": {
     "^.+\\.(js|jsx)$": "babel-jest"
   },
   "testPathIgnorePatterns": [
     "/node_modules/"
-  ]
+  ],
+  "moduleNameMapper": {
+    "\\.(css)$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.(png|svg)$": "<rootDir>/__mocks__/styleMock.js"
+  },
+  "setupFilesAfterEnv": [
+    "<rootDir>/__tests__/configs/enzyme.config.js"
+  ],
+  "modulePathIgnorePatterns": ["<rootDir>/__tests__/configs"]
 }

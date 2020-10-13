@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseModalWindow make snapshot 1`] = `"<div class=\\"modal-window__overlay\\"></div><div class=\\"modal-window\\"><div class=\\"modal-window__wrapper additionalClass\\">logo component<h1 class=\\"modal-window__title\\">test title</h1><button type=\\"button\\" class=\\"close-button modal-window__close large\\">Close</button>internal data component</div></div>"`;

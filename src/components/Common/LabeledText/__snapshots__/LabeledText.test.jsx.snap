@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LabeledText when all props passed then all props rendered 1`] = `"<label for=\\"testId\\" class=\\"labeled-title\\">testTitle<p id=\\"testId\\" class=\\"additionalClass\\">testValue</p></label>"`;

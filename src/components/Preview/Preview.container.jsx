@@ -18,6 +18,7 @@ const PreviewContainer = ({
     if (!preview.id && id) {
       onLoadFilmById(id);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onClose = useCallback(() => {

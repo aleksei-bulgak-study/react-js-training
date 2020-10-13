@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LabeledMultiSelect when error was specified then it rendered 1`] = `"<label for=\\"genres\\" class=\\"genres\\">test title<div class=\\"go2139093995 multi-select\\"><div tabindex=\\"0\\" class=\\"go2646822163 dropdown-container\\" aria-expanded=\\"false\\" aria-readonly=\\"true\\"><div class=\\"go2642161244 dropdown-heading\\"><div class=\\"dropdown-heading-value\\"><span class=\\"gray\\">Select...</span></div><svg width=\\"24\\" height=\\"24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" class=\\"dropdown-heading-dropdown-arrow gray\\"><path d=\\"M6 9L12 15 18 9\\"></path></svg></div></div></div><p class=\\"genres__error\\">error message</p></label>"`;
