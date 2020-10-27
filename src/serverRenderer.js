@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import App from './index';
+import App from './app';
 
 function renderHtml(html) {
   return `

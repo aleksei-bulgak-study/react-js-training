@@ -1,34 +1,47 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const { merge } = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
-const common = require('./webpack.config.common');
 
-module.exports = merge(common, {
+module.exports = {
   mode: 'development',
-  devtool: 'inline-source-map',
   target: 'node',
   entry: path.join(__dirname, '..', 'src', 'serverRenderer.js'),
   externals: [nodeExternals()],
   output: {
-    filename: 'js/serverRenderer.js',
+    filename: 'serverRenderer.js',
     libraryTarget: 'commonjs2',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         include: /src/,
+        loader: 'css-loader',
+        options: {
+          modules: {
+            exportOnlyLocals: true,
+          },
+        },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: 'file-loader',
             options: {
-              sourceMap: true,
+              name: '[name].[ext]',
+              outputPath: 'images/',
             },
           },
         ],
       },
     ],
   },
-});
+};
