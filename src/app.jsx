@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import store from './store';
 import { Home, PageNotFound } from './components';
 
@@ -18,9 +19,9 @@ const GoBackLink = (
   </Link>
 );
 
-const App = () => (
+const App = ({ Router, location, context }) => (
   <Provider store={store}>
-    <Router>
+    <Router location={location} context={context}>
       <Switch>
         <Route exact path="/404" component={PageNotFound}>
           <PageNotFound GoBackLink={GoBackLink} />
@@ -30,5 +31,18 @@ const App = () => (
     </Router>
   </Provider>
 );
+
+App.propTypes = {
+  Router: PropTypes.func.isRequired,
+  location: PropTypes.string,
+  context: PropTypes.shape({
+    url: PropTypes.string,
+  }),
+};
+
+App.defaultProps = {
+  location: null,
+  context: null,
+};
 
 export default App;
