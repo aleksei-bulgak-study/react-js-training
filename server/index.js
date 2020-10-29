@@ -1,30 +1,54 @@
+require('dotenv').config();
+const { Router } = require('express');
 const express = require('express');
-// const webpack = require('webpack');
-// const webpackDevMiddleware = require('webpack-dev-middleware');
-// const webpackHotMiddleware = require('webpack-hot-middleware');
-// const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-// const webpackConfig = require('../webpack/webpack.config.server');
-// const webpackConfigClient = require('../webpack/webpack.config.dev');
-const serverRenderer = require('../dist/serverRenderer').default;
+const serverRouting = require('../dist/serverRouting').default;
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
-
-// if (process.env.NODE_ENV === 'development') {
-
-//   const compiler = webpack(webpackConfig);
-
-//   app.use(webpackDevMiddleware(compiler));
-//   app.use(webpackHotMiddleware(webpackConfigClient));
-//   app.use(webpackHotServerMiddleware(compiler));
-// } else {
-
-// }
-
+const router = Router();
 app.use(express.static('dist'));
-app.use(serverRenderer());
 
-app.listen(3000, () => {
-  console.info(`Express listening on port 3000`); // eslint-disable-line
+const processRedirect = (res, error) => {
+  if (error.redirect) {
+    res.writeHead(302, {
+      Location: error.message,
+    });
+    res.end();
+  }
+};
+
+router.get('/films/:id', (req, res) => {
+  const filmId = req.params.id;
+  return Promise.resolve(serverRouting.renderPreview(req.url, filmId))
+    .then((html) => res.send(html))
+    .catch((error) => {
+      processRedirect(res, error);
+    });
+});
+
+router.get('/search', (req, res) => {
+  const { query } = req.query;
+
+  return Promise.resolve(serverRouting.renderSearch(req.url, query))
+    .then((html) => res.send(html))
+    .catch((error) => {
+      processRedirect(res, error);
+    });
+});
+
+router.get('/', (req, res) => {
+  try {
+    serverRouting.renderHome(req.url);
+  } catch (error) {
+    processRedirect(res, error);
+  }
+});
+
+app.use(router);
+
+app.listen(PORT, () => {
+  console.info(`Express listening on port ${PORT}`); // eslint-disable-line
 });
 
 module.exports = app;

@@ -4,7 +4,7 @@
   "description": "Epam ReactJs training",
   "scripts": {
     "start": "cross-env NODE_ENV=dev webpack-dev-server --open --hot",
-    "start:server": "cross-env NODE_ENV=development  node ./server",
+    "start:server": "cross-env NODE_ENV=production  node ./server",
     "build:prod": "cross-env NODE_ENV=prod webpack",
     "build:dev": "cross-env NODE_ENV=dev webpack",
     "build:server": "cross-env NODE_ENV=dev webpack --config ./webpack/webpack.config.server.js",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.5",
     "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formik": "^2.1.5",
     "moment": "^2.27.0",

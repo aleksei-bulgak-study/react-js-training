@@ -5,36 +5,35 @@ import fs from 'fs';
 import path from 'path';
 import App from './app';
 
-function renderHtml(html) {
-  const data = fs.readFileSync(path.join('./dist', 'index.html'), 'utf8');
-  return data.replace('<div id="container"></div>', `<div id="container">${html}</div>`);
+const stateScript = (preloadedState) =>
+  `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(
+    preloadedState,
+  ).replace(/</g, '\\u003c')}</script>`;
+
+function renderWithIntitalState(store, url) {
+  const context = {};
+
+  const renderRoot = () => (
+    // eslint-disable-next-line react/jsx-filename-extension
+    <App context={context} location={url} Router={StaticRouter} store={store} />
+  );
+
+  renderToString(renderRoot());
+
+  if (context.url) {
+    const error = new Error(context.url);
+    error.redirect = true;
+    throw error;
+  }
+
+  return renderToString(renderRoot());
 }
 
-export default function serverRenderer() {
-  return (req, res) => {
-    const context = {};
-
-    const renderRoot = () => (
-      // eslint-disable-next-line react/jsx-filename-extension
-      <App
-        context={context}
-        location={req.url}
-        Router={StaticRouter}
-      />
-    );
-
-    renderToString(renderRoot());
-
-    // context.url will contain the URL to redirect to if a <Redirect> was used
-    if (context.url) {
-      res.writeHead(302, {
-        Location: context.url,
-      });
-      res.end();
-      return;
-    }
-
-    const html = renderToString(renderRoot());
-    res.send(renderHtml(html));
-  };
+export default function renderHtml(store, url) {
+  const html = renderWithIntitalState(store, url);
+  const data = fs.readFileSync(path.join('./dist', 'index.html'), 'utf8');
+  return data.replace(
+    '<div id="container"></div>',
+    `<div id="container">${html}</div>${stateScript(store.getState())}`,
+  );
 }

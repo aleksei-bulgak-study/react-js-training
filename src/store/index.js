@@ -1,7 +1,7 @@
-import store from './store';
+import createStore from './store';
 import * as actions from './actions';
 import reducers from './reducers';
 
 export { actions, reducers };
 
-export default store;
+export default createStore;

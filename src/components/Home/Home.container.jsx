@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   Switch,
   Route,
@@ -13,29 +13,9 @@ import SearchBar from '../SearchBar';
 import Preview from '../Preview';
 import { filmActions } from '../../store/actions';
 
-const HomeContainer = ({ films, filters, common, onFilterFilms }) => {
+const HomeContainer = ({ common }) => {
   const { path } = useRouteMatch();
   const history = useHistory();
-
-  useEffect(() => {
-    const { searchString, order, genre } = filters;
-    const pattern = new RegExp(searchString, 'gi');
-    const filteredResults = films
-      .filter(
-        (film) =>
-          genre === null ||
-          genre.toLowerCase() === 'all' ||
-          film.genres.indexOf(genre) !== -1,
-      )
-      .filter((film) => pattern.test(film.title))
-      .sort((f, s) => {
-        if (f[order] > s[order]) {
-          return 1;
-        }
-        return -1;
-      });
-    onFilterFilms(filteredResults);
-  }, [films, filters, onFilterFilms]);
 
   const isModalWindoOpened = useMemo(() => common.modalWindow !== null, [
     common.modalWindow,
@@ -69,29 +49,9 @@ const HomeContainer = ({ films, filters, common, onFilterFilms }) => {
 };
 
 HomeContainer.propTypes = {
-  films: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      title: PropTypes.string,
-      release_date: PropTypes.string,
-      url: PropTypes.string,
-      genre: PropTypes.arrayOf(PropTypes.string),
-      overview: PropTypes.string,
-      runtime: PropTypes.number,
-    }),
-  ).isRequired,
-  filters: PropTypes.shape({
-    searchString: PropTypes.string,
-    order: PropTypes.string,
-    genre: PropTypes.string,
-  }).isRequired,
   common: PropTypes.shape({
     modalWindow: PropTypes.string,
     loader: PropTypes.bool,
-  }).isRequired,
-  onFilterFilms: PropTypes.func.isRequired,
-  location: PropTypes.shape({
-    search: PropTypes.string,
   }).isRequired,
 };
 
@@ -100,10 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  films: state.films.films,
-  filters: state.filters,
   common: state.common,
-  filmForProcessing: state.films.filmForProcessing,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

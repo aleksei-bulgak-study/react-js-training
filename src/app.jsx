@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
-import store from './store';
 import { Home, PageNotFound } from './components';
 
 import './app.css';
@@ -19,7 +18,7 @@ const GoBackLink = (
   </Link>
 );
 
-const App = ({ Router, location, context }) => (
+const App = ({ Router, location, context, store }) => (
   <Provider store={store}>
     <Router location={location} context={context}>
       <Switch>
@@ -38,6 +37,7 @@ App.propTypes = {
   context: PropTypes.shape({
     url: PropTypes.string,
   }),
+  store: PropTypes.shape({}).isRequired,
 };
 
 App.defaultProps = {

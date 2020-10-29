@@ -1,44 +1,30 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
-import qs from 'qs';
+import { useHistory } from 'react-router';
 import SearchBar from './SearchBar';
 import { filterActions, filmActions, commonActions } from '../../store/actions';
 
 const SearchBarContainer = ({
+  searchString,
   onFilmAdd,
   onSearchString,
-  onEmptySearch,
   onFilterByName,
 }) => {
   const history = useHistory();
-  const location = useLocation();
-
-  const searchStringValue = useMemo(() => {
-    if (location.search) {
-      const searchQuery = qs.parse(location.search, {
-        ignoreQueryPrefix: true,
-      }).query;
-      onSearchString(searchQuery);
-      return searchQuery;
-    }
-
-    onEmptySearch();
-    return '';
-  }, [onSearchString, location, onEmptySearch]);
 
   const onSearch = useCallback(
     (data) => {
+      onSearchString(data);
       history.push(`/search?query=${data}`);
       onFilterByName(data);
     },
-    [history, onFilterByName],
+    [history, onFilterByName, onSearchString],
   );
 
   return (
     <SearchBar
-      filterByName={searchStringValue}
+      filterByName={searchString}
       onFilmAdd={onFilmAdd}
       onFilterByName={onSearch}
     />
@@ -46,10 +32,14 @@ const SearchBarContainer = ({
 };
 
 SearchBarContainer.propTypes = {
+  searchString: PropTypes.string,
   onFilmAdd: PropTypes.func.isRequired,
   onSearchString: PropTypes.func.isRequired,
-  onEmptySearch: PropTypes.func.isRequired,
   onFilterByName: PropTypes.func.isRequired,
+};
+
+SearchBarContainer.defaultProps = {
+  searchString: '',
 };
 
 const mapStateToProps = (state) => ({

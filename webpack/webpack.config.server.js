@@ -4,10 +4,10 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
   mode: 'development',
   target: 'node',
-  entry: path.join(__dirname, '..', 'src', 'serverRenderer.js'),
+  entry: path.join(__dirname, '..', 'src', 'serverRouting.js'),
   externals: [nodeExternals()],
   output: {
-    filename: 'serverRenderer.js',
+    filename: 'serverRouting.js',
     libraryTarget: 'commonjs2',
   },
   resolve: {

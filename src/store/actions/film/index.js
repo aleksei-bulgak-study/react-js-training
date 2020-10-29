@@ -10,6 +10,7 @@ import {
   editFilm,
   renewedFilmsSearch,
   getFilmById,
+  updateFilteredFilms,
 } from './filmAction';
 
 import * as types from './filmActionType';
@@ -26,5 +27,6 @@ export default {
   editFilm,
   renewedFilmsSearch,
   getFilmById,
+  updateFilteredFilms,
   types,
 };
