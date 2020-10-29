@@ -13,6 +13,7 @@ import SearchBar from '../SearchBar';
 import Preview from '../Preview';
 import { filmActions } from '../../store/actions';
 
+// PATTERN: Adapter
 const HomeContainer = ({ common }) => {
   const { path } = useRouteMatch();
   const history = useHistory();
@@ -26,6 +27,7 @@ const HomeContainer = ({ common }) => {
     [history],
   );
 
+  // PATTERN: Builder / HOC
   const buildHome = (TopSection) => (
     <Home
       isModalWindoOpened={isModalWindoOpened}
