@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './MenuItem.css';
 
 const MenuItem = ({ title, onClick }) => (
   <button className="menu__item" type="button" onClick={onClick}>

@@ -22,9 +22,34 @@ export const updateGenres = () => ({
   payload: null,
 });
 
+export const filteredFilms = (payload) => ({
+  type: SET_FILTERED_RESULTS,
+  payload,
+});
+
+export const updateFilteredFilms = () => (dispatch, getState) => {
+  const { searchString, order, genre } = getState().filters;
+  const pattern = new RegExp(searchString, 'i');
+  const filteredResults = getState()
+    .films.films.filter(
+      (film) =>
+        genre === null ||
+        genre.toLowerCase() === 'all' ||
+        film.genres.indexOf(genre) !== -1,
+    )
+    .filter((film) => pattern.test(film.title))
+    .sort((f, s) => {
+      if (f[order] > s[order]) {
+        return 1;
+      }
+      return -1;
+    });
+  return dispatch(filteredFilms(filteredResults));
+};
+
 export const loadFilms = () => (dispatch, getState) => {
   dispatch(commonActions.loader(true));
-  filmService
+  return filmService
     .getFilms({
       query: getState().filters.searchString || '',
       offset: getState().films.offset || 0,
@@ -33,14 +58,10 @@ export const loadFilms = () => (dispatch, getState) => {
     })
     .then((data) => dispatch(setFilmsInStore(data)))
     .then(() => dispatch(updateGenres()))
+    .then(() => dispatch(updateFilteredFilms()))
     .catch((err) => dispatch(commonActions.error(err)))
     .finally(() => dispatch(commonActions.loader(false)));
 };
-
-export const filteredFilms = (payload) => ({
-  type: SET_FILTERED_RESULTS,
-  payload,
-});
 
 export const previewFilm = (payload) => ({
   type: PREVIEW_FILM,
@@ -75,6 +96,7 @@ export const deleteFilm = () => (dispatch, getState) => {
       dispatch(deleteFilmFromStore(filmIdForDeletion));
       dispatch(commonActions.closeModalWindow());
     })
+    .then(() => dispatch(updateFilteredFilms()))
     .catch((err) => commonActions.error(err.message))
     .finally(() => dispatch(commonActions.loader(false)));
 };
@@ -92,6 +114,7 @@ export const addFilm = (film) => (dispatch) => {
       dispatch(addFilmInStore(newFilm));
       dispatch(commonActions.closeModalWindow());
     })
+    .then(() => dispatch(updateFilteredFilms()))
     .catch((err) => dispatch(commonActions.error(err)))
     .finally(() => dispatch(commonActions.loader(false)));
 };
@@ -109,6 +132,7 @@ export const editFilm = (film) => (dispatch) => {
       dispatch(editFilmInStore(updatedFilm));
       dispatch(commonActions.closeModalWindow());
     })
+    .then(() => dispatch(updateFilteredFilms()))
     .catch((err) => dispatch(commonActions.error(err)))
     .finally(() => dispatch(commonActions.loader(false)));
 };
@@ -126,7 +150,7 @@ export const renewedFilmsSearch = () => (dispatch) => {
 
 export const getFilmById = (id) => (dispatch) => {
   dispatch(commonActions.loader(true));
-  filmService
+  return filmService
     .getFilmById(id)
     .then((data) => dispatch(previewFilm(data)))
     .catch((err) => dispatch(commonActions.error(err)))

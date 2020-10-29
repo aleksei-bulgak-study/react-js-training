@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './SearchBar.css';
 import Button, { types } from '../Common/Button';
 
 const SearchBar = ({ filterByName, onFilterByName, onFilmAdd }) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import BaseModalWindow from '../BaseModalWindow';
-import './styles.css';
+import './DeleteFilm.css';
 import Button from '../../Common/Button';
 import { commonActions, filmActions } from '../../../store/actions';
 

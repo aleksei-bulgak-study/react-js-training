@@ -1,7 +1,7 @@
 import React from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import BrandHeader from '../Brand';
-import './styles.css';
+import './Header.css';
 
 const Header = () => (
   <header>

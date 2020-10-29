@@ -1,7 +1,7 @@
 import { LOADER, ERROR, MODAL_WINDOW } from '../actions/common/commonActionType';
 
 const initialState = {
-  loader: true,
+  loader: false,
   modalWindow: null,
 };
 

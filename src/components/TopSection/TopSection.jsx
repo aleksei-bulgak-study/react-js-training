@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Wrapper from '../Wrapper';
 import ErrorBoundary from '../ErrorBoundary';
 
-import './styles.css';
+import './TopSection.css';
 
 const buildClassNameString = (active) => {
   const classes = ['search-preview'];

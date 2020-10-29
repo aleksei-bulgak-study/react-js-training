@@ -9,7 +9,7 @@ import BaseModalWindow from '../../ModalWindows/BaseModalWindow';
 import LabeledMultiSelect from '../LabeledMultiSelect';
 import Button, { types } from '../Button';
 
-import './styles.css';
+import './FilmForm.css';
 
 const FilmForm = ({
   title,
