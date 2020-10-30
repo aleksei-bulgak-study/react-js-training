@@ -37,4 +37,5 @@ select.genre-filter {
   outline: none;
   text-transform: uppercase;
   cursor: pointer;
+  margin-left: 1rem;
 }

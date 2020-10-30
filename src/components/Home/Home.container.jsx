@@ -8,10 +8,12 @@ import {
 } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import loadable from "@loadable/component";
 import Home from './Home';
-import SearchBar from '../SearchBar';
-import Preview from '../Preview';
 import { filmActions } from '../../store/actions';
+
+const SearchBar = loadable(() => import('../SearchBar'));
+const Preview = loadable(() => import('../Preview'));
 
 // PATTERN: Adapter
 const HomeContainer = ({ common }) => {
