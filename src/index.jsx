@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { loadableReady } from '@loadable/component';
 import createStore from './store';
 import App from './app';
 
@@ -16,7 +17,9 @@ if (typeof window !== 'undefined') {
   delete window.__PRELOADED_STATE__;
 }
 
-ReactDOM.hydrate(
-  <App Router={BrowserRouter} store={createStore(preloadedState)} />,
-  document.getElementById('container'),
-);
+loadableReady(() => {
+  ReactDOM.hydrate(
+    <App Router={BrowserRouter} store={createStore(preloadedState)} />,
+    document.getElementById('container'),
+  );
+});

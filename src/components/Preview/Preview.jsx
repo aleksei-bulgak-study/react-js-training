@@ -11,6 +11,8 @@ const Preview = ({ preview, onPreviewClose }) => (
       src={preview.poster_path}
       alt={preview.title}
       className="film-preview__logo"
+      width="250"
+      height="375"
     />
     <FilmDescription details={preview} />
     <button

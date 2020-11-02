@@ -5,10 +5,13 @@ import './GenreFilter.css';
 const GenreFilter = ({ genres, action, active }) => {
   const [activeGenre, setActiveGenre] = useState(active || genres[0]);
 
-  const onClick =useCallback((genre) => {
-    action(genre);
-    setActiveGenre(genre);
-  }, [action]);
+  const onClick = useCallback(
+    (genre) => {
+      action(genre);
+      setActiveGenre(genre);
+    },
+    [action],
+  );
 
   const onSelect = useCallback(
     (event) => {
@@ -25,18 +28,21 @@ const GenreFilter = ({ genres, action, active }) => {
   );
 
   const select = (
-    <select
-      id="genre-filter"
-      className="genre-filter"
-      onChange={onSelect}
-      value={activeGenre}
-    >
-      {genres.map((option) => (
-        <option key={option} className="genre-filter__item" value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+    <label htmlFor="genre-filter" className="sorting__title">
+      Genres:
+      <select
+        id="genre-filter"
+        className="genre-filter"
+        onChange={onSelect}
+        value={activeGenre}
+      >
+        {genres.map((option) => (
+          <option key={option} className="genre-filter__item" value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 
   const list = (

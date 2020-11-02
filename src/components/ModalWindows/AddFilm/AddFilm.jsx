@@ -36,4 +36,5 @@ const mapStateToProps = (state) => ({
   genres: state.films.genres.filter((genre) => genre !== 'All'),
 });
 
+// PATTERN: HOC
 export default connect(mapStateToProps, mapDispathToProps)(AddFilm);
