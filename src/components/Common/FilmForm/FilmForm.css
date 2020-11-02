@@ -12,7 +12,7 @@
   margin: 0;
 }
 
-.film-form labeled-input > * {
+.film-form .labeled-input > * {
   display: block;
   width: 100%;
 }
